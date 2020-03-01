@@ -1,8 +1,12 @@
+@import '_vars'
+
 /* The switch - the box around the slider */
 .switch {
   position: absolute;
-  right: 13px;
-  top: 13px;
+  // right: 13px;
+  right: 2%;
+  // top: 13px;
+  top: 2%;
   display: inline-block;
   width: 60px;
   height: 34px;
