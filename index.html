@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--%---JQuery!-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- %---FontAwsome Css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+    />
+    <!--%---Bootstrap! -->
+    <link rel="stylesheet" href="./CSS/bootstrap.min.css" />
+    <!--%---My Css Stylesheet-->
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <link rel="stylesheet" href="./CSS/mediaQuerys.css" />
+    <link rel="stylesheet" href="./CSS/animationHamburgerBTN.css" />
+    <link rel="stylesheet" href="./CSS/toggleBtn.css" />
+
+    <title>JQuery-Ajax API Project</title>
+  </head>
+  <body>
+    <header id="myHeader" class="fixed-top">
+      <h1 class="display-4 text-center py-3">
+        The Crypto Coins World
+      </h1>
+
+      <nav
+        class="navbar nav-fill nav-pills navbar-expand-md navbar-light bg-secondary "
+      >
+        <div class="container-fluid">
+          <!--$ Navbar brand -->
+          <a class="navbar-brand text-center mx-auto" href="#"
+            >The Crypto Coins World</a
+          >
+
+          <!--$ Collapse button -->
+          <button
+            class="navbar-toggler second-button"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapsibleNavId"
+            aria-controls="collapsibleNavId"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <div class="animated-icon2">
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </button>
+
+          <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto ml-3 mt-2 mt-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Live Reports</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Info</a>
+              </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+              <input
+                id="searchCoin"
+                class="form-control mr-sm-2"
+                type="text"
+                placeholder="Search"
+              />
+              <button
+                id="srcBtn"
+                class="btn btn-outline-primary my-2 my-sm-2"
+                type="submit"
+              >
+                Search
+              </button>
+            </form>
+          </div>
+          <!-- End .Collapse -->
+        </div>
+      </nav>
+      <!-- End Container Of Header -->
+    </header>
+
+    <section id="sctn1">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col col-lg-9 m-auto">
+            <div
+              id="boxOfAllCards"
+              class="d-flex flex-wrap justify-content-between mt-3 mx-3"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sctn2">
+      <article id="mySpecialSrcBox">
+        <div id="boxColor1" class="colorBoxes"></div>
+        <div id="boxColor2" class="colorBoxes"></div>
+        <div id="boxColor3" class="colorBoxes"></div>
+        <div id="boxColor4" class="colorBoxes"></div>
+        <div id="boxColor5" class="colorBoxes"></div>
+        <div id="boxColor6" class="colorBoxes"></div>
+        <div id="boxColor7" class="colorBoxes"></div>
+        <div id="boxColor8" class="colorBoxes"></div>
+        <div id="boxColor9" class="colorBoxes"></div>
+        <div id="boxColor10" class="colorBoxes"></div>
+        <div id="boxColor11" class="colorBoxes"></div>
+        <div id="boxColor12" class="colorBoxes"></div>
+        <div id="boxColor13" class="colorBoxes"></div>
+        <div id="boxColor14" class="colorBoxes"></div>
+        <div id="boxColor15" class="colorBoxes"></div>
+        <div id="boxColor16" class="colorBoxes"></div>
+        <div id="boxColor17" class="colorBoxes"></div>
+        <div id="boxColor18" class="colorBoxes"></div>
+        <div id="boxColor19" class="colorBoxes"></div>
+        <div id="boxColor20" class="colorBoxes"></div>
+
+        <i class="fas fa-times fa-5x" id="myCloseIcon"></i>
+
+        <label class="switch">
+          <input type="checkbox" />
+          <span class="slider round"></span>
+        </label>
+
+        <h2>Symbol: <span>BTC</span></h2>
+        <h3>ID: <span>Bitcoin</span></h3>
+
+        <article id="extraInfo">
+          <div class="insideBox" id="currPrice">
+            <div id="boxColor21"></div>
+            <div id="boxColor22"></div>
+            <div id="boxColor23"></div>
+            <header>
+              <h4 class="text-center pt-2 mx-auto">Current Price Of: <span>Bitcoin</span></h4>
+            </header>
+            <div id="text">
+              <p id="p1">Usd:<span> Price</span></p>
+              <p id="p2">Eur:<span> Price</span></p>
+              <p id="p3">Ils:<span> Price</span></p>
+            </div>
+          </div>
+          <div class="insideBox" id="coinImg"></div>
+        </article>
+
+        <button
+          type="button"
+          name="moreInfo"
+          id="moreInfo"
+          class="btn btn-primary"
+        >
+          More Info
+        </button>
+      </article>
+      
+    </section>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="JS/main.js"></script>
+  </body>
+</html>

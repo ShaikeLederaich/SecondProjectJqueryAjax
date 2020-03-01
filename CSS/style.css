@@ -1,0 +1,292 @@
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans:500,500i,700,700i&display=swap");
+#myHeader h1 {
+  background-color: #fffb00;
+  color: #001e80;
+  letter-spacing: 3px;
+  font-size: 5rem;
+}
+
+#myHeader {
+  position: relative;
+  z-index: 1;
+}
+
+#myHeader h1 {
+  margin-bottom: 0;
+}
+
+#sctn1 {
+  position: relative;
+}
+
+#sctn1 #boxOfAllCards {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#sctn1 #boxOfAllCards .myCardBox {
+  border: 2px solid #0b063f;
+  width: 33.33%;
+  background-color: rgba(0, 0, 0, 0.226);
+}
+
+#sctn2 {
+  position: absolute;
+}
+
+#sctn2 #mySpecialSrcBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  font-family: 'Fira Sans';
+  position: relative;
+  position: fixed;
+  background-image: url(../CryptoImage/bitcoin-4728496_1920.jpg);
+  background-size: cover;
+  background-position: center;
+  top: 13%;
+  left: 25%;
+  height: 55%;
+  width: 50%;
+  border: 10px double blue;
+  border-radius: 25px;
+  z-index: 2;
+}
+
+#sctn2 #mySpecialSrcBox .colorBoxes {
+  height: 25%;
+  width: 20%;
+}
+
+#sctn2 #mySpecialSrcBox #boxColor1 {
+  background-color: rgba(228, 198, 26, 0.45);
+  border-top-left-radius: 15px;
+}
+
+#sctn2 #mySpecialSrcBox #boxColor2 {
+  background-color: rgba(100, 228, 26, 0.35);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor3 {
+  background-color: rgba(26, 73, 228, 0.35);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor4 {
+  background-color: rgba(181, 26, 228, 0.35);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor5 {
+  background-color: rgba(236, 114, 13, 0.45);
+  border-top-right-radius: 15px;
+}
+
+#sctn2 #mySpecialSrcBox #boxColor6 {
+  background-color: rgba(221, 76, 76, 0.55);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor7 {
+  background-color: rgba(58, 225, 231, 0.45);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor8 {
+  background-color: rgba(7, 36, 90, 0.45);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor9 {
+  background-color: rgba(147, 228, 171, 0.45);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor10 {
+  background-color: rgba(236, 55, 155, 0.45);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor11 {
+  background-color: rgba(18, 102, 15, 0.45);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor12 {
+  background-color: rgba(94, 208, 223, 0.35);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor13 {
+  background-color: rgba(26, 73, 228, 0.35);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor14 {
+  background-color: rgba(19, 77, 4, 0.35);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor15 {
+  background-color: rgba(179, 86, 11, 0.45);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor16 {
+  background-color: rgba(151, 26, 26, 0.55);
+  border-bottom-left-radius: 15px;
+}
+
+#sctn2 #mySpecialSrcBox #boxColor17 {
+  background-color: rgba(11, 119, 122, 0.45);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor18 {
+  background-color: rgba(172, 236, 68, 0.45);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor19 {
+  background-color: rgba(10, 55, 138, 0.45);
+}
+
+#sctn2 #mySpecialSrcBox #boxColor20 {
+  background-color: rgba(236, 55, 155, 0.45);
+  border-bottom-right-radius: 15px;
+}
+
+#sctn2 #mySpecialSrcBox i#myCloseIcon {
+  position: absolute;
+  color: rgba(51, 179, 211, 0.55);
+  text-shadow: 2px 2px 10px #0a073a;
+  left: 2%;
+  top: 2%;
+  cursor: pointer;
+  z-index: 1;
+}
+
+#sctn2 #mySpecialSrcBox i#myCloseIcon:hover {
+  color: rgba(120, 188, 233, 0.657);
+  text-shadow: 2px 3px 10px #05063f;
+}
+
+#sctn2 #mySpecialSrcBox h2 {
+  position: absolute;
+  width: 100%;
+  font-size: 6rem;
+  font-style: italic;
+  color: #0c0d24;
+  text-shadow: 4px 6px 5px #90a5e2;
+  text-align: center;
+  top: 8%;
+}
+
+#sctn2 #mySpecialSrcBox h2 span {
+  font-weight: bold;
+  font-style: normal;
+}
+
+#sctn2 #mySpecialSrcBox h3 {
+  position: absolute;
+  width: 100%;
+  font-size: 5rem;
+  font-style: italic;
+  text-align: center;
+  color: #0c0d24;
+  text-shadow: 4px 6px 5px #90a5e2;
+  top: 36%;
+}
+
+#sctn2 #mySpecialSrcBox h3 span {
+  font-weight: bold;
+  font-style: normal;
+}
+
+#sctn2 #mySpecialSrcBox button {
+  position: absolute;
+  width: 85%;
+  letter-spacing: 1rem;
+  font-size: 2rem;
+  bottom: 5%;
+  right: 7.5%;
+  left: 7.5%;
+  padding: 3% 5%;
+}
+
+#sctn2 #mySpecialSrcBox #extraInfo {
+  display: block;
+  position: absolute;
+  width: 100%;
+  top: 53%;
+  background-image: url("../CryptoImage/bitcoin-3029371_640.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 47%;
+  border: 1px solid black;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  z-index: 2;
+}
+
+#sctn2 #mySpecialSrcBox #extraInfo .insideBox {
+  position: relative;
+  height: 100%;
+  float: left;
+}
+
+#sctn2 #mySpecialSrcBox #extraInfo #currPrice {
+  width: 66.66%;
+}
+
+#sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor21 {
+  float: left;
+  width: 33.33%;
+  height: 100%;
+  background-color: rgba(224, 211, 17, 0.459);
+  border-bottom-left-radius: 15px;
+}
+
+#sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor22 {
+  float: left;
+  width: 33.33%;
+  height: 100%;
+  background-color: rgba(99, 223, 17, 0.35);
+}
+
+#sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor23 {
+  float: left;
+  width: 33.33%;
+  height: 100%;
+  background-color: rgba(11, 25, 212, 0.45);
+}
+
+#sctn2 #mySpecialSrcBox #extraInfo #currPrice h4 {
+  width: 100%;
+  height: 30%;
+  position: absolute;
+  margin-bottom: 0;
+  font-size: 2.5rem;
+  color: black;
+  background-color: rgba(70, 221, 214, 0.35);
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 2px white;
+}
+
+#sctn2 #mySpecialSrcBox #extraInfo #currPrice h4 span {
+  text-decoration: underline;
+}
+
+#sctn2 #mySpecialSrcBox #extraInfo #currPrice div#text {
+  width: 100%;
+  height: 70%;
+  position: absolute;
+  top: 30%;
+  font-size: 2.2rem;
+  text-align: center;
+  letter-spacing: 2px;
+  color: #d7d8e4;
+  background-color: rgba(0, 0, 0, 0.35);
+  text-shadow: 2px 2px 2px #270606;
+}
+
+#sctn2 #mySpecialSrcBox #extraInfo #currPrice p {
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
+  -webkit-margin-after: 0;
+          margin-block-end: 0;
+}
+
+#sctn2 #mySpecialSrcBox #extraInfo #coinImg {
+  width: 33.33%;
+  border-bottom-right-radius: 15px;
+}
+/*# sourceMappingURL=style.css.map */

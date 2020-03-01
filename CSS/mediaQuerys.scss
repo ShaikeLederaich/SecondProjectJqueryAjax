@@ -1,0 +1,28 @@
+@import '_vars';
+//%---Extra Small---Portrait Smartphone
+//%---Max Width 575.98 px
+@media (max-width: $breakPoint-exSmall) {
+  #sctn1 {
+    #boxOfAllCards {
+      .myCardBox {
+        width: 100%;
+      }
+    }
+  }
+}
+//%---Small---Landscape Smartphone
+//%---Min-Width: 576px Max-Width 767.98
+@media (min-width: $breakPoint-SmartphoneMin) and (max-width: $breakPoint-SmartphoneMax) {
+  
+}
+//%---Medium---Tablet
+//%---Min-Width: 768px Max-Width 991.98px
+@media (min-width: $breakPoint-TabletMin) and (max-width: $breakPoint-TabletMax) {
+
+}
+//%---Large---Desktops
+//%---Min-Width: 992px Max-Width 1199.98px
+@media (min-width: $breakPoint-DesktopsMin) and (max-width: $breakPoint-DesktopsMax) {
+
+}
+
