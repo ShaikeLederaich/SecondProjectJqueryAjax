@@ -5,11 +5,12 @@ export class UI {
   static drawCryptoCoinsCards(index, symbol, name, id) {
     let output = `
       <div data-index="${index}" id="${id}" class="card myCardBox">
+        <label class="rocker rocker-small">
+          <input type="checkbox" />
+          <span class="switch-left">Yes</span>
+          <span class="switch-right">No</span>
+        </label>
         <div class="card-body">
-          <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
           <h5 class="card-title text-center font-weight-bolder">${symbol}</h5>
           <p class="card-text font-weight-bold text-center">${name}</p>
           <button class="btn btn-primary btn-block" data-toggle="collapse" data-target="#collapse-${id}">Read More</button>

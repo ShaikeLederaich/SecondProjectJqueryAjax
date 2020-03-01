@@ -9,20 +9,53 @@
       }
     }
   }
+  #sctn2 {
+    #mySpecialSrcBox {
+      h2 {
+        font-size: 3rem;
+      }
+      h3 {
+        font-size: 2.5rem;
+        top: 28%;
+      }
+    }
+  }
 }
 //%---Small---Landscape Smartphone
 //%---Min-Width: 576px Max-Width 767.98
 @media (min-width: $breakPoint-SmartphoneMin) and (max-width: $breakPoint-SmartphoneMax) {
-  
+  #sctn2 {
+    #mySpecialSrcBox {
+      h2 {
+        font-size: 3rem;
+      }
+      h3 {
+        font-size: 2.5rem;
+        top: 28%;
+      }
+    }
+  }
 }
 //%---Medium---Tablet
 //%---Min-Width: 768px Max-Width 991.98px
 @media (min-width: $breakPoint-TabletMin) and (max-width: $breakPoint-TabletMax) {
-
+  #sctn2 {
+    #mySpecialSrcBox {
+      h2 {
+        font-size: 3rem;
+      }
+      h3 {
+        font-size: 2.5rem;
+        top: 28%;
+      }
+    }
+  }
 }
 //%---Large---Desktops
 //%---Min-Width: 992px Max-Width 1199.98px
 @media (min-width: $breakPoint-DesktopsMin) and (max-width: $breakPoint-DesktopsMax) {
-
+  
 }
-
+@media (min-width: $breakPoint-LargeDesktop) {
+  
+}
