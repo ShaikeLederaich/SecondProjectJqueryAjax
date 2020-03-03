@@ -1,4 +1,5 @@
 /* Switch starts here */
+
 .rocker {
   display: inline-block;
   position: absolute;
@@ -20,6 +21,7 @@
   height: 4em;
   overflow: hidden;
   border-bottom: 0.5em solid #eee;
+  z-index: 2;
 }
 
 .rocker-small {

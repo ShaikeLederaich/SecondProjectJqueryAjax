@@ -24,6 +24,33 @@
       border: 2px solid rgb(11, 6, 63);
       width: 33.33%;
       background-color: rgba(0, 0, 0, 0.226);
+
+      .card-body {
+        .collapse {
+          .card {
+            .card-body {
+              p {
+                background-color: rgba(0, 0, 0, 0.25);
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+                span {
+                  font-weight: bold;
+                  font-size: 1.3rem;
+                }
+                #spn1 {
+                  color: red;
+                }
+                #spn3 {
+                  color: rgb(21, 255, 0);
+                }
+                #spn5 {
+                  color: rgb(4, 0, 255);
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -123,7 +150,7 @@
       color: rgba(51, 179, 211, 0.55);
       text-shadow: 2px 2px 10px rgb(10, 7, 58);
       left: 2%;
-      
+
       // top: 1%;
       cursor: pointer;
       z-index: 1;
@@ -135,13 +162,14 @@
     h2 {
       position: absolute;
       width: 80%;
+      font-size: 3.5rem;
       margin: 0 auto;
       font-style: italic;
       font-size: 3.5;
       color: rgb(12, 13, 36);
       text-shadow: 4px 6px 5px rgb(144, 165, 226);
       text-align: center;
-      top: 5%;
+      top: 10%;
       left: 10%;
 
       span {
@@ -236,7 +264,6 @@
         div#text {
           width: 100%;
           height: 70%;
-          // margin: 0 15%;
           position: absolute;
           top: 30%;
           font-size: 1.4rem;
@@ -251,9 +278,18 @@
           margin-block-end: 0;
         }
       }
-      #coinImg {
+      #coinImgBox {
         width: 33.33%;
         border-bottom-right-radius: 15px;
+        #currCoinImg {
+          background-image: url('../image/110.gif');
+          background-color: rgba(255, 255, 255, 0.45);
+          background-size: cover;
+          border: 5px solid rgb(255, 255, 255);
+          width: 50%;
+          height: 50%;
+          margin: 25%;
+        }
       }
     }
   }
