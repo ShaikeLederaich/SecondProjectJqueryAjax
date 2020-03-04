@@ -1,5 +1,6 @@
 import { Animations } from './animations.js';
-import { GetCoinParamBySrcSym } from './services.js';
+import { Ajax } from './services.js';
+import { Storage } from './Storage.js';
 
 export class UI {
   static drawCryptoCoinsCards(index, symbol, name, id) {
@@ -53,7 +54,6 @@ export class UI {
         </div>
       `);
 
-      
       $(
         `div#${id} > div.card-body > div#collapse-${id} > div.card > img#loadImg`
       ).replaceWith(
@@ -70,34 +70,36 @@ export class UI {
     $('article#extraInfo').hide();
     $('h2 > span').text(`${sym}`);
     $('h3 > span').text(`${id}`);
-    console.log(template);
+    // console.log(template);
     Animations.testSpecialBoxAnimation();
     let mainHeader = document.getElementById('myHeader');
     mainHeader.style.zIndex = -1;
 
     $('#mySpecialSrcBox > #moreInfo').click(function(e) {
-      console.log(e);
+      let target = e.target.id;
 
-      GetCoinParamBySrcSym(id);
+      console.log(target);
+
+      Storage.getCoinDetailsFromSessionStorage(id, target);
 
       $('article#extraInfo').fadeIn(2000);
       e.preventDefault();
     });
 
     $('#mySpecialSrcBox > i').click(function(e) {
-      console.log(e);
-      $('#mySpecialSrcBox').hide();
+      // console.log(e);
+      $('#mySpecialSrcBox').fadeOut(1500);
       mainHeader.style.zIndex = 1;
       e.preventDefault();
     });
   }
 
-  static drwaSearchingExtraInfo(usd, eur, ils, img, id) {
-    $('#extraInfo > #currPrice > header > h4 > span').text(id)
-    $('#extraInfo > #currPrice > #text > #p1 > span').text(usd)
-    $('#extraInfo > #currPrice > #text > #p2 > span').text(eur)
-    $('#extraInfo > #currPrice > #text > #p3 > span').text(ils)
-    let imgPlace = document.getElementById('currCoinImg')
-    imgPlace.style.backgroundImage = `url(${img})`
+  static drwaSearchingExtraInfo(id, img, price) {
+    $('#extraInfo > #currPrice > header > h4 > span').text(id);
+    $('#extraInfo > #currPrice > #text > #p1 > span').text(price.Usd);
+    $('#extraInfo > #currPrice > #text > #p2 > span').text(price.Eur);
+    $('#extraInfo > #currPrice > #text > #p3 > span').text(price.Ils);
+    let imgPlace = document.getElementById('currCoinImg');
+    imgPlace.style.backgroundImage = `url(${img})`;
   }
 }

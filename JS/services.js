@@ -21,7 +21,7 @@ export class Ajax {
       });
   }
 
-  static async sendAPI_GETRequestByID(id) {
+  static async sendAPI_GETRequestByID(id, target) {
     let date1 = new Date();
     let timeOnFirstClick = date1.getTime();
 
@@ -30,7 +30,7 @@ export class Ajax {
     let obj = await response.json();
     // console.log(obj);
 
-    Extract.extractParam2(obj, id, timeOnFirstClick);
+    Extract.extractParam2(obj, id, timeOnFirstClick, target);
   }
 
   static async getHtmlTemplate(url) {
@@ -68,7 +68,7 @@ class Extract {
     });
   }
 
-  static extractParam2(obj, id, currTime) {
+  static extractParam2(obj, id, currTime, target) {
     const currImg = obj.image.large;
     const currPrice = obj.market_data.current_price;
 
@@ -79,7 +79,13 @@ class Extract {
 
     Storage.setToSessionStorage(currCryptoCoin, id);
 
-    UI.pushCollapseToDivByID(id, currCryptoCoin.image, currCryptoCoin.price);
+    id = Storage.getCoinDetailsFromSessionStorage(id, target);
+
+    if (target !== 'moreInfo') {
+      UI.pushCollapseToDivByID(id, currCryptoCoin.image, currCryptoCoin.price);
+    } else {
+      UI.drwaSearchingExtraInfo(id, currCryptoCoin.image, currCryptoCoin.price);
+    }
   }
 }
 
@@ -94,13 +100,18 @@ function searchCryptoCoin() {
 
     if (findAMatchingCurrency !== undefined) {
       let specialBox = Ajax.getHtmlTemplate('../HtmlTemplate/specialBox.html');
-      specialBox.then(template => {
-        UI.drawBTNSearchCoinResult(
-          template,
-          findAMatchingCurrency.id,
-          findAMatchingCurrency.symbol
-        );
-      });
+      specialBox
+        .then(template => {
+          UI.drawBTNSearchCoinResult(
+            template,
+            findAMatchingCurrency.id,
+            findAMatchingCurrency.symbol
+          );
+        })
+        .catch(error => {
+          console.log('Something Went Wrong!');
+          console.error(error);
+        });
 
       resolve("Ok! It's Worked!");
     } else {
@@ -110,14 +121,6 @@ function searchCryptoCoin() {
   return promise;
 }
 
-export async function GetCoinParamBySrcSym(id) {
-  let response = await fetch(`https://api.coingecko.com/api/v3/coins/${id}`);
-  let currCoinParam = await response.json();
-  let price = currCoinParam.market_data.current_price;
-  let img = currCoinParam.image.small;
-
-  UI.drwaSearchingExtraInfo(price.usd, price.eur, price.ils, img, id);
-}
 //%---This Function Get Information About Specific Crypto Coin By 'Id' --- First Check In Session Storage And If The Specific 'Id' Does not exist There --- Send API 'GET' Request By the same 'Id'
 
 function getCoinInfoByID() {
@@ -126,41 +129,14 @@ function getCoinInfoByID() {
     let id = valueOfElement.id;
 
     $(`div#${id}`).each(function(index, element) {
-      $(this).on('click', 'button', async function(e) {
-        //%---ShowLoaderAnimation
-        UI.showLoaderAnimation(id);
-        //%---Get Item From Session Storage By Crypto Coin 'Id' --- The 'Id' Use to be A Key In Storage
-
-        let currCoin = await Storage.getCoinDetailsFromSessionStorage(
-          id,
-          UI.pushCollapseToDivByID
-        );
-      });
-    });
-  });
-}
-
-function getCoinInfoByID2() {
-  let coinsList = Coins.getList();
-  $.each(coinsList, function(indexInArray, valueOfElement) {
-    let id = valueOfElement.id;
-
-    $(`div#${id}`).each(function(index, element) {
       $(this).on('click', 'button', function(e) {
         //%---ShowLoaderAnimation
         UI.showLoaderAnimation(id);
-
+        let target = e.target;
+        console.log(target);
         //%---Get Item From Session Storage By Crypto Coin 'Id' --- The 'Id' Use to be A Key In Storage
-        Storage.getCoinDetailsFromSessionStorage(id, UI.pushCollapseToDivByID);
+        Storage.getCoinDetailsFromSessionStorage(id, target);
       });
-    });
-
-    $('#mySpecialSrcBox > #moreInfo').click(function(e) {
-      
-      //%---Get Item From Session Storage By Crypto Coin 'Id' --- The 'Id' Use to be A Key In Storage
-      Storage.getCoinDetailsFromSessionStorage(id, UI.pushCollapseToDivByID);
-
-      e.preventDefault();
     });
   });
 }
