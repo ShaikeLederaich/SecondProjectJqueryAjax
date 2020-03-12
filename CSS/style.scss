@@ -5,46 +5,62 @@
   margin: 0;
   padding: 0;
 }
-#myHeader {
-  position: relative;
-  z-index: 1;
-  h1 {
-    @extend %main-headline;
-    margin-bottom: 0;
+
+body {
+
+  #myHeader {
+    position: relative;
+    z-index: 1;
+    h1 {
+      @extend %main-headline;
+      margin-bottom: 0;
+    }
   }
+
+  
+
+
+
 }
 
 #sctn1 {
   position: relative;
+  height: 600px;
 
-  #boxOfAllCards {
-    box-sizing: border-box;
+    #boxOfAllCards {
+      position: relative;
+      box-sizing: border-box;
 
-    .myCardBox {
-      border: 2px solid rgb(11, 6, 63);
-      width: 33.33%;
-      background-color: rgba(0, 0, 0, 0.226);
-
-      .card-body {
-        .collapse {
-          .card {
-            .card-body {
-              p {
-                background-color: rgba(0, 0, 0, 0.25);
-                font-size: 1.2rem;
-                letter-spacing: 1px;
-                span {
-                  font-weight: bold;
-                  font-size: 1.3rem;
-                }
-                #spn1 {
-                  color: red;
-                }
-                #spn3 {
-                  color: rgb(21, 255, 0);
-                }
-                #spn5 {
-                  color: rgb(4, 0, 255);
+      overflow-y: scroll;
+  
+      .myCardBox {
+        border: 2px solid rgb(11, 6, 63);
+        width: 31.5%;
+        margin-bottom: 2%;
+        background-color: rgba(0, 0, 0, 0.226);
+  
+        .card-body {
+          .collapse {
+            .card {
+              .card-body {
+                p {
+                  background-color: rgba(0, 0, 0, 0.25);
+                  font-size: 1.2rem;
+                  letter-spacing: 1px;
+  
+                  span {
+                    font-weight: bold;
+                    font-size: 1.3rem;
+                  }
+                  #spn1 {
+                    color: red;
+                  }
+                  #spn3 {
+                    color: rgb(21, 255, 0);
+                  }
+                  #spn5 {
+                    color: rgb(4, 0, 255);
+                  }
                 }
               }
             }
@@ -52,7 +68,7 @@
         }
       }
     }
-  }
+  
 }
 
 #sctn2 {
@@ -292,5 +308,14 @@
         }
       }
     }
+  }
+}
+
+#chartWindow {
+  #liveRepChart {
+    position: absolute;
+    top: 0;
+    z-index: 3;
+
   }
 }

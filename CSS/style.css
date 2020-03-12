@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans:500,500i,700,700i&display=swap");
-#myHeader h1 {
+body #myHeader h1 {
   background-color: #fffb00;
   color: #001e80;
   letter-spacing: 3px;
@@ -11,27 +11,31 @@
   padding: 0;
 }
 
-#myHeader {
+body #myHeader {
   position: relative;
   z-index: 1;
 }
 
-#myHeader h1 {
+body #myHeader h1 {
   margin-bottom: 0;
 }
 
 #sctn1 {
   position: relative;
+  height: 600px;
 }
 
 #sctn1 #boxOfAllCards {
+  position: relative;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  overflow-y: scroll;
 }
 
 #sctn1 #boxOfAllCards .myCardBox {
   border: 2px solid #0b063f;
-  width: 33.33%;
+  width: 31.5%;
+  margin-bottom: 2%;
   background-color: rgba(0, 0, 0, 0.226);
 }
 
@@ -328,5 +332,11 @@
   width: 50%;
   height: 50%;
   margin: 25%;
+}
+
+#chartWindow #liveRepChart {
+  position: absolute;
+  top: 0;
+  z-index: 3;
 }
 /*# sourceMappingURL=style.css.map */

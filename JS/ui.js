@@ -1,13 +1,14 @@
 import { Animations } from './animations.js';
 import { Ajax } from './services.js';
 import { Storage } from './Storage.js';
+import { Coins } from './coinClasses.js';
 
 export class UI {
   static drawCryptoCoinsCards(index, symbol, name, id) {
     let output = `
       <div data-index="${index}" id="${id}" class="card myCardBox">
         <label class="rocker rocker-small">
-          <input type="checkbox" />
+          <input type="checkbox" class="liveRepCheck"/>
           <span class="switch-left">Yes</span>
           <span class="switch-right">No</span>
         </label>
@@ -101,5 +102,86 @@ export class UI {
     $('#extraInfo > #currPrice > #text > #p3 > span').text(price.Ils);
     let imgPlace = document.getElementById('currCoinImg');
     imgPlace.style.backgroundImage = `url(${img})`;
+  }
+
+  static addCoinToModalList(arr) {
+    $('#myModal > .modal-dialog > .modal-content > .modal-body > ol').empty();
+
+    let newSym = arr[5];
+
+    arr.pop();
+
+    for (let sym of arr) {
+      sym = sym.toLowerCase();
+      let currObj = Coins.findCoinBySearch(sym);
+      // console.log(currObj);
+
+      let output = `
+      <li id="${currObj.id}">
+        <p>
+        Currency Id: <span id="spn1-${currObj.id}">${currObj.id}</span>, Currency Symbol: <span id="spn2-${sym}">${sym}</span>
+        <label class="rocker rocker-small">
+          <input type="checkbox"/>
+          <span class="switch-left">Yes</span>
+          <span class="switch-right">No</span>
+        </label>
+        </p>
+      </li>
+      `;
+
+      $('#myModal > .modal-dialog > .modal-content > .modal-body > ol').append(
+        output
+      );
+
+      //%---Style For Modal List
+
+      //%--01) 'ol' Style
+      $(
+        '#myModal > .modal-dialog > .modal-content > .modal-body > ol'
+      ).css({
+        'list-style-position': 'inside'
+      });
+
+      //%--02) 'li' Style
+      $(
+        '#myModal > .modal-dialog > .modal-content > .modal-body > ol > li'
+      ).css({
+        'font-size': '1.3rem',
+        'border-bottom': '4px dashed black',
+        'padding-top': '10px',
+        'padding-bottom': '20px'
+      });
+
+      //%--03) 'p' Style
+      $(
+        '#myModal > .modal-dialog > .modal-content > .modal-body > ol > li > p'
+      ).css({
+        'display': 'inline-block',
+        'font-weight': 'bold',
+        'font-style': 'italic',
+        'margin': '10px 15px'
+      });
+
+      //%--04) 'btn toggle' Style
+      $(
+        `#myModal > .modal-dialog > .modal-content > .modal-body > ol > li > p > .rocker`
+      ).css({
+        
+        'right': '3%',
+        'font-size': '0.65em'
+      });
+
+      //%--05) 'span' Style
+      $(
+        '#myModal > .modal-dialog > .modal-content > .modal-body > ol > li > p > span'
+      ).css({
+        'font-size': '1.4rem',
+        color: 'Blue',
+        'background-color': 'rgba(0, 0, 0, 0.25)',
+        'font-weight': 'bold',
+        'font-style': 'none'
+      });
+    }
+    return newSym
   }
 }

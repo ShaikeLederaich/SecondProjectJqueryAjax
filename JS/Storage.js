@@ -1,4 +1,4 @@
-import { Ajax } from './services.js';
+import { Ajax, moreInfo } from './services.js';
 
 export class Storage {
   static setToSessionStorage(cryptoCoin, cryptoId) {
@@ -31,8 +31,7 @@ export class Storage {
           });
       } else {
         console.log('Loading Information');
-        return cryptoId;
-        // callBack(cryptoId, currCoin.image, currCoin.price)
+        moreInfo(target, cryptoId, currCoin.image, currCoin.price);
       }
     }
   }

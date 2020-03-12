@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--%---JQuery!-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--%---Chart.js  -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <!-- %---FontAwsome Css -->
     <link
       rel="stylesheet"
@@ -23,13 +25,13 @@
   <body>
     <header id="myHeader" class="fixed-top">
       <h1 class="display-4 text-center py-3">
-        The Crypto Coins World
+        Cryptonite
       </h1>
 
       <nav
         class="navbar nav-fill nav-pills navbar-expand-md navbar-light bg-secondary "
       >
-        <div class="container-fluid">
+        <div class="container">
           <!--$ Navbar brand -->
           <a class="navbar-brand text-center mx-auto" href="#"
             >The Crypto Coins World</a
@@ -84,21 +86,28 @@
       </nav>
       <!-- End Container Of Header -->
     </header>
-    
+
+    <section id="innerContent">
+
+    </section>
+
     <section id="sctn1">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col col-lg-9 m-auto">
+
+      <div class="container-fluid h-100">
+        <div class="row h-100">
+          
             <div
               id="boxOfAllCards"
-              class="d-flex flex-wrap justify-content-between mt-3 mx-3"
+              class="col col-lg-9 m-auto h-100 d-flex flex-wrap justify-content-between mt-3 mx-3"
             ></div>
-          </div>
+          
         </div>
       </div>
     </section>
 
+
     <section id="sctn2">
+
       <!-- <article id="mySpecialSrcBox">
         <div id="boxColor1" class="colorBoxes"></div>
         <div id="boxColor2" class="colorBoxes"></div>
@@ -167,7 +176,54 @@
       </article> -->
     </section>
 
-    
+    <section id="sctnModal">
+      <div class="modal" id="myModal">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title m-auto h2">Live Reports Coins List</h3>
+            </div>
+            <div class="modal-body">
+              <div class="text-center">
+                <h4 class="modal-title m-auto h3 p-2 bg-warning">
+                  The option to get a live report, possible for 5 maximum crypto
+                  coins at the same time!
+                </h4>
+
+                <h5 class="modal-title m-auto h4 p-2 bg-success">
+                  Please select which currency you would like to give up by
+                  moving the switch to 'Yes' and then press the 'Confirm' button
+                  Or click 'Cancel' to cancel
+                </h5>
+              </div>
+              <ol></ol>
+            </div>
+            <div class="modal-footer">
+              <button id="confirm" class="btn btn-primary btn-block">
+                Confirm Changes
+              </button>
+              <button
+                id="cancel"
+                class="btn btn-secondary btn-block"
+                data-dismiss="modal"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+    </section>
+
+    <!-- <section id="chartWindow">
+      <canvas id="liveRepChart" width="40vw" height="40vh"></canvas>
+    </section> -->
+
+    <footer class="">
+
+    </footer>
+
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
       integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"

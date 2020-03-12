@@ -27,6 +27,13 @@ export class Coins {
   static getList() {
     return this.arrAllListOfCoins;
   }
+  static findCoinBySearch(userSearch) {
+    let arr = Coins.getList();
+    let findAMatchingCurrency = arr.find(coin => coin.symbol === userSearch);
+
+    return findAMatchingCurrency
+  }
+  
   static addExtraParam(obj) {
     this.arrCoinsWithExtraParam.push(obj);
   }
