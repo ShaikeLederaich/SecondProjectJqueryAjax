@@ -1,8 +1,14 @@
 import { UI } from './ui.js';
-import { CryptoCoinObj, Coins } from './coinClasses.js';
+import { CryptoCoinObj, Coins } from './coins.js';
 import { Storage } from './Storage.js';
 
 export class Ajax {
+  static async getHtmlTemplate(url) {
+    let response = await fetch(url);
+    let currHtml = await response.text();
+    return currHtml;
+  }
+
   //%---This Function Send API 'GET' Request And get All Crypto Coins list
   static getDataFromURL(url, callback) {
     $.ajax({
@@ -16,16 +22,17 @@ export class Ajax {
         //%---This Function Get Array of All Crypto Coins list And Extract Specific Parametrs
         $.each(response, function(indexInArray, valueOfElement) {
           if (indexInArray <= 100) {
+            Coins.addToList(valueOfElement);
             UI.drawCryptoCoinsCards(
               indexInArray,
               valueOfElement.symbol,
               valueOfElement.name,
               valueOfElement.id
             );
-            Coins.addToList(valueOfElement);
           }
         });
 
+        Storage.getLiveRepFromLocalStorage();
         callback();
 
         $('#srcBtn').click(function(e) {
@@ -37,7 +44,7 @@ export class Ajax {
           e.preventDefault();
         });
 
-        LiveReports.updateModalAndLiveArr();
+        UI.updateModalAndLiveArr();
       })
       //%---Fail() - If The Request Not Succses === Error
       .fail(err => {
@@ -71,17 +78,13 @@ export class Ajax {
 
     moreInfo(target, id, currCryptoCoin.image, currCryptoCoin.price);
   }
-
-  static async getHtmlTemplate(url) {
-    let response = await fetch(url);
-    let currHtml = await response.text();
-
-    return currHtml;
-  }
 }
 
 export function moreInfo(target, id, img, price) {
   if (target !== 'moreInfo') {
+    $(
+      `#boxOfAllCards > div#${id} > .card-body > .collapse > .accordion > .progress`
+    ).show();
     UI.pushCollapseToDivByID(id, img, price);
   } else {
     UI.drwaSearchingExtraInfo(id, img, price);
@@ -95,20 +98,10 @@ function searchCryptoCoin() {
     let findAMatchingCurrency = Coins.findCoinBySearch(userSearch);
 
     if (findAMatchingCurrency !== undefined) {
-      let specialBox = Ajax.getHtmlTemplate('../HtmlTemplate/specialBox.html');
-      specialBox
-        .then(template => {
-          UI.drawBTNSearchCoinResult(
-            template,
-            findAMatchingCurrency.id,
-            findAMatchingCurrency.symbol
-          );
-        })
-        .catch(error => {
-          console.log('Something Went Wrong!');
-          console.error(error);
-        });
-
+      UI.drawSearchCoinResult(
+        findAMatchingCurrency.id,
+        findAMatchingCurrency.symbol
+      );
       resolve("Ok! It's Worked!");
     } else {
       reject('Please search for the currency exactly according to its symbol');
@@ -126,9 +119,7 @@ export function getCoinInfoByID() {
     let sym = valueOfElement.symbol;
 
     $(`div#${id}`).each(function(index, element) {
-      $(this).on('click', 'button', function(e) {
-        //%---ShowLoaderAnimation
-        UI.showLoaderAnimation(id);
+      $(this).on('click', `button#btn-${id}`, function(e) {
         let target = e.target;
         // console.log(target);
         //%---Get Item From Session Storage By Crypto Coin 'Id' --- The 'Id' Use to be A Key In Storage
@@ -138,96 +129,37 @@ export function getCoinInfoByID() {
   });
 }
 
+export function drawMainPage() {
+  $('a#main').click(function(e) {
+    $('canvas#myChart').hide();
+    $('#sctn1').fadeIn(1000);
+    clearInterval(LiveReports.liveInterval);
+    e.preventDefault();
+  });
+}
+
+
 export class LiveReports {
   static liveRep = [];
   static newsym;
 
-  static async getLiveInfo(symArr) {
-    let response = await fetch(
-      `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${symArr}&tsyms=USD`
-    );
-    let obj = await response.json();
-    console.log(obj);
-  }
+  static liveInterval;
 
-  static updateModalAndLiveArr() {
-    let coinsList = Coins.getList();
-    console.log(coinsList);
-    $.each(coinsList, function(indexInArray, valueOfElement) {
-      let id = valueOfElement.id;
-      let sym = valueOfElement.symbol;
-
-      sym = sym.toUpperCase();
-      // LiveReports.liveRep = LiveReports.get();
-
-      $(`div#${id}`).each(function(index, element) {
-        $(this).on('click', 'input', function(e) {
-          LiveReports.pushAndRemovedFromLiveReportsBefore6(sym);
-
-          if (LiveReports.liveRep.length === 6) {
-            console.log('5 Coin Add To Live Reports');
-            console.log(this);
-            $(this).attr({
-              'data-toggle': 'modal',
-              'data-target': '#myModal'
-            });
-            // console.log(LiveReports.liveRep)
-
-            LiveReports.newsym = UI.addCoinToModalList(LiveReports.liveRep);
-
-            $('#myModal').modal('show');
-
-            $('.liveRepCheck').prop('disabled', true);
-
-            console.log(LiveReports.liveRep);
-            setTimeout(() => {
-              $(`div#${id} > label > .liveRepCheck`).prop('checked', false);
-            }, 100);
-          }
-
-          LiveReports.removeFromLiveReportsOnModal(
-            id,
-            sym,
-            LiveReports.pushFromModal
-          );
-
-          LiveReports.getLiveInfo(LiveReports.liveRep);
-        });
-        // console.log(LiveReports.liveRep)
-      });
-    });
-  }
+  static myChart;
 
   static pushAndRemovedFromLiveReportsBefore6(sym) {
     let num = LiveReports.liveRep.indexOf(sym);
 
     if (LiveReports.liveRep.includes(sym)) {
       LiveReports.liveRep.splice(num, 1);
-      // console.log(num);
+
       console.log(LiveReports.liveRep);
+      Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
     } else {
       LiveReports.liveRep.push(sym);
       console.log(LiveReports.liveRep);
+      Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
     }
-  }
-
-  static removeFromLiveReportsOnModal(id, sym, callback) {
-    $('.modal-footer > #confirm').on('click', function(e) {
-      $(`li#${id} > p > label > input`).each(function(index, element) {
-        if (this.checked === true) {
-          let num = LiveReports.liveRep.indexOf(sym);
-          LiveReports.liveRep.splice(num, 1);
-          console.log(LiveReports.liveRep);
-
-          $(`div#${id} > label > .liveRepCheck`).prop('checked', false);
-        }
-      });
-
-      $('#myModal').modal('hide');
-      $('.liveRepCheck').prop('disabled', false);
-
-      callback();
-    });
   }
 
   static pushFromModal() {
@@ -237,6 +169,7 @@ export class LiveReports {
     ) {
       LiveReports.liveRep.push(LiveReports.newsym);
       console.log(LiveReports.liveRep);
+      Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
 
       let sym = LiveReports.newsym.toLowerCase();
 
@@ -249,40 +182,143 @@ export class LiveReports {
       $(`div#${coinObj.id} > label > .liveRepCheck`).removeAttr('data-target');
     }
   }
-  static get() {
-    return LiveReports.liveRep;
+
+  static drawChart() {
+    $('a#live').click(function(e) {
+      console.log('12345');
+      $('#sctn1').hide();
+
+      Ajax.getHtmlTemplate('../HtmlTemplate/chart.html').then(chart => {
+        $('#chartWindow').html(chart);
+
+        LiveReports.chart();
+      });
+    });
+  }
+
+  static getFetchTime() {
+    let d = new Date();
+    let hh = d.getHours();
+    let mm = d.getMinutes();
+    let ss = d.getSeconds();
+
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+    if (hh < 10) {
+      hh = '0' + hh;
+    }
+    if (ss < 10) {
+      ss = '0' + ss;
+    }
+    let fetchTime = `${hh}:${mm}:${ss}`;
+    return fetchTime;
+  }
+
+  static async getLiveInfoData(symArr) {
+    let response = await fetch(
+      `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${symArr}&tsyms=USD`
+    );
+    let resulte = await response.json();
+
+    let currTime = LiveReports.getFetchTime();
+    let indexNum = 0;
+    console.log(resulte);
+    console.log(Object.keys(resulte));
+
+    $.each(resulte, function(indexInArray, valueOfElement) {
+      let currPrice;
+      for (let usdPrice of Object.values(valueOfElement)) {
+        currPrice = usdPrice;
+      }
+      console.log(indexInArray);
+      LiveReports.addColor(LiveReports.myChart, indexNum)
+      LiveReports.addData(LiveReports.myChart, indexNum, currPrice);
+
+      indexNum += 1;
+    });
+
+    LiveReports.addTimeLabel(LiveReports.myChart, currTime);
+  }
+
+  static addTimeLabel(chart, currTime) {
+    chart.data.labels.push(currTime);
+
+    chart.update();
+  }
+
+  static addData(chart, index, data) {
+    chart.data.datasets[index].data.push(data);
+
+    chart.update();
+  }
+
+  static addColor(chart, index) {
+    switch (index) {
+      case 0:
+        chart.data.datasets[index].backgroundColor = 'rgba(33, 25, 102, 0.2)';
+        chart.data.datasets[index].borderColor = 'rgba(33, 25, 102, 1)';
+        break;
+      case 1:
+        chart.data.datasets[index].backgroundColor = 'rgba(111, 236, 39, 0.2)';
+        chart.data.datasets[index].borderColor = 'rgba(111, 236, 39, 1)';
+        break;
+      case 2:
+        chart.data.datasets[index].backgroundColor = 'rgba(230, 115, 8, 0.2)';
+        chart.data.datasets[index].borderColor = 'rgba(230, 115, 8, 1)';
+        break;
+      case 3:
+        chart.data.datasets[index].backgroundColor = 'rgba(185, 4, 4, 0.2)';
+        chart.data.datasets[index].borderColor = 'rgba(185, 4, 4, 1)';
+        break;
+      case 4:
+        chart.data.datasets[index].backgroundColor = 'rgba(7, 95, 91, 0.2)';
+        chart.data.datasets[index].borderColor = 'rgba(7, 95, 91, 1)';
+        break;
+    }
+
+    chart.update();
+  }
+
+  static async createDataObjByFetchResolteAndPushToChartDatasets(symArr) {
+    let response = await fetch(
+      `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${symArr}&tsyms=USD`
+    );
+    let resulte = await response.json();
+
+    $.each(resulte, function(indexInArray, valueOfElement) {
+      let currDataObj = {
+        label: `${indexInArray}`,
+        fill: true,
+        lineTension: 0,
+        borderWidth: 1,
+        data: []
+      };
+
+      LiveReports.myChart.data.datasets.push(currDataObj);
+
+      LiveReports.myChart.update();
+    });
   }
 
   static chart() {
-    var ctx = document.getElementById('liveRepChart');
-    var myChart = new Chart(ctx, {
-      type: 'bar',
+    LiveReports.createDataObjByFetchResolteAndPushToChartDatasets(
+      LiveReports.liveRep
+    );
+
+    LiveReports.liveInterval = setInterval(() => {
+      LiveReports.getLiveInfoData(LiveReports.liveRep);
+    }, 2000);
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    LiveReports.myChart = new Chart(ctx, {
+      type: 'line',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [
-          {
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-          }
-        ]
+        labels: [],
+        datasets: []
       },
+
       options: {
         scales: {
           yAxes: [

@@ -1,5 +1,5 @@
 import { Animations } from './animations.js';
-import { Ajax, getCoinInfoByID, LiveReports } from './services.js';
+import { Ajax, getCoinInfoByID, LiveReports, drawMainPage } from './services.js';
 import { UI } from './ui.js';
 
 $(function() {
@@ -9,6 +9,8 @@ $(function() {
     'https://api.coingecko.com/api/v3/coins/list',
     getCoinInfoByID
   );
-  console.log(window)
-  // LiveReports.chart()
+
+  LiveReports.drawChart();
+
+  drawMainPage();
 });

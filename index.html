@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--%---JQuery!-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!--%---Chart.js  -->
+    <!--%---Chart.js-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <!-- %---FontAwsome Css -->
     <link
@@ -55,13 +55,13 @@
           <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto ml-3 mt-2 mt-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" id="main" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Live Reports</a>
+                <a class="nav-link" id="live" href="#">Live Reports</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Info</a>
+                <a class="nav-link" id="info" href="#">Info</a>
               </li>
             </ul>
 
@@ -88,141 +88,66 @@
     </header>
 
     <section id="innerContent">
-
-    </section>
-
-    <section id="sctn1">
-
-      <div class="container-fluid h-100">
-        <div class="row h-100">
-          
+      <section id="sctn1" class="h-100">
+        <div class="container-fluid h-100">
+          <div class="row h-100">
             <div
               id="boxOfAllCards"
               class="col col-lg-9 m-auto h-100 d-flex flex-wrap justify-content-between mt-3 mx-3"
             ></div>
-          
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <section id="sctn2"></section>
 
-
-    <section id="sctn2">
-
-      <!-- <article id="mySpecialSrcBox">
-        <div id="boxColor1" class="colorBoxes"></div>
-        <div id="boxColor2" class="colorBoxes"></div>
-        <div id="boxColor3" class="colorBoxes"></div>
-        <div id="boxColor4" class="colorBoxes"></div>
-        <div id="boxColor5" class="colorBoxes"></div>
-        <div id="boxColor6" class="colorBoxes"></div>
-        <div id="boxColor7" class="colorBoxes"></div>
-        <div id="boxColor8" class="colorBoxes"></div>
-        <div id="boxColor9" class="colorBoxes"></div>
-        <div id="boxColor10" class="colorBoxes"></div>
-        <div id="boxColor11" class="colorBoxes"></div>
-        <div id="boxColor12" class="colorBoxes"></div>
-        <div id="boxColor13" class="colorBoxes"></div>
-        <div id="boxColor14" class="colorBoxes"></div>
-        <div id="boxColor15" class="colorBoxes"></div>
-        <div id="boxColor16" class="colorBoxes"></div>
-        <div id="boxColor17" class="colorBoxes"></div>
-        <div id="boxColor18" class="colorBoxes"></div>
-        <div id="boxColor19" class="colorBoxes"></div>
-        <div id="boxColor20" class="colorBoxes"></div>
-
-        <i class="fas fa-times fa-3x" id="myCloseIcon"></i>
-
-          <label class="rocker rocker-small">
-            <input type="checkbox" />
-            <span class="switch-left">Yes</span>
-            <span class="switch-right">No</span>
-          </label>
-
-
-        <h2>Symbol: <span>BTC</span></h2>
-        <h3>ID: <span>Bitcoin</span></h3>
-
-        <article id="extraInfo">
-          <div class="insideBox" id="currPrice">
-            <div id="boxColor21"></div>
-            <div id="boxColor22"></div>
-            <div id="boxColor23"></div>
-            <header>
-              <h4 class="text-center pt-2 mx-auto">
-                Current Price Of: <span></span>
-              </h4>
-            </header>
-            <div id="text">
-              <p id="p1">Usd:<span></span></p>
-              <p id="p2">Eur:<span></span></p>
-              <p id="p3">Ils:<span></span></p>
-            </div>
-          </div>
-          <div class="insideBox" id="coinImgBox">
-            <div id="currCoinImg">
-
-            </div>
-          </div>
-        </article>
-
-        <button
-          type="button"
-          name="moreInfo"
-          id="moreInfo"
-          class="btn btn-primary"
-        >
-          More Info
-        </button>
-      </article> -->
-    </section>
-
-    <section id="sctnModal">
-      <div class="modal" id="myModal">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h3 class="modal-title m-auto h2">Live Reports Coins List</h3>
-            </div>
-            <div class="modal-body">
-              <div class="text-center">
-                <h4 class="modal-title m-auto h3 p-2 bg-warning">
-                  The option to get a live report, possible for 5 maximum crypto
-                  coins at the same time!
-                </h4>
-
-                <h5 class="modal-title m-auto h4 p-2 bg-success">
-                  Please select which currency you would like to give up by
-                  moving the switch to 'Yes' and then press the 'Confirm' button
-                  Or click 'Cancel' to cancel
-                </h5>
+      <section id="sctnModal">
+        <div class="modal" id="myModal">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title m-auto h2">Live Reports Coins List</h3>
               </div>
-              <ol></ol>
-            </div>
-            <div class="modal-footer">
-              <button id="confirm" class="btn btn-primary btn-block">
-                Confirm Changes
-              </button>
-              <button
-                id="cancel"
-                class="btn btn-secondary btn-block"
-                data-dismiss="modal"
-              >
-                Cancel
-              </button>
+              <div class="modal-body">
+                <div class="text-center">
+                  <h4 class="modal-title m-auto h3 p-2 bg-warning">
+                    The option to get a live report, possible for 5 maximum
+                    crypto coins at the same time!
+                  </h4>
+
+                  <h5 class="modal-title m-auto h4 p-2 bg-success">
+                    Please select which currency you would like to give up by
+                    moving the switch to 'Yes' and then press the 'Confirm'
+                    button Or click 'Cancel' to cancel
+                  </h5>
+                </div>
+                <ol></ol>
+              </div>
+              <div class="modal-footer">
+                <button id="confirm" class="btn btn-primary btn-block">
+                  Confirm Changes
+                </button>
+                <button
+                  id="cancel"
+                  class="btn btn-secondary btn-block"
+                  data-dismiss="modal"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- End Modal -->
+        <!-- End Modal -->
+      </section>
+
+      <section id="chartWindow" class="h-100"></section>
     </section>
 
-    <!-- <section id="chartWindow">
-      <canvas id="liveRepChart" width="40vw" height="40vh"></canvas>
-    </section> -->
+    <!-- End 'Inner-Content' Section -->
 
-    <footer class="">
-
-    </footer>
+    <!-- <footer id="MyFooter" class="text-center p-4">
+      <p>Created By <span>Shai Lederaich</span><span></span></p>
+    </footer> -->
 
     <script
       src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -234,6 +159,7 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
+
     <script type="module" src="JS/main.js"></script>
   </body>
 </html>

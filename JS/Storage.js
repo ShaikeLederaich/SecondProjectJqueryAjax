@@ -1,4 +1,6 @@
 import { Ajax, moreInfo } from './services.js';
+import { LiveReports } from './services.js';
+import { Coins } from './coins.js';
 
 export class Storage {
   static setToSessionStorage(cryptoCoin, cryptoId) {
@@ -31,8 +33,34 @@ export class Storage {
           });
       } else {
         console.log('Loading Information');
+        console.log(currCoin);
         moreInfo(target, cryptoId, currCoin.image, currCoin.price);
       }
+    }
+  }
+
+  static setLiveRepToLocalStorage(arrOfCoins) {
+    localStorage.setItem('ChartList', JSON.stringify(arrOfCoins));
+  }
+
+  static getLiveRepFromLocalStorage() {
+    if (localStorage.getItem('ChartList') === null) {
+      LiveReports.liveRep = [];
+    } else {
+      let list = localStorage.getItem('ChartList');
+      list = JSON.parse(list);
+
+      for (let sym of list) {
+        sym = sym.toLowerCase();
+        // console.log(sym);
+        let currObjCoin = Coins.findCoinBySearch(sym);
+
+        $(`div#${currObjCoin.id} > label > .liveRepCheck`).prop(
+          'checked',
+          true
+        );
+      }
+      LiveReports.liveRep = list;
     }
   }
 }

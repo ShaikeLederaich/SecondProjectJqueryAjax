@@ -1,11 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans:500,500i,700,700i&display=swap");
-body #myHeader h1 {
-  background-color: #fffb00;
-  color: #001e80;
-  letter-spacing: 3px;
-  font-size: 5rem;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -14,59 +7,82 @@ body #myHeader h1 {
 body #myHeader {
   position: relative;
   z-index: 1;
+  background-color: #87e1ec;
+  color: #001e80;
 }
 
 body #myHeader h1 {
+  letter-spacing: 3px;
+  font-size: 5rem;
   margin-bottom: 0;
 }
 
-#sctn1 {
-  position: relative;
+body #innerContent {
   height: 600px;
 }
 
-#sctn1 #boxOfAllCards {
+body #innerContent #sctn1 {
+  position: relative;
+}
+
+body #innerContent #sctn1 #boxOfAllCards {
   position: relative;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   overflow-y: scroll;
 }
 
-#sctn1 #boxOfAllCards .myCardBox {
+body #innerContent #sctn1 #boxOfAllCards .myCardBox {
   border: 2px solid #0b063f;
   width: 31.5%;
   margin-bottom: 2%;
   background-color: rgba(0, 0, 0, 0.226);
 }
 
-#sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p {
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body img {
+  width: 50%;
+  float: right;
+}
+
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body h5 {
+  width: 50%;
+  padding-top: 5%;
+  line-height: 150%;
+  float: left;
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p {
+  clear: both;
   background-color: rgba(0, 0, 0, 0.25);
   font-size: 1.2rem;
   letter-spacing: 1px;
 }
 
-#sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p span {
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p span {
   font-weight: bold;
   font-size: 1.3rem;
 }
 
-#sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p #spn1 {
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p #spn1 {
   color: red;
 }
 
-#sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p #spn3 {
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p #spn3 {
   color: #15ff00;
 }
 
-#sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p #spn5 {
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p #spn5 {
   color: #0400ff;
 }
 
-#sctn2 {
+body #innerContent #sctn2 {
   position: absolute;
 }
 
-#sctn2 #mySpecialSrcBox {
+body #innerContent #sctn2 #mySpecialSrcBox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -87,96 +103,96 @@ body #myHeader h1 {
   z-index: 2;
 }
 
-#sctn2 #mySpecialSrcBox .colorBoxes {
+body #innerContent #sctn2 #mySpecialSrcBox .colorBoxes {
   height: 25%;
   width: 20%;
 }
 
-#sctn2 #mySpecialSrcBox #boxColor1 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor1 {
   background-color: rgba(228, 198, 26, 0.45);
   border-top-left-radius: 15px;
 }
 
-#sctn2 #mySpecialSrcBox #boxColor2 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor2 {
   background-color: rgba(100, 228, 26, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor3 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor3 {
   background-color: rgba(26, 73, 228, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor4 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor4 {
   background-color: rgba(181, 26, 228, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor5 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor5 {
   background-color: rgba(236, 114, 13, 0.45);
   border-top-right-radius: 15px;
 }
 
-#sctn2 #mySpecialSrcBox #boxColor6 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor6 {
   background-color: rgba(221, 76, 76, 0.55);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor7 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor7 {
   background-color: rgba(58, 225, 231, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor8 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor8 {
   background-color: rgba(7, 36, 90, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor9 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor9 {
   background-color: rgba(147, 228, 171, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor10 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor10 {
   background-color: rgba(236, 55, 155, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor11 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor11 {
   background-color: rgba(18, 102, 15, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor12 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor12 {
   background-color: rgba(94, 208, 223, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor13 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor13 {
   background-color: rgba(26, 73, 228, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor14 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor14 {
   background-color: rgba(19, 77, 4, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor15 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor15 {
   background-color: rgba(179, 86, 11, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor16 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor16 {
   background-color: rgba(151, 26, 26, 0.55);
   border-bottom-left-radius: 15px;
 }
 
-#sctn2 #mySpecialSrcBox #boxColor17 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor17 {
   background-color: rgba(11, 119, 122, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor18 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor18 {
   background-color: rgba(172, 236, 68, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor19 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor19 {
   background-color: rgba(10, 55, 138, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor20 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor20 {
   background-color: rgba(236, 55, 155, 0.45);
   border-bottom-right-radius: 15px;
 }
 
-#sctn2 #mySpecialSrcBox i#myCloseIcon {
+body #innerContent #sctn2 #mySpecialSrcBox i#myCloseIcon {
   position: absolute;
   color: rgba(51, 179, 211, 0.55);
   text-shadow: 2px 2px 10px #0a073a;
@@ -185,12 +201,12 @@ body #myHeader h1 {
   z-index: 1;
 }
 
-#sctn2 #mySpecialSrcBox i#myCloseIcon:hover {
+body #innerContent #sctn2 #mySpecialSrcBox i#myCloseIcon:hover {
   color: rgba(120, 188, 233, 0.657);
   text-shadow: 2px 3px 10px #05063f;
 }
 
-#sctn2 #mySpecialSrcBox h2 {
+body #innerContent #sctn2 #mySpecialSrcBox h2 {
   position: absolute;
   width: 80%;
   font-size: 3.5rem;
@@ -204,12 +220,12 @@ body #myHeader h1 {
   left: 10%;
 }
 
-#sctn2 #mySpecialSrcBox h2 span {
+body #innerContent #sctn2 #mySpecialSrcBox h2 span {
   font-weight: bold;
   font-style: normal;
 }
 
-#sctn2 #mySpecialSrcBox h3 {
+body #innerContent #sctn2 #mySpecialSrcBox h3 {
   position: absolute;
   width: 100%;
   font-size: 3rem;
@@ -220,12 +236,12 @@ body #myHeader h1 {
   text-shadow: 4px 6px 5px #90a5e2;
 }
 
-#sctn2 #mySpecialSrcBox h3 span {
+body #innerContent #sctn2 #mySpecialSrcBox h3 span {
   font-weight: bold;
   font-style: normal;
 }
 
-#sctn2 #mySpecialSrcBox button {
+body #innerContent #sctn2 #mySpecialSrcBox button {
   position: absolute;
   width: 85%;
   letter-spacing: 1rem;
@@ -236,7 +252,7 @@ body #myHeader h1 {
   padding: 3% 5%;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo {
   display: block;
   position: absolute;
   width: 100%;
@@ -251,17 +267,17 @@ body #myHeader h1 {
   z-index: 2;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo .insideBox {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo .insideBox {
   position: relative;
   height: 100%;
   float: left;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice {
   width: 66.66%;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor21 {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor21 {
   float: left;
   width: 33.33%;
   height: 100%;
@@ -269,21 +285,21 @@ body #myHeader h1 {
   border-bottom-left-radius: 15px;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor22 {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor22 {
   float: left;
   width: 33.33%;
   height: 100%;
   background-color: rgba(99, 223, 17, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor23 {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor23 {
   float: left;
   width: 33.33%;
   height: 100%;
   background-color: rgba(11, 25, 212, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice h4 {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice h4 {
   width: 100%;
   height: 30%;
   position: absolute;
@@ -295,11 +311,11 @@ body #myHeader h1 {
   text-shadow: 2px 2px 2px white;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice h4 span {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice h4 span {
   text-decoration: underline;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice div#text {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice div#text {
   width: 100%;
   height: 70%;
   position: absolute;
@@ -312,19 +328,19 @@ body #myHeader h1 {
   text-shadow: 2px 2px 2px #270606;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice p {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice p {
   -webkit-margin-before: 0;
           margin-block-start: 0;
   -webkit-margin-after: 0;
           margin-block-end: 0;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #coinImgBox {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #coinImgBox {
   width: 33.33%;
   border-bottom-right-radius: 15px;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #coinImgBox #currCoinImg {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #coinImgBox #currCoinImg {
   background-image: url("../image/110.gif");
   background-color: rgba(255, 255, 255, 0.45);
   background-size: cover;
@@ -334,9 +350,15 @@ body #myHeader h1 {
   margin: 25%;
 }
 
-#chartWindow #liveRepChart {
-  position: absolute;
-  top: 0;
-  z-index: 3;
+body #innerContent #chartWindow {
+  left: 10vw;
+  top: 10vh;
+  position: relative;
+  width: 80vw;
+  height: 40vh;
+}
+
+body #myFooter {
+  background-color: rgba(100, 228, 26, 0.35);
 }
 /*# sourceMappingURL=style.css.map */

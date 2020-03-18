@@ -1,7 +1,7 @@
 import { Animations } from './animations.js';
-import { Ajax } from './services.js';
+import { Ajax, LiveReports } from './services.js';
 import { Storage } from './Storage.js';
-import { Coins } from './coinClasses.js';
+import { Coins } from './coins.js';
 
 export class UI {
   static drawCryptoCoinsCards(index, symbol, name, id) {
@@ -15,66 +15,74 @@ export class UI {
         <div class="card-body">
           <h5 class="card-title text-center font-weight-bolder">${symbol}</h5>
           <p class="card-text font-weight-bold text-center">${name}</p>
-          <button class="btn btn-primary btn-block" data-toggle="collapse" data-target="#collapse-${id}">Read More</button>
+          <button id="btn-${id}" class="btn btn-primary btn-block" data-toggle="collapse" data-target="#collapse-${id}">Read More</button>
 
           <div class="collapse mb-5" id="collapse-${id}">
-            <div class="card">
-              
+          <div class="accordion">
+          <div class="progress mt-4">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
             </div>
           </div>
+          <div class="card">
 
+          </div>
+          </div>
+          </div>
         </div>
       </div>
       `;
     $('#boxOfAllCards').append(output);
   }
 
-  static showLoaderAnimation(id) {
-    let output = `
-    <img id="loadImg" class="mx-auto my-3" src="./image/770.png" width="200px" alt="loader" >
-    <img id="loadText" class="mx-auto pb-3" src="./image/289 (1).png" width="128px" alt="text animation">
-    `;
-    $(`div#${id} > div.card-body > div#collapse-${id} > div.card`).html(output);
-  }
-
   static pushCollapseToDivByID(id, imgLink, currPriceObj) {
-    setTimeout(() => {
-      $(
-        `div#${id} > div.card-body > div#collapse-${id} > div.card > img#loadText`
-      ).replaceWith(`
+    $(
+      `#boxOfAllCards > div#${id} > .card-body > .collapse > .accordion > .progress`
+    ).hide();
+    $(`button#btn-${id}`).hide();
+
+    $(
+      `div#${id} > div.card-body > div#collapse-${id} > div.accordion > div.card`
+    ).html(`
         <div class="card-body">
+          <img class="card-img-top" src="${imgLink}" alt="Card image cap">
+          <h5 class="card-title">Current<br/>Price:</h5>
           <p class="card-text text-center">
-          Current Price in <span id="spn1">US Dollar: </span><span id="spn2">&#36;${currPriceObj.Usd}</span>
+          <span id="spn1">US Dollar: </span><br/><span id="spn2"> &#36;${currPriceObj.Usd}</span>
           </p>
           <p class="card-text text-center">
-          Current Price in <span id="spn3">Euru</span>:<span id="spn4"> &#8364;${currPriceObj.Eur}</span>
+          <span id="spn3">Euru:</span><br/><span id="spn4"> &#8364;${currPriceObj.Eur}</span>
           </p>
           <p class="card-text text-center">
-          Current Price in <span id="spn5">IL Shekel:</span><span id="spn6">&#8362;${currPriceObj.Ils}</span>
+          <span id="spn5">IL Shekel:</span><br/><span id="spn6"> &#8362;${currPriceObj.Ils}</span>
           </p>
+          <button id="readLess-${id}" class="btn btn-primary btn-block" data-toggle="collapse" data-target="#collapse-${id}">Read Less</button>
         </div>
       `);
 
-      $(
-        `div#${id} > div.card-body > div#collapse-${id} > div.card > img#loadImg`
-      ).replaceWith(
-        `<img class="card-img-top" src="${imgLink}" alt="Card image cap">`
-      );
-      setTimeout(() => {
-        $(`div#collapse-${id}`).collapse('hide');
-      }, 10000);
-    }, 500);
+    $(`#readLess-${id}`).click(function(e) {
+      $(`button#btn-${id}`).show();
+      e.preventDefault();
+    });
   }
 
-  static drawBTNSearchCoinResult(template, id, sym) {
-    $('#sctn2').html(template);
-    $('article#extraInfo').hide();
-    $('h2 > span').text(`${sym}`);
-    $('h3 > span').text(`${id}`);
-    // console.log(template);
-    Animations.testSpecialBoxAnimation();
+  static drawSearchCoinResult(id, sym) {
     let mainHeader = document.getElementById('myHeader');
-    mainHeader.style.zIndex = -1;
+
+    Ajax.getHtmlTemplate('../HtmlTemplate/specialBox.html').then(temp => {
+      $('#sctn2').html(temp);
+      console.log(id);
+      console.log(sym);
+      $('article#extraInfo').hide();
+      $('h2 > span').text(`${sym}`);
+      $('h3 > span').text(`${id}`);
+      Animations.testSpecialBoxAnimation();
+      mainHeader.style.zIndex = -1;
+      UI.drawAndHideMoreInfoForSpeacialBox(id);
+    });
+  }
+
+  static drawAndHideMoreInfoForSpeacialBox(id) {
+    let mainHeader = document.getElementById('myHeader');
 
     $('#mySpecialSrcBox > #moreInfo').click(function(e) {
       let target = e.target.id;
@@ -104,12 +112,79 @@ export class UI {
     imgPlace.style.backgroundImage = `url(${img})`;
   }
 
-  static addCoinToModalList(arr) {
+  static updateModalAndLiveArr() {
+    let coinsList = Coins.getList();
+
+    $.each(coinsList, function(indexInArray, valueOfElement) {
+      let id = valueOfElement.id;
+      let sym = valueOfElement.symbol;
+
+      sym = sym.toUpperCase();
+
+      $(`div#${id}`).each(function(index, element) {
+        $(this).on('click', 'input', function(e) {
+          LiveReports.pushAndRemovedFromLiveReportsBefore6(sym);
+
+          if (LiveReports.liveRep.length > 5) {
+            $(this).attr({
+              'data-toggle': 'modal',
+              'data-target': '#myModal'
+            });
+
+            LiveReports.newsym = UI.addLiToModalList(LiveReports.liveRep);
+
+            setTimeout(() => {
+              $('#myModal').modal('show');
+
+              $(`div#${id} > label > .liveRepCheck`).prop('checked', false);
+            }, 200);
+
+            $('.liveRepCheck').prop('disabled', true);
+          }
+        });
+      });
+    });
+
+    UI.removeFromLiveReportsOnModal(LiveReports.pushFromModal);
+  }
+
+  static removeFromLiveReportsOnModal(callback) {
+    $.each(LiveReports.liveRep, function(indexInArray, valueOfElement) {
+      let sym = valueOfElement.toLowerCase();
+      let id = Coins.findCoinBySearch(sym).id;
+      
+
+      $('.modal-footer > #confirm').on('click', function(e) {
+        $(`li#${id} > p > label > input`).each(function(index, element) {
+          if (this.checked === true) {
+            console.log('Yes')
+            let num = LiveReports.liveRep.indexOf(sym);
+            LiveReports.liveRep.splice(num, 1);
+            console.log(LiveReports.liveRep);
+            Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
+            $(`div#${id} > label > .liveRepCheck`).prop('checked', false);
+          }
+        });
+  
+        $('#myModal').modal('hide');
+        $('.liveRepCheck').prop('disabled', false);
+  
+        setTimeout(() => {
+          callback();
+        }, 200);
+      });
+      
+    });
+
+  }
+
+  static addLiToModalList(arr) {
     $('#myModal > .modal-dialog > .modal-content > .modal-body > ol').empty();
 
     let newSym = arr[5];
 
     arr.pop();
+    Storage.setLiveRepToLocalStorage(arr);
 
     for (let sym of arr) {
       sym = sym.toLowerCase();
@@ -136,9 +211,7 @@ export class UI {
       //%---Style For Modal List
 
       //%--01) 'ol' Style
-      $(
-        '#myModal > .modal-dialog > .modal-content > .modal-body > ol'
-      ).css({
+      $('#myModal > .modal-dialog > .modal-content > .modal-body > ol').css({
         'list-style-position': 'inside'
       });
 
@@ -156,18 +229,17 @@ export class UI {
       $(
         '#myModal > .modal-dialog > .modal-content > .modal-body > ol > li > p'
       ).css({
-        'display': 'inline-block',
+        display: 'inline-block',
         'font-weight': 'bold',
         'font-style': 'italic',
-        'margin': '10px 15px'
+        margin: '10px 15px'
       });
 
       //%--04) 'btn toggle' Style
       $(
         `#myModal > .modal-dialog > .modal-content > .modal-body > ol > li > p > .rocker`
       ).css({
-        
-        'right': '3%',
+        right: '3%',
         'font-size': '0.65em'
       });
 
@@ -182,6 +254,6 @@ export class UI {
         'font-style': 'none'
       });
     }
-    return newSym
+    return newSym;
   }
 }
