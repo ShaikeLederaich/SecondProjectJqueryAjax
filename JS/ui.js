@@ -70,8 +70,6 @@ export class UI {
 
     Ajax.getHtmlTemplate('../HtmlTemplate/specialBox.html').then(temp => {
       $('#sctn2').html(temp);
-      console.log(id);
-      console.log(sym);
       $('article#extraInfo').hide();
       $('h2 > span').text(`${sym}`);
       $('h3 > span').text(`${id}`);
@@ -114,30 +112,42 @@ export class UI {
   }
 
   static updateModalAndLiveArrFromSpecialBox(sym, id) {
-    $('#mySpecialSrcBox > label > input').on('click', function() {
-      sym = sym.toUpperCase()
-      console.log(sym);
-
-      console.log(id);
-    });
+    sym = sym.toUpperCase();
+    console.log(sym);
+    if (LiveReports.liveRep.includes(sym)) {
+      $('#mySpecialSrcBox > label > input').prop('checked', true);
+      $('#mySpecialSrcBox > label > input').on('click', function() {
+        updateModalAndLiveArr(sym, id);
+        $(`div#${id} > label > .liveRepCheck`).prop('checked', false);
+      });
+      console.log('Yes');
+    } else {
+      $('#mySpecialSrcBox > label > input').on('click', function() {
+        updateModalAndLiveArr(sym, id);
+        $(`div#${id} > label > .liveRepCheck`).prop('checked', true);
+      });
+      console.log('No');
+    }
   }
 
   static updateModalAndLiveArrFromAllCards() {
     let coinsList = Coins.getList();
+    let eTarget;
 
     $.each(coinsList, function(indexInArray, valueOfElement) {
       let id = valueOfElement.id;
       let sym = valueOfElement.symbol;
-
       sym = sym.toUpperCase();
 
       $(`div#${id}`).each(function(index, element) {
         $(this).on('click', 'input', function(e) {
-          updateModalAndLiveArr(sym, id)
+          eTarget = e.target;
+          updateModalAndLiveArr(sym, id);
         });
       });
     });
 
+    console.log(eTarget);
     UI.removeFromLiveRepArrFromTheModal(LiveReports.pushFromModal);
   }
 
@@ -158,6 +168,8 @@ export class UI {
           console.log(currSym);
 
           let indexLiveRep = LiveReports.liveRep.indexOf(currSym);
+
+          console.log(indexLiveRep);
 
           let currId = $(
             `ol > li:nth-child(${indexInArray + 1}) > p > span:first-child`
