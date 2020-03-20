@@ -10,6 +10,7 @@ export class Ajax {
   }
 
   //%---This Function Send API 'GET' Request And get All Crypto Coins list
+
   static getDataFromURL(url, callback) {
     $.ajax({
       type: 'GET',
@@ -33,6 +34,7 @@ export class Ajax {
         });
 
         Storage.getLiveRepFromLocalStorage();
+
         callback();
 
         $('#srcBtn').click(function(e) {
@@ -44,7 +46,7 @@ export class Ajax {
           e.preventDefault();
         });
 
-        UI.updateModalAndLiveArr();
+        UI.updateModalAndLiveArrFromAllCards();
       })
       //%---Fail() - If The Request Not Succses === Error
       .fail(err => {
@@ -138,7 +140,6 @@ export function drawMainPage() {
   });
 }
 
-
 export class LiveReports {
   static liveRep = [];
   static newsym;
@@ -148,9 +149,9 @@ export class LiveReports {
   static myChart;
 
   static pushAndRemovedFromLiveReportsBefore6(sym) {
-    let num = LiveReports.liveRep.indexOf(sym);
-
     if (LiveReports.liveRep.includes(sym)) {
+      let num = LiveReports.liveRep.indexOf(sym);
+      console.log(num);
       LiveReports.liveRep.splice(num, 1);
 
       console.log(LiveReports.liveRep);
@@ -169,18 +170,23 @@ export class LiveReports {
     ) {
       LiveReports.liveRep.push(LiveReports.newsym);
       console.log(LiveReports.liveRep);
-      Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
 
       let sym = LiveReports.newsym.toLowerCase();
-
       let coinObj = Coins.findCoinBySearch(sym);
 
       $(`div#${coinObj.id} > label > .liveRepCheck`).prop('checked', true);
 
-      $(`div#${coinObj.id} > label > .liveRepCheck`).removeAttr('data-toggle');
-
-      $(`div#${coinObj.id} > label > .liveRepCheck`).removeAttr('data-target');
+      Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
     }
+  }
+
+  static removeAttrToOpenModal() {
+    let sym = LiveReports.newsym.toLowerCase();
+    let coinObj = Coins.findCoinBySearch(sym);
+
+    $(`div#${coinObj.id} > label > .liveRepCheck`).removeAttr('data-toggle');
+
+    $(`div#${coinObj.id} > label > .liveRepCheck`).removeAttr('data-target');
   }
 
   static drawChart() {
@@ -232,7 +238,7 @@ export class LiveReports {
         currPrice = usdPrice;
       }
       console.log(indexInArray);
-      LiveReports.addColor(LiveReports.myChart, indexNum)
+      LiveReports.addColor(LiveReports.myChart, indexNum);
       LiveReports.addData(LiveReports.myChart, indexNum, currPrice);
 
       indexNum += 1;

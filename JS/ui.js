@@ -78,6 +78,7 @@ export class UI {
       Animations.testSpecialBoxAnimation();
       mainHeader.style.zIndex = -1;
       UI.drawAndHideMoreInfoForSpeacialBox(id);
+      UI.updateModalAndLiveArrFromSpecialBox(sym, id);
     });
   }
 
@@ -112,7 +113,16 @@ export class UI {
     imgPlace.style.backgroundImage = `url(${img})`;
   }
 
-  static updateModalAndLiveArr() {
+  static updateModalAndLiveArrFromSpecialBox(sym, id) {
+    $('#mySpecialSrcBox > label > input').on('click', function() {
+      sym = sym.toUpperCase()
+      console.log(sym);
+
+      console.log(id);
+    });
+  }
+
+  static updateModalAndLiveArrFromAllCards() {
     let coinsList = Coins.getList();
 
     $.each(coinsList, function(indexInArray, valueOfElement) {
@@ -123,59 +133,54 @@ export class UI {
 
       $(`div#${id}`).each(function(index, element) {
         $(this).on('click', 'input', function(e) {
-          LiveReports.pushAndRemovedFromLiveReportsBefore6(sym);
-
-          if (LiveReports.liveRep.length > 5) {
-            $(this).attr({
-              'data-toggle': 'modal',
-              'data-target': '#myModal'
-            });
-
-            LiveReports.newsym = UI.addLiToModalList(LiveReports.liveRep);
-
-            setTimeout(() => {
-              $('#myModal').modal('show');
-
-              $(`div#${id} > label > .liveRepCheck`).prop('checked', false);
-            }, 200);
-
-            $('.liveRepCheck').prop('disabled', true);
-          }
+          updateModalAndLiveArr(sym, id)
         });
       });
     });
 
-    UI.removeFromLiveReportsOnModal(LiveReports.pushFromModal);
+    UI.removeFromLiveRepArrFromTheModal(LiveReports.pushFromModal);
   }
 
-  static removeFromLiveReportsOnModal(callback) {
-    $.each(LiveReports.liveRep, function(indexInArray, valueOfElement) {
-      let sym = valueOfElement.toLowerCase();
-      let id = Coins.findCoinBySearch(sym).id;
-      
+  static removeFromLiveRepArrFromTheModal(callback) {
+    $('.modal-footer > #confirm').on('click', function(e) {
+      let allInputsAtList = $('ol')
+        .children()
+        .children()
+        .children('label')
+        .children('input');
 
-      $('.modal-footer > #confirm').on('click', function(e) {
-        $(`li#${id} > p > label > input`).each(function(index, element) {
-          if (this.checked === true) {
-            console.log('Yes')
-            let num = LiveReports.liveRep.indexOf(sym);
-            LiveReports.liveRep.splice(num, 1);
-            console.log(LiveReports.liveRep);
-            Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
-            $(`div#${id} > label > .liveRepCheck`).prop('checked', false);
-          }
-        });
-  
-        $('#myModal').modal('hide');
-        $('.liveRepCheck').prop('disabled', false);
-  
-        setTimeout(() => {
-          callback();
-        }, 200);
+      $.each(allInputsAtList, function(indexInArray, input) {
+        if (this.checked === true) {
+          let currSym = $(
+            `ol > li:nth-child(${indexInArray + 1}) > p > span:nth-child(2)`
+          ).text();
+          currSym = currSym.toUpperCase();
+          console.log(currSym);
+
+          let indexLiveRep = LiveReports.liveRep.indexOf(currSym);
+
+          let currId = $(
+            `ol > li:nth-child(${indexInArray + 1}) > p > span:first-child`
+          ).text();
+          console.log(currId);
+
+          LiveReports.liveRep.splice(indexLiveRep, 1);
+          console.log(LiveReports.liveRep);
+
+          $(`div#${currId} > label > .liveRepCheck`).prop('checked', false);
+        }
       });
-      
+      $('#myModal').modal('hide');
     });
 
+    $('#myModal').on('hidden.bs.modal', function(e) {
+      console.log('12345');
+
+      LiveReports.removeAttrToOpenModal();
+      $('.liveRepCheck').prop('disabled', false);
+
+      callback();
+    });
   }
 
   static addLiToModalList(arr) {
@@ -194,7 +199,7 @@ export class UI {
       let output = `
       <li id="${currObj.id}">
         <p>
-        Currency Id: <span id="spn1-${currObj.id}">${currObj.id}</span>, Currency Symbol: <span id="spn2-${sym}">${sym}</span>
+        Currency Id: <span id="spn1-${currObj.id}">${currObj.id}</span>, Currency Symbol: <span id="spn2-${sym}" class="spnSym">${sym}</span>
         <label class="rocker rocker-small">
           <input type="checkbox"/>
           <span class="switch-left">Yes</span>
@@ -255,5 +260,26 @@ export class UI {
       });
     }
     return newSym;
+  }
+}
+
+function updateModalAndLiveArr(sym, id) {
+  LiveReports.pushAndRemovedFromLiveReportsBefore6(sym);
+
+  if (LiveReports.liveRep.length > 5) {
+    $(this).attr({
+      'data-toggle': 'modal',
+      'data-target': '#myModal'
+    });
+
+    LiveReports.newsym = UI.addLiToModalList(LiveReports.liveRep);
+
+    setTimeout(() => {
+      $('#myModal').modal('show');
+
+      $(`div#${id} > label > .liveRepCheck`).prop('checked', false);
+    }, 200);
+
+    $('.liveRepCheck').prop('disabled', true);
   }
 }
