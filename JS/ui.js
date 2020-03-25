@@ -67,6 +67,7 @@ export class UI {
 
   static drawSearchCoinResult(id, sym) {
     let mainHeader = document.getElementById('myHeader');
+    let boxOfAllCards = document.getElementById('boxOfAllCards')
 
     Ajax.getHtmlTemplate('../HtmlTemplate/specialBox.html').then(temp => {
       $('#sctn2').html(temp);
@@ -75,6 +76,7 @@ export class UI {
       $('h3 > span').text(`${id}`);
       Animations.testSpecialBoxAnimation();
       mainHeader.style.zIndex = -1;
+      boxOfAllCards.style.zIndex = -1;
       UI.drawAndHideMoreInfoForSpeacialBox(id);
       UI.updateModalAndLiveArrFromSpecialBox(sym, id);
     });
@@ -97,7 +99,8 @@ export class UI {
     $('#mySpecialSrcBox > i').click(function(e) {
       // console.log(e);
       $('#mySpecialSrcBox').fadeOut(1500);
-      mainHeader.style.zIndex = 1;
+      mainHeader.style.zIndex = 0;
+      boxOfAllCards.style.zIndex = 1;
       e.preventDefault();
     });
   }
@@ -147,7 +150,6 @@ export class UI {
       });
     });
 
-    console.log(eTarget);
     UI.removeFromLiveRepArrFromTheModal(LiveReports.pushFromModal);
   }
 
@@ -272,6 +274,58 @@ export class UI {
       });
     }
     return newSym;
+  }
+  //%---Change 'Header' Height From '20%' To 'Auto' When 'Click' on Collapse Button inside Navbar
+  static changeHeaderHeightToAuto() {
+    let myHeader = document.getElementById('myHeader');
+    $(myHeader).on('click', 'button#navCollapseBtn', function() {
+      myHeader.style.height = 'auto';
+      myHeader.style.zIndex = 2;
+    });
+    $('#collapsibleNavId').on('hidden.bs.collapse', function() {
+      myHeader.style.height = '20%';
+      myHeader.style.zIndex = 0;
+    });
+  }
+
+  //%---Change Toggle-BTN Z-Index When Nav Collapse Is Open
+  static changeZIndexForToggleBTN() {
+    let cardToggle = document.querySelectorAll('label.rocker');
+    $('#collapsibleNavId').on('show.bs.collapse', function() {
+      console.log('Open');
+      cardToggle[0].style.zIndex = 0;
+      cardToggle[1].style.zIndex = 0;
+    });
+    $('#collapsibleNavId').on('hide.bs.collapse', function() {
+      console.log('Close');
+      cardToggle[0].style.zIndex = 2;
+      cardToggle[1].style.zIndex = 2;
+    });
+  }
+
+  static smartphoneLandscapeHeaderStyle() {
+    let body = document.getElementsByTagName('body');
+    // console.log(body)
+    console.log(body[0].offsetHeight);
+    console.log(body[0].offsetWidth);
+    let header = document.getElementById('myHeader');
+    let h1 = header.children[0];
+    let borderBottom = header.children[1];
+    let nav = header.children[4];
+    let navCollapseBTN = nav.children[0].children[0];
+    if (body[0].offsetHeight < 576 && body[0].offsetWidth < 767.98) {
+      console.log('Yes');
+      h1.style.height = '50%';
+      nav.style.height = '50%';
+      h1.style.fontSize = '3.5em';
+      borderBottom.style.display = 'none'
+      navCollapseBTN.style.position = 'absolute'
+      navCollapseBTN.style.top = '0'
+    } else {
+      console.log('No');
+      h1.style.height = '60%';
+      nav.style.height = '40%';
+    }
   }
 }
 

@@ -1,5 +1,6 @@
 @import '_vars';
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans:500,500i,700,700i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Bellota+Text:400,400i,700,700i|Rubik&display=swap');
 
 * {
   margin: 0;
@@ -7,21 +8,72 @@
 }
 
 body {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  margin: 0 auto;
+  font-size: 10px;
   #myHeader {
     position: relative;
-    z-index: 1;
-    background-color: rgb(135, 225, 236);
-    color: rgb(0, 30, 128);
+    z-index: 0;
+    background-color: #999;
+    color: rgb(0, 0, 0);
+    height: 20%;
     h1 {
-      
-      letter-spacing: 3px;
-      font-size: 5rem;
+      padding: 0 25%;
+      text-shadow: 2px 2px 2px rgb(66, 177, 2);
+      height: 60%;
       margin-bottom: 0;
+      letter-spacing: 3px;
+      font-family: 'Bellota Text', cursive;
+      font-style: italic;
+      font-size: 7em;
+    }
+    #borderBottomHeadline {
+      border-bottom: 3px solid rgb(24, 0, 0);
+      z-index: -2;
+    }
+    #borderLeftImg {
+      border-left: 3px solid rgb(24, 0, 0);
+      position: absolute;
+      top: 0;
+    }
+    #imgBox {
+      width: 180px;
+      float: right;
+      position: absolute;
+      border-bottom: 3px solid rgb(24, 0, 0);
+      top: 0;
+      right: 0;
+      z-index: -1;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    nav {
+      z-index: -2;
+      height: 40%;
+      div.container-fluid {
+        #navCollapseBtn {
+          z-index: 3;
+        }
+        div.collapse {
+          z-index: 2;
+        }
+      }
+      a {
+        font-size: 1.5em;
+      }
     }
   }
-
   #innerContent {
-    height: 600px;
+    position: absolute;
+    top: 20%;
+    height: 70%;
+    padding: 1% 0;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 
     #sctn1 {
       position: relative;
@@ -29,15 +81,13 @@ body {
       #boxOfAllCards {
         position: relative;
         box-sizing: border-box;
-
         overflow-y: scroll;
-
+        z-index: 1;
         .myCardBox {
           border: 2px solid rgb(11, 6, 63);
           width: 31.5%;
           margin-bottom: 2%;
           background-color: rgba(0, 0, 0, 0.226);
-
           .card-body {
             .collapse {
               .card {
@@ -86,29 +136,28 @@ body {
 
     #sctn2 {
       position: absolute;
+      width: 100vw;
+      height: 70vh;
+      top: 0;
       #mySpecialSrcBox {
         display: flex;
         flex-wrap: wrap;
         font-family: 'Fira Sans';
         position: relative;
-        position: fixed;
         background-image: url(../CryptoImage/bitcoin-4728496_1920.jpg);
         background-size: cover;
         background-position: center;
-
-        top: 13%;
+        top: 0;
         left: 25%;
         height: 55%;
         width: 50%;
         border: 10px double blue;
         border-radius: 25px;
         z-index: 2;
-
         .colorBoxes {
           height: 25%;
           width: 20%;
         }
-
         #boxColor1 {
           background-color: rgba(228, 198, 26, 0.45);
           border-top-left-radius: 15px;
@@ -176,16 +225,15 @@ body {
 
         i#myCloseIcon {
           position: absolute;
-          color: rgba(51, 179, 211, 0.55);
-          text-shadow: 2px 2px 10px rgb(10, 7, 58);
+          color: rgb(0, 0, 0);
+          text-shadow: 2px 2px 5px rgb(30, 212, 45);
           left: 2%;
-
           // top: 1%;
           cursor: pointer;
           z-index: 1;
           &:hover {
-            color: rgba(120, 188, 233, 0.657);
-            text-shadow: 2px 3px 10px rgb(5, 6, 63);
+            color: rgba(214, 16, 16, 0.55);
+            text-shadow: 2px 2px 8px rgb(2, 2, 8);
           }
         }
         h2 {
@@ -222,7 +270,6 @@ body {
             font-style: normal;
           }
         }
-
         button {
           position: absolute;
           width: 85%;
@@ -323,17 +370,28 @@ body {
         }
       }
     }
-
+    
     #chartWindow {
-      left: 10vw;
-      top: 10vh;
       position: relative;
-      width:80vw;
-      height:40vh;
+      width: 100vw;
+      height: 69vh;
+      top: 1vh;
+      bottom: 1vh;
+      #canvasBox {
+        width: 60%;
+        height: 80%;
+        margin: 0 auto;
+        padding: 1% 0 1.5%;
+      }
     }
   }
 
   #myFooter {
+    position: absolute;
+    
+    width: 100%;
+    height: 10%;
+    bottom: 0;
     background-color: rgba(100, 228, 26, 0.35);
   }
 }

@@ -1,37 +1,146 @@
 @import '_vars';
+
 //%---Extra Small---Portrait Smartphone
 //%---Max Width 575.98 px
 @media (max-width: $breakPoint-exSmall) {
-  #sctn1 {
-    #boxOfAllCards {
-      .myCardBox {
-        width: 100%;
+  body {
+    #myHeader {
+      h1 {
+        font-size: 4.5em;
+        padding: 2% 40% 2% 15%;
+        z-index: 2;
+        height: 50%;
+      }
+      nav {
+        height: 50%;
+        #navCollapseBtn {
+          position: absolute;
+          top: 0;
+        }
+      }
+      #borderBottomHeadline {
+        // margin-right: 25vw;
+        display: none;
+      }
+      #borderLeftImg {
+        height: 18vh;
+        right: 25vw;
+      }
+      #imgBox {
+        width: 25vw;
+        height: 18vh;
+      }
+      nav {
+        .container-fluid {
+          .collapse {
+            form {
+              #srcBtn {
+                width: 100%;
+                margin-top: 3%;
+              }
+            }
+          }
+        }
       }
     }
-  }
-  #sctn2 {
-    #mySpecialSrcBox {
-      h2 {
-        font-size: 3rem;
+    #innerContent {
+      #sctn1 {
+        #boxOfAllCards {
+          .myCardBox {
+            width: 100%;
+          }
+        }
       }
-      h3 {
-        font-size: 2.5rem;
-        top: 28%;
+      #sctn2 {
+        #mySpecialSrcBox {
+          h2 {
+            font-size: 3rem;
+          }
+          h3 {
+            font-size: 2.5rem;
+            top: 28%;
+          }
+        }
+      }
+      #chartWindow {
+        #canvasBox {
+          width: 85%;
+          margin: 0 auto;
+          padding: 1% 0 1.5%;
+        }
       }
     }
   }
 }
-//%---Small---Landscape Smartphone
+//%---Small---
 //%---Min-Width: 576px Max-Width 767.98
 @media (min-width: $breakPoint-SmartphoneMin) and (max-width: $breakPoint-SmartphoneMax) {
-  #sctn2 {
-    #mySpecialSrcBox {
-      h2 {
-        font-size: 3rem;
+  body {
+    #myHeader {
+      h1 {
+        font-size: 5em;
+        padding: 2% 35% 3% 15%;
+        height: 50%;
       }
-      h3 {
-        font-size: 2.5rem;
-        top: 28%;
+      nav {
+        height: 50%;
+        #navCollapseBtn {
+          position: absolute;
+          top: 0;
+        }
+      }
+      #borderBottomHeadline {
+        // margin-right: 20vw;
+        display: none;
+      }
+      #borderLeftImg {
+        height: 18vh;
+        right: 20vw;
+      }
+      #imgBox {
+        width: 20vw;
+        height: 18vh;
+      }
+      nav {
+        .container-fluid {
+          .collapse {
+            form {
+              #searchCoin {
+                width: 48%;
+              }
+              #srcBtn {
+                width: 48%;
+              }
+            }
+          }
+        }
+      }
+    }
+    #innerContent {
+      #sctn1 {
+        #boxOfAllCards {
+          .myCardBox {
+            width: 100%;
+          }
+        }
+      }
+      #sctn2 {
+        #mySpecialSrcBox {
+          h2 {
+            font-size: 3rem;
+          }
+          h3 {
+            font-size: 2.5rem;
+            top: 28%;
+          }
+        }
+      }
+      #chartWindow {
+        #canvasBox {
+          width:80%;
+          margin: 0 auto;
+          padding: 1% 0 1.5%;
+        }
       }
     }
   }
@@ -39,14 +148,42 @@
 //%---Medium---Tablet
 //%---Min-Width: 768px Max-Width 991.98px
 @media (min-width: $breakPoint-TabletMin) and (max-width: $breakPoint-TabletMax) {
-  #sctn2 {
-    #mySpecialSrcBox {
-      h2 {
-        font-size: 3rem;
+  body {
+    #myHeader {
+      h1 {
+        font-size: 6em;
+        padding: 1% 30% 3% 20%;
       }
-      h3 {
-        font-size: 2.5rem;
-        top: 28%;
+      #borderBottomHeadline {
+        margin-right: 14vw;
+      }
+      #borderLeftImg {
+        height: 18vh;
+        right: 14vw;
+      }
+      #imgBox {
+        width: 14vw;
+        height: 18vh;
+      }
+      nav {
+        div.container-fluid {
+          div.collapse {
+            padding-right: 13vw;
+          }
+        }
+      }
+    }
+    #innerContent {
+      #sctn2 {
+        #mySpecialSrcBox {
+          h2 {
+            font-size: 3rem;
+          }
+          h3 {
+            font-size: 2.5rem;
+            top: 28%;
+          }
+        }
       }
     }
   }
@@ -54,8 +191,59 @@
 //%---Large---Desktops
 //%---Min-Width: 992px Max-Width 1199.98px
 @media (min-width: $breakPoint-DesktopsMin) and (max-width: $breakPoint-DesktopsMax) {
-  
+  body {
+    #myHeader {
+      h1 {
+        font-size: 6.5em;
+        padding: 0 30% 3% 20%;
+      }
+
+      #borderBottomHeadline {
+        margin-right: 14vw;
+      }
+      #borderLeftImg {
+        height: 18vh;
+        right: 14vw;
+      }
+      #imgBox {
+        width: 14vw;
+        height: 18vh;
+      }
+      nav {
+        div.container-fluid {
+          div.collapse {
+            padding-right: 9.5vw;
+          }
+        }
+      }
+    }
+  }
 }
 @media (min-width: $breakPoint-LargeDesktop) {
-  
+  body {
+    #myHeader {
+      h1 {
+        padding: 0 30% 3% 20%;
+      }
+      #borderBottomHeadline {
+        margin-right: 13vw;
+      }
+      #borderLeftImg {
+        height: 18vh;
+        right: 13vw;
+        // z-index: -1;
+      }
+      #imgBox {
+        width: 13vw;
+        height: 18vh;
+      }
+      nav {
+        div.container-fluid {
+          div.collapse {
+            padding-right: 10vw;
+          }
+        }
+      }
+    }
+  }
 }

@@ -34,6 +34,9 @@ export class Ajax {
         });
 
         Storage.getLiveRepFromLocalStorage();
+        LiveReports.drawChart();
+        UI.changeZIndexForToggleBTN();
+        UI.changeHeaderHeightToAuto();
 
         callback();
 
@@ -136,6 +139,8 @@ export function drawMainPage() {
     $('canvas#myChart').hide();
     $('#sctn1').fadeIn(1000);
     clearInterval(LiveReports.liveInterval);
+
+    console.log(LiveReports.myChart);
     e.preventDefault();
   });
 }
@@ -156,10 +161,12 @@ export class LiveReports {
 
       console.log(LiveReports.liveRep);
       Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
+      // LiveReports.drawChart();
     } else {
       LiveReports.liveRep.push(sym);
       console.log(LiveReports.liveRep);
       Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
+      // LiveReports.drawChart();
     }
   }
 
@@ -177,6 +184,7 @@ export class LiveReports {
       $(`div#${coinObj.id} > label > .liveRepCheck`).prop('checked', true);
 
       Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
+      // LiveReports.drawChart();
     }
   }
 
@@ -189,36 +197,50 @@ export class LiveReports {
     $(`div#${coinObj.id} > label > .liveRepCheck`).removeAttr('data-target');
   }
 
+
   static drawChart() {
-    $('a#live').click(function(e) {
-      console.log('12345');
-      $('#sctn1').hide();
+    let chartArrLenght = LiveReports.liveRep.length;
 
-      Ajax.getHtmlTemplate('../HtmlTemplate/chart.html').then(chart => {
-        $('#chartWindow').html(chart);
-
-        LiveReports.chart();
-      });
+    $('header#myHeader').mouseenter(function(e) {
+      chartArrLenght = LiveReports.liveRep.length;
+      if (chartArrLenght === 0) {
+        $('a#live').addClass('disabled');
+        $('a#live')
+          .parent()
+          .attr({
+            'data-toggle': 'tooltip',
+            'data-placement': 'top',
+            title:
+              'To view real-time reports - You must first select which currencies by moving the switch from "No" to "Yes".'
+          });
+        $('a#live')
+          .parent()
+          .mouseover(e => {
+            $('a#live')
+              .parent()
+              .tooltip('show');
+            e.preventDefault();
+          });
+        console.log('0');
+      } else if (chartArrLenght !== 0) {
+        $('a#live').removeClass('disabled');
+      }
+      e.preventDefault();
     });
-  }
 
-  static getFetchTime() {
-    let d = new Date();
-    let hh = d.getHours();
-    let mm = d.getMinutes();
-    let ss = d.getSeconds();
+    $('a#live').click(function(e) {
+      if (chartArrLenght !== 0) {
+        $('#sctn1').hide();
+        let chartWindow = document.getElementById('chartWindow');
+        // chartWindow.style.zIndex = 0
+        Ajax.getHtmlTemplate('../HtmlTemplate/chart.html').then(chart => {
+          $('#chartWindow').html(chart);
 
-    if (mm < 10) {
-      mm = '0' + mm;
-    }
-    if (hh < 10) {
-      hh = '0' + hh;
-    }
-    if (ss < 10) {
-      ss = '0' + ss;
-    }
-    let fetchTime = `${hh}:${mm}:${ss}`;
-    return fetchTime;
+          LiveReports.chart();
+        });
+      }
+      e.preventDefault();
+    });
   }
 
   static async getLiveInfoData(symArr) {
@@ -230,14 +252,13 @@ export class LiveReports {
     let currTime = LiveReports.getFetchTime();
     let indexNum = 0;
     console.log(resulte);
-    console.log(Object.keys(resulte));
+    let resArr = Object.keys(resulte);
 
     $.each(resulte, function(indexInArray, valueOfElement) {
       let currPrice;
       for (let usdPrice of Object.values(valueOfElement)) {
         currPrice = usdPrice;
       }
-      console.log(indexInArray);
       LiveReports.addColor(LiveReports.myChart, indexNum);
       LiveReports.addData(LiveReports.myChart, indexNum, currPrice);
 
@@ -245,6 +266,78 @@ export class LiveReports {
     });
 
     LiveReports.addTimeLabel(LiveReports.myChart, currTime);
+    return resArr;
+  }
+
+  static async createDataObjByFetchResolteAndPushToChartDatasets(symArr) {
+    let response = await fetch(
+      `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${symArr}&tsyms=USD`
+    );
+    let resulte = await response.json();
+    console.log(resulte);
+
+    $.each(resulte, function(indexInArray, valueOfElement) {
+      let currDataObj = {
+        label: `${indexInArray}`,
+        fill: true,
+        lineTension: 0,
+        borderWidth: 1,
+        data: []
+      };
+      LiveReports.myChart.data.datasets.push(currDataObj);
+      LiveReports.myChart.update();
+      console.log(LiveReports.myChart.data.datasets);
+    });
+  }
+
+  static chart() {
+    LiveReports.createDataObjByFetchResolteAndPushToChartDatasets(
+      LiveReports.liveRep
+    );
+
+    LiveReports.liveInterval = setInterval(() => {
+      LiveReports.getLiveInfoData(LiveReports.liveRep).then(res => {
+        LiveReports.updateChartTitle(LiveReports.myChart, res);
+      });
+    }, 2000);
+
+    // Chart.defaults.global.defaultFontSize = 20;
+    Chart.defaults.global.defaultFontSize = 15;
+    Chart.defaults.global.maintainAspectRatio = false;
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    LiveReports.myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: []
+      },
+      options: {
+        tooltips: {
+          mode: 'point'
+        },
+        title: {
+          display: true,
+          text: ''
+        },
+        scales: {
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: 'Coins Value',
+                fontStyle: 'bold',
+                fontSize: '20'
+              },
+              ticks: {
+                beginAtZero: true
+              }
+            }
+          ]
+        }
+      }
+    });
   }
 
   static addTimeLabel(chart, currTime) {
@@ -253,9 +346,20 @@ export class LiveReports {
     chart.update();
   }
 
+  static addDataLabel(chart, index, label) {
+    chart.data.datasets[index].label = label;
+
+    chart.update();
+  }
+
   static addData(chart, index, data) {
     chart.data.datasets[index].data.push(data);
 
+    chart.update();
+  }
+
+  static updateChartTitle(chart, arr) {
+    chart.options.title.text = `${arr} To USD`;
     chart.update();
   }
 
@@ -282,60 +386,25 @@ export class LiveReports {
         chart.data.datasets[index].borderColor = 'rgba(7, 95, 91, 1)';
         break;
     }
-
     chart.update();
   }
 
-  static async createDataObjByFetchResolteAndPushToChartDatasets(symArr) {
-    let response = await fetch(
-      `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${symArr}&tsyms=USD`
-    );
-    let resulte = await response.json();
+  static getFetchTime() {
+    let d = new Date();
+    let hh = d.getHours();
+    let mm = d.getMinutes();
+    let ss = d.getSeconds();
 
-    $.each(resulte, function(indexInArray, valueOfElement) {
-      let currDataObj = {
-        label: `${indexInArray}`,
-        fill: true,
-        lineTension: 0,
-        borderWidth: 1,
-        data: []
-      };
-
-      LiveReports.myChart.data.datasets.push(currDataObj);
-
-      LiveReports.myChart.update();
-    });
-  }
-
-  static chart() {
-    LiveReports.createDataObjByFetchResolteAndPushToChartDatasets(
-      LiveReports.liveRep
-    );
-
-    LiveReports.liveInterval = setInterval(() => {
-      LiveReports.getLiveInfoData(LiveReports.liveRep);
-    }, 2000);
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-
-    LiveReports.myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: [],
-        datasets: []
-      },
-
-      options: {
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true
-              }
-            }
-          ]
-        }
-      }
-    });
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+    if (hh < 10) {
+      hh = '0' + hh;
+    }
+    if (ss < 10) {
+      ss = '0' + ss;
+    }
+    let fetchTime = `${hh}:${mm}:${ss}`;
+    return fetchTime;
   }
 }
