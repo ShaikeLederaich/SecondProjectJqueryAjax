@@ -419,7 +419,7 @@ body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #coinImgBox #currCoinImg {
 }
 
 body #innerContent #chartWindow {
-  position: relative;
+  position: absolute;
   width: 100vw;
   height: 69vh;
   top: 1vh;
