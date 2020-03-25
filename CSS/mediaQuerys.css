@@ -1,9 +1,12 @@
 @media (max-width: 575.98px) {
-  body #myHeader h1 {
-    font-size: 4.5em;
-    padding: 2% 40% 2% 15%;
-    z-index: 2;
+  body #myHeader #headlineBox {
+    width: 75vw;
     height: 50%;
+  }
+  body #myHeader #headlineBox h1 {
+    font-size: 4.5em;
+    padding: 2% 25% 2% 20%;
+    z-index: 2;
   }
   body #myHeader nav {
     height: 50%;
@@ -45,10 +48,13 @@
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
-  body #myHeader h1 {
-    font-size: 5em;
-    padding: 2% 35% 3% 15%;
+  body #myHeader #headlineBox {
+    width: 80vw;
     height: 50%;
+  }
+  body #myHeader #headlineBox h1 {
+    font-size: 5em;
+    padding: 2% 25% 3% 25%;
   }
   body #myHeader nav {
     height: 50%;
@@ -92,9 +98,13 @@
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-  body #myHeader h1 {
+  body #myHeader #headlineBox {
+    z-index: 0;
+    width: 86vw;
+  }
+  body #myHeader #headlineBox h1 {
     font-size: 6em;
-    padding: 1% 30% 3% 20%;
+    padding: 1% 25% 3% 25%;
   }
   body #myHeader #borderBottomHeadline {
     margin-right: 14vw;
@@ -102,6 +112,7 @@
   body #myHeader #borderLeftImg {
     height: 18vh;
     right: 14vw;
+    z-index: -1;
   }
   body #myHeader #imgBox {
     width: 14vw;
@@ -120,9 +131,13 @@
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
-  body #myHeader h1 {
+  body #myHeader #headlineBox {
+    width: 86vw;
+    z-index: 0;
+  }
+  body #myHeader #headlineBox h1 {
     font-size: 6.5em;
-    padding: 0 30% 3% 20%;
+    padding: 0 25% 3% 25%;
   }
   body #myHeader #borderBottomHeadline {
     margin-right: 14vw;
@@ -130,6 +145,7 @@
   body #myHeader #borderLeftImg {
     height: 18vh;
     right: 14vw;
+    z-index: -1;
   }
   body #myHeader #imgBox {
     width: 14vw;
@@ -141,8 +157,12 @@
 }
 
 @media (min-width: 1200px) {
-  body #myHeader h1 {
-    padding: 0 30% 3% 20%;
+  body #myHeader #headlineBox {
+    width: 87vw;
+    z-index: 0;
+  }
+  body #myHeader #headlineBox h1 {
+    padding: 0 25% 3% 25%;
   }
   body #myHeader #borderBottomHeadline {
     margin-right: 13vw;
@@ -150,6 +170,7 @@
   body #myHeader #borderLeftImg {
     height: 18vh;
     right: 13vw;
+    z-index: -1;
   }
   body #myHeader #imgBox {
     width: 13vw;

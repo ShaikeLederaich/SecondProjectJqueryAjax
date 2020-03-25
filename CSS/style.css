@@ -14,18 +14,22 @@ body {
 }
 
 body #myHeader {
-  position: relative;
   z-index: 0;
   background-color: #999;
   color: black;
   height: 20%;
 }
 
-body #myHeader h1 {
+body #myHeader #headlineBox {
+  position: relative;
+  height: 60%;
+  background-color: #999;
+}
+
+body #myHeader #headlineBox h1 {
+  margin-bottom: 0;
   padding: 0 25%;
   text-shadow: 2px 2px 2px #42b102;
-  height: 60%;
-  margin-bottom: 0;
   letter-spacing: 3px;
   font-family: 'Bellota Text', cursive;
   font-style: italic;
@@ -44,7 +48,6 @@ body #myHeader #borderLeftImg {
 }
 
 body #myHeader #imgBox {
-  width: 180px;
   float: right;
   position: absolute;
   border-bottom: 3px solid #180000;
@@ -79,7 +82,7 @@ body #innerContent {
   position: absolute;
   top: 20%;
   height: 70%;
-  padding: 1% 0;
+  padding: 0.3% 0;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
 }
@@ -92,7 +95,6 @@ body #innerContent #sctn1 #boxOfAllCards {
   position: relative;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  overflow-y: scroll;
   z-index: 1;
 }
 

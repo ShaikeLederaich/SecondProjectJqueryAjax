@@ -10,7 +10,5 @@ $(function() {
     getCoinInfoByID
   );
   
-  // UI.smartphoneLandscapeHeaderStyle();
-
   drawMainPage();
 });

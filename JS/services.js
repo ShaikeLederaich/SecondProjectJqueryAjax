@@ -21,7 +21,11 @@ export class Ajax {
         //%---Done() - If The Request Succses === No Error
 
         //%---This Function Get Array of All Crypto Coins list And Extract Specific Parametrs
+        let cardsOnPage;
+
+        
         $.each(response, function(indexInArray, valueOfElement) {
+          console.log(indexInArray)
           if (indexInArray <= 100) {
             Coins.addToList(valueOfElement);
             UI.drawCryptoCoinsCards(
@@ -33,6 +37,8 @@ export class Ajax {
           }
         });
 
+        let boxOfAllCards = document.getElementById('boxOfAllCards')
+        boxOfAllCards.style.overflowY = 'scroll'
         Storage.getLiveRepFromLocalStorage();
         LiveReports.drawChart();
         UI.changeZIndexForToggleBTN();

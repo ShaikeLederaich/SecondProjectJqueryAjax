@@ -14,20 +14,25 @@ body {
   margin: 0 auto;
   font-size: 10px;
   #myHeader {
-    position: relative;
     z-index: 0;
     background-color: #999;
     color: rgb(0, 0, 0);
     height: 20%;
-    h1 {
-      padding: 0 25%;
-      text-shadow: 2px 2px 2px rgb(66, 177, 2);
+    #headlineBox {
+      position: relative;
       height: 60%;
-      margin-bottom: 0;
-      letter-spacing: 3px;
-      font-family: 'Bellota Text', cursive;
-      font-style: italic;
-      font-size: 7em;
+    background-color: #999;
+
+      h1 {
+        margin-bottom: 0;
+        padding: 0 25%;
+        text-shadow: 2px 2px 2px rgb(66, 177, 2);
+        letter-spacing: 3px;
+        font-family: 'Bellota Text', cursive;
+        font-style: italic;
+        font-size: 7em;
+      }
+
     }
     #borderBottomHeadline {
       border-bottom: 3px solid rgb(24, 0, 0);
@@ -39,7 +44,6 @@ body {
       top: 0;
     }
     #imgBox {
-      width: 180px;
       float: right;
       position: absolute;
       border-bottom: 3px solid rgb(24, 0, 0);
@@ -71,17 +75,15 @@ body {
     position: absolute;
     top: 20%;
     height: 70%;
-    padding: 1% 0;
+    padding: 0.3% 0;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
 
     #sctn1 {
       position: relative;
-
       #boxOfAllCards {
         position: relative;
         box-sizing: border-box;
-        overflow-y: scroll;
         z-index: 1;
         .myCardBox {
           border: 2px solid rgb(11, 6, 63);
@@ -95,7 +97,6 @@ body {
                   img {
                     width: 50%;
                     float: right;
-                    // margin: 2%;
                   }
                   h5 {
                     width: 50%;
@@ -370,7 +371,7 @@ body {
         }
       }
     }
-    
+
     #chartWindow {
       position: relative;
       width: 100vw;

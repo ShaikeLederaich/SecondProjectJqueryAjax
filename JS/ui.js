@@ -302,31 +302,6 @@ export class UI {
       cardToggle[1].style.zIndex = 2;
     });
   }
-
-  static smartphoneLandscapeHeaderStyle() {
-    let body = document.getElementsByTagName('body');
-    // console.log(body)
-    console.log(body[0].offsetHeight);
-    console.log(body[0].offsetWidth);
-    let header = document.getElementById('myHeader');
-    let h1 = header.children[0];
-    let borderBottom = header.children[1];
-    let nav = header.children[4];
-    let navCollapseBTN = nav.children[0].children[0];
-    if (body[0].offsetHeight < 576 && body[0].offsetWidth < 767.98) {
-      console.log('Yes');
-      h1.style.height = '50%';
-      nav.style.height = '50%';
-      h1.style.fontSize = '3.5em';
-      borderBottom.style.display = 'none'
-      navCollapseBTN.style.position = 'absolute'
-      navCollapseBTN.style.top = '0'
-    } else {
-      console.log('No');
-      h1.style.height = '60%';
-      nav.style.height = '40%';
-    }
-  }
 }
 
 function updateModalAndLiveArr(sym, id) {
