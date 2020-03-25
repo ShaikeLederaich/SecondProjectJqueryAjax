@@ -1,40 +1,157 @@
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans:500,500i,700,700i&display=swap");
-#myHeader h1 {
-  background-color: #fffb00;
-  color: #001e80;
-  letter-spacing: 3px;
-  font-size: 5rem;
+@import url("https://fonts.googleapis.com/css?family=Bellota+Text:400,400i,700,700i|Rubik&display=swap");
+* {
+  margin: 0;
+  padding: 0;
 }
 
-#myHeader {
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  margin: 0 auto;
+  font-size: 10px;
+}
+
+body #myHeader {
+  z-index: 0;
+  background-color: #999;
+  color: black;
+  height: 20%;
+}
+
+body #myHeader #headlineBox {
   position: relative;
+  height: 60%;
+  background-color: #999;
+}
+
+body #myHeader #headlineBox h1 {
+  margin-bottom: 0;
+  padding: 0 25%;
+  text-shadow: 2px 2px 2px #42b102;
+  letter-spacing: 3px;
+  font-family: 'Bellota Text', cursive;
+  font-style: italic;
+  font-size: 7em;
+}
+
+body #myHeader #borderBottomHeadline {
+  border-bottom: 3px solid #180000;
+  z-index: -2;
+}
+
+body #myHeader #borderLeftImg {
+  border-left: 3px solid #180000;
+  position: absolute;
+  top: 0;
+}
+
+body #myHeader #imgBox {
+  float: right;
+  position: absolute;
+  border-bottom: 3px solid #180000;
+  top: 0;
+  right: 0;
+  z-index: -1;
+}
+
+body #myHeader #imgBox img {
+  width: 100%;
+  height: 100%;
+}
+
+body #myHeader nav {
+  z-index: -2;
+  height: 40%;
+}
+
+body #myHeader nav div.container-fluid #navCollapseBtn {
+  z-index: 3;
+}
+
+body #myHeader nav div.container-fluid div.collapse {
+  z-index: 2;
+}
+
+body #myHeader nav a {
+  font-size: 1.5em;
+}
+
+body #innerContent {
+  position: absolute;
+  top: 20%;
+  height: 70%;
+  padding: 0.3% 0;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+body #innerContent #sctn1 {
+  position: relative;
+}
+
+body #innerContent #sctn1 #boxOfAllCards {
+  position: relative;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   z-index: 1;
 }
 
-#myHeader h1 {
-  margin-bottom: 0;
-}
-
-#sctn1 {
-  position: relative;
-}
-
-#sctn1 #boxOfAllCards {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-#sctn1 #boxOfAllCards .myCardBox {
+body #innerContent #sctn1 #boxOfAllCards .myCardBox {
   border: 2px solid #0b063f;
-  width: 33.33%;
+  width: 31.5%;
+  margin-bottom: 2%;
   background-color: rgba(0, 0, 0, 0.226);
 }
 
-#sctn2 {
-  position: absolute;
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body img {
+  width: 50%;
+  float: right;
 }
 
-#sctn2 #mySpecialSrcBox {
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body h5 {
+  width: 50%;
+  padding-top: 5%;
+  line-height: 150%;
+  float: left;
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p {
+  clear: both;
+  background-color: rgba(0, 0, 0, 0.25);
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p span {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p #spn1 {
+  color: red;
+}
+
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p #spn3 {
+  color: #15ff00;
+}
+
+body #innerContent #sctn1 #boxOfAllCards .myCardBox .card-body .collapse .card .card-body p #spn5 {
+  color: #0400ff;
+}
+
+body #innerContent #sctn2 {
+  position: absolute;
+  width: 100vw;
+  height: 70vh;
+  top: 0;
+}
+
+body #innerContent #sctn2 #mySpecialSrcBox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -42,11 +159,10 @@
       flex-wrap: wrap;
   font-family: 'Fira Sans';
   position: relative;
-  position: fixed;
   background-image: url(../CryptoImage/bitcoin-4728496_1920.jpg);
   background-size: cover;
   background-position: center;
-  top: 13%;
+  top: 0;
   left: 25%;
   height: 55%;
   width: 50%;
@@ -55,143 +171,145 @@
   z-index: 2;
 }
 
-#sctn2 #mySpecialSrcBox .colorBoxes {
+body #innerContent #sctn2 #mySpecialSrcBox .colorBoxes {
   height: 25%;
   width: 20%;
 }
 
-#sctn2 #mySpecialSrcBox #boxColor1 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor1 {
   background-color: rgba(228, 198, 26, 0.45);
   border-top-left-radius: 15px;
 }
 
-#sctn2 #mySpecialSrcBox #boxColor2 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor2 {
   background-color: rgba(100, 228, 26, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor3 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor3 {
   background-color: rgba(26, 73, 228, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor4 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor4 {
   background-color: rgba(181, 26, 228, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor5 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor5 {
   background-color: rgba(236, 114, 13, 0.45);
   border-top-right-radius: 15px;
 }
 
-#sctn2 #mySpecialSrcBox #boxColor6 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor6 {
   background-color: rgba(221, 76, 76, 0.55);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor7 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor7 {
   background-color: rgba(58, 225, 231, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor8 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor8 {
   background-color: rgba(7, 36, 90, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor9 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor9 {
   background-color: rgba(147, 228, 171, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor10 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor10 {
   background-color: rgba(236, 55, 155, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor11 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor11 {
   background-color: rgba(18, 102, 15, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor12 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor12 {
   background-color: rgba(94, 208, 223, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor13 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor13 {
   background-color: rgba(26, 73, 228, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor14 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor14 {
   background-color: rgba(19, 77, 4, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor15 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor15 {
   background-color: rgba(179, 86, 11, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor16 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor16 {
   background-color: rgba(151, 26, 26, 0.55);
   border-bottom-left-radius: 15px;
 }
 
-#sctn2 #mySpecialSrcBox #boxColor17 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor17 {
   background-color: rgba(11, 119, 122, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor18 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor18 {
   background-color: rgba(172, 236, 68, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor19 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor19 {
   background-color: rgba(10, 55, 138, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #boxColor20 {
+body #innerContent #sctn2 #mySpecialSrcBox #boxColor20 {
   background-color: rgba(236, 55, 155, 0.45);
   border-bottom-right-radius: 15px;
 }
 
-#sctn2 #mySpecialSrcBox i#myCloseIcon {
+body #innerContent #sctn2 #mySpecialSrcBox i#myCloseIcon {
   position: absolute;
-  color: rgba(51, 179, 211, 0.55);
-  text-shadow: 2px 2px 10px #0a073a;
+  color: black;
+  text-shadow: 2px 2px 5px #1ed42d;
   left: 2%;
-  top: 2%;
   cursor: pointer;
   z-index: 1;
 }
 
-#sctn2 #mySpecialSrcBox i#myCloseIcon:hover {
-  color: rgba(120, 188, 233, 0.657);
-  text-shadow: 2px 3px 10px #05063f;
+body #innerContent #sctn2 #mySpecialSrcBox i#myCloseIcon:hover {
+  color: rgba(214, 16, 16, 0.55);
+  text-shadow: 2px 2px 8px #020208;
 }
 
-#sctn2 #mySpecialSrcBox h2 {
+body #innerContent #sctn2 #mySpecialSrcBox h2 {
   position: absolute;
-  width: 100%;
-  font-size: 6rem;
+  width: 80%;
+  font-size: 3.5rem;
+  margin: 0 auto;
   font-style: italic;
+  font-size: 3.5;
   color: #0c0d24;
   text-shadow: 4px 6px 5px #90a5e2;
   text-align: center;
-  top: 8%;
+  top: 10%;
+  left: 10%;
 }
 
-#sctn2 #mySpecialSrcBox h2 span {
+body #innerContent #sctn2 #mySpecialSrcBox h2 span {
   font-weight: bold;
   font-style: normal;
 }
 
-#sctn2 #mySpecialSrcBox h3 {
+body #innerContent #sctn2 #mySpecialSrcBox h3 {
   position: absolute;
   width: 100%;
-  font-size: 5rem;
+  font-size: 3rem;
+  top: 30%;
   font-style: italic;
   text-align: center;
   color: #0c0d24;
   text-shadow: 4px 6px 5px #90a5e2;
-  top: 36%;
 }
 
-#sctn2 #mySpecialSrcBox h3 span {
+body #innerContent #sctn2 #mySpecialSrcBox h3 span {
   font-weight: bold;
   font-style: normal;
 }
 
-#sctn2 #mySpecialSrcBox button {
+body #innerContent #sctn2 #mySpecialSrcBox button {
   position: absolute;
   width: 85%;
   letter-spacing: 1rem;
@@ -202,7 +320,7 @@
   padding: 3% 5%;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo {
   display: block;
   position: absolute;
   width: 100%;
@@ -217,17 +335,17 @@
   z-index: 2;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo .insideBox {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo .insideBox {
   position: relative;
   height: 100%;
   float: left;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice {
   width: 66.66%;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor21 {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor21 {
   float: left;
   width: 33.33%;
   height: 100%;
@@ -235,42 +353,42 @@
   border-bottom-left-radius: 15px;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor22 {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor22 {
   float: left;
   width: 33.33%;
   height: 100%;
   background-color: rgba(99, 223, 17, 0.35);
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor23 {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice #boxColor23 {
   float: left;
   width: 33.33%;
   height: 100%;
   background-color: rgba(11, 25, 212, 0.45);
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice h4 {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice h4 {
   width: 100%;
   height: 30%;
   position: absolute;
   margin-bottom: 0;
-  font-size: 2.5rem;
+  font-size: 1.7rem;
   color: black;
   background-color: rgba(70, 221, 214, 0.35);
   letter-spacing: 1px;
   text-shadow: 2px 2px 2px white;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice h4 span {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice h4 span {
   text-decoration: underline;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice div#text {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice div#text {
   width: 100%;
   height: 70%;
   position: absolute;
   top: 30%;
-  font-size: 2.2rem;
+  font-size: 1.4rem;
   text-align: center;
   letter-spacing: 2px;
   color: #d7d8e4;
@@ -278,15 +396,48 @@
   text-shadow: 2px 2px 2px #270606;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #currPrice p {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #currPrice p {
   -webkit-margin-before: 0;
           margin-block-start: 0;
   -webkit-margin-after: 0;
           margin-block-end: 0;
 }
 
-#sctn2 #mySpecialSrcBox #extraInfo #coinImg {
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #coinImgBox {
   width: 33.33%;
   border-bottom-right-radius: 15px;
+}
+
+body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #coinImgBox #currCoinImg {
+  background-image: url("../image/110.gif");
+  background-color: rgba(255, 255, 255, 0.45);
+  background-size: cover;
+  border: 5px solid white;
+  width: 50%;
+  height: 50%;
+  margin: 25%;
+}
+
+body #innerContent #chartWindow {
+  position: relative;
+  width: 100vw;
+  height: 69vh;
+  top: 1vh;
+  bottom: 1vh;
+}
+
+body #innerContent #chartWindow #canvasBox {
+  width: 60%;
+  height: 80%;
+  margin: 0 auto;
+  padding: 1% 0 1.5%;
+}
+
+body #myFooter {
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  bottom: 0;
+  background-color: rgba(100, 228, 26, 0.35);
 }
 /*# sourceMappingURL=style.css.map */

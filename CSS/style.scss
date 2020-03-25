@@ -1,253 +1,398 @@
 @import '_vars';
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans:500,500i,700,700i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Bellota+Text:400,400i,700,700i|Rubik&display=swap');
 
-#myHeader {
-  position: relative;
-  z-index: 1;
-  h1 {
-    @extend %main-headline;
-    margin-bottom: 0;
-  }
+* {
+  margin: 0;
+  padding: 0;
 }
 
-#sctn1 {
-  position: relative;
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  margin: 0 auto;
+  font-size: 10px;
+  #myHeader {
+    z-index: 0;
+    background-color: #999;
+    color: rgb(0, 0, 0);
+    height: 20%;
+    #headlineBox {
+      position: relative;
+      height: 60%;
+    background-color: #999;
 
-  #boxOfAllCards {
-    box-sizing: border-box;
-
-    .myCardBox {
-      border: 2px solid rgb(11, 6, 63);
-      width: 33.33%;
-      background-color: rgba(0, 0, 0, 0.226);
-    }
-  }
-}
-
-#sctn2 {
-  position: absolute;
-  #mySpecialSrcBox {
-    display: flex;
-    flex-wrap: wrap;
-    font-family: 'Fira Sans';
-    position: relative;
-    position: fixed;
-    background-image: url(../CryptoImage/bitcoin-4728496_1920.jpg);
-    background-size: cover;
-    background-position: center;
-
-    top: 13%;
-    left: 25%;
-    height: 55%;
-    width: 50%;
-    border: 10px double blue;
-    border-radius: 25px;
-    z-index: 2;
-
-    .colorBoxes {
-      height: 25%;
-      width: 20%;
-    }
-
-    #boxColor1 {
-      background-color: rgba(228, 198, 26, 0.45);
-      border-top-left-radius: 15px;
-    }
-    #boxColor2 {
-      background-color: rgba(100, 228, 26, 0.35);
-    }
-    #boxColor3 {
-      background-color: rgba(26, 73, 228, 0.35);
-    }
-    #boxColor4 {
-      background-color: rgba(181, 26, 228, 0.35);
-    }
-    #boxColor5 {
-      background-color: rgba(236, 114, 13, 0.45);
-      border-top-right-radius: 15px;
-    }
-    #boxColor6 {
-      background-color: rgba(221, 76, 76, 0.55);
-    }
-    #boxColor7 {
-      background-color: rgba(58, 225, 231, 0.45);
-    }
-    #boxColor8 {
-      background-color: rgba(7, 36, 90, 0.45);
-    }
-    #boxColor9 {
-      background-color: rgba(147, 228, 171, 0.45);
-    }
-    #boxColor10 {
-      background-color: rgba(236, 55, 155, 0.45);
-    }
-    #boxColor11 {
-      background-color: rgba(18, 102, 15, 0.45);
-    }
-    #boxColor12 {
-      background-color: rgba(94, 208, 223, 0.35);
-    }
-    #boxColor13 {
-      background-color: rgba(26, 73, 228, 0.35);
-    }
-    #boxColor14 {
-      background-color: rgba(19, 77, 4, 0.35);
-    }
-    #boxColor15 {
-      background-color: rgba(179, 86, 11, 0.45);
-    }
-    #boxColor16 {
-      background-color: rgba(151, 26, 26, 0.55);
-      border-bottom-left-radius: 15px;
-    }
-    #boxColor17 {
-      background-color: rgba(11, 119, 122, 0.45);
-    }
-    #boxColor18 {
-      background-color: rgba(172, 236, 68, 0.45);
-    }
-    #boxColor19 {
-      background-color: rgba(10, 55, 138, 0.45);
-    }
-    #boxColor20 {
-      background-color: rgba(236, 55, 155, 0.45);
-      border-bottom-right-radius: 15px;
-    }
-
-    i#myCloseIcon {
-      position: absolute;
-      color: rgba(51, 179, 211, 0.55);
-      text-shadow: 2px 2px 10px rgb(10, 7, 58);
-      left: 2%;
-      top: 2%;
-      cursor: pointer;
-      z-index: 1;
-      &:hover {
-        color: rgba(120, 188, 233, 0.657);
-        text-shadow: 2px 3px 10px rgb(5, 6, 63);
+      h1 {
+        margin-bottom: 0;
+        padding: 0 25%;
+        text-shadow: 2px 2px 2px rgb(66, 177, 2);
+        letter-spacing: 3px;
+        font-family: 'Bellota Text', cursive;
+        font-style: italic;
+        font-size: 7em;
       }
+
     }
-    h2 {
-      position: absolute;
-      width: 100%;
-      font-size: 6rem;
-      font-style: italic;
-      color: rgb(12, 13, 36);
-      text-shadow: 4px 6px 5px rgb(144, 165, 226);
-      text-align: center;
-      top: 8%;
-
-      span {
-        font-weight: bold;
-        font-style: normal;
-      }
+    #borderBottomHeadline {
+      border-bottom: 3px solid rgb(24, 0, 0);
+      z-index: -2;
     }
-
-    h3 {
+    #borderLeftImg {
+      border-left: 3px solid rgb(24, 0, 0);
       position: absolute;
-      width: 100%;
-      font-size: 5rem;
-      font-style: italic;
-      text-align: center;
-      color: rgb(12, 13, 36);
-      text-shadow: 4px 6px 5px rgb(144, 165, 226);
-      top: 36%;
-
-      span {
-        font-weight: bold;
-        font-style: normal;
-      }
+      top: 0;
     }
-
-    button {
+    #imgBox {
+      float: right;
       position: absolute;
-      width: 85%;
-      letter-spacing: 1rem;
-      font-size: 2rem;
-      bottom: 5%;
-      right: 7.5%;
-      left: 7.5%;
-      padding: 3% 5%;
-    }
-    #extraInfo {
-      display: block;
-      position: absolute;
-      width: 100%;
-      top: 53%;
-
-      background-image: url('../CryptoImage/bitcoin-3029371_640.jpg');
-      background-repeat: no-repeat;
-      background-size: cover;
-      // left: 5%;
-      height: 47%;
-      border: 1px solid black;
-      border-bottom-right-radius: 15px;
-      border-bottom-left-radius: 15px;
-      z-index: 2;
-      .insideBox {
-        position: relative;
+      border-bottom: 3px solid rgb(24, 0, 0);
+      top: 0;
+      right: 0;
+      z-index: -1;
+      img {
+        width: 100%;
         height: 100%;
-        // border: 5px double rgb(92, 225, 65);
-        float: left;
-        // z-index: 3;
       }
-      #currPrice {
-        width: 66.66%;
-        #boxColor21 {
-          float: left;
-          width: 33.33%;
-          height: 100%;
-          background-color: rgba(224, 211, 17, 0.459);
-          border-bottom-left-radius: 15px;
+    }
+    nav {
+      z-index: -2;
+      height: 40%;
+      div.container-fluid {
+        #navCollapseBtn {
+          z-index: 3;
         }
-        #boxColor22 {
-          float: left;
-          width: 33.33%;
-          height: 100%;
-          background-color: rgba(99, 223, 17, 0.35);
+        div.collapse {
+          z-index: 2;
         }
-        #boxColor23 {
-          float: left;
-          width: 33.33%;
-          height: 100%;
-          background-color: rgba(11, 25, 212, 0.45);
-        }
-        h4 {
-          width: 100%;
-          height: 30%;
-          position: absolute;
-          margin-bottom: 0;
-          font-size: 2.5rem;
-          color: rgb(0, 0, 0);
-          background-color: rgba(70, 221, 214, 0.35);
-          letter-spacing: 1px;
-          text-shadow: 2px 2px 2px rgb(255, 255, 255);
-          span {
-            text-decoration: underline;
+      }
+      a {
+        font-size: 1.5em;
+      }
+    }
+  }
+  #innerContent {
+    position: absolute;
+    top: 20%;
+    height: 70%;
+    padding: 0.3% 0;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+
+    #sctn1 {
+      position: relative;
+      #boxOfAllCards {
+        position: relative;
+        box-sizing: border-box;
+        z-index: 1;
+        .myCardBox {
+          border: 2px solid rgb(11, 6, 63);
+          width: 31.5%;
+          margin-bottom: 2%;
+          background-color: rgba(0, 0, 0, 0.226);
+          .card-body {
+            .collapse {
+              .card {
+                .card-body {
+                  img {
+                    width: 50%;
+                    float: right;
+                  }
+                  h5 {
+                    width: 50%;
+                    padding-top: 5%;
+                    line-height: 150%;
+                    float: left;
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                  }
+                  p {
+                    clear: both;
+                    background-color: rgba(0, 0, 0, 0.25);
+                    font-size: 1.2rem;
+                    letter-spacing: 1px;
+
+                    span {
+                      font-weight: bold;
+                      font-size: 1.3rem;
+                    }
+                    #spn1 {
+                      color: red;
+                    }
+                    #spn3 {
+                      color: rgb(21, 255, 0);
+                    }
+                    #spn5 {
+                      color: rgb(4, 0, 255);
+                    }
+                  }
+                }
+              }
+            }
           }
         }
-        div#text {
-          width: 100%;
-          height: 70%;
-          // margin: 0 15%;
-          position: absolute;
-          top: 30%;
-          font-size: 2.2rem;
-          text-align: center;
-          letter-spacing: 2px;
-          color: rgb(215, 216, 228);
-          background-color: rgba(0, 0, 0, 0.35);
-          text-shadow: 2px 2px 2px rgb(39, 6, 6);
-        }
-        p {
-          margin-block-start: 0;
-          margin-block-end: 0;
-        }
-      }
-      #coinImg {
-        width: 33.33%;
-        border-bottom-right-radius: 15px;
       }
     }
+
+    #sctn2 {
+      position: absolute;
+      width: 100vw;
+      height: 70vh;
+      top: 0;
+      #mySpecialSrcBox {
+        display: flex;
+        flex-wrap: wrap;
+        font-family: 'Fira Sans';
+        position: relative;
+        background-image: url(../CryptoImage/bitcoin-4728496_1920.jpg);
+        background-size: cover;
+        background-position: center;
+        top: 0;
+        left: 25%;
+        height: 55%;
+        width: 50%;
+        border: 10px double blue;
+        border-radius: 25px;
+        z-index: 2;
+        .colorBoxes {
+          height: 25%;
+          width: 20%;
+        }
+        #boxColor1 {
+          background-color: rgba(228, 198, 26, 0.45);
+          border-top-left-radius: 15px;
+        }
+        #boxColor2 {
+          background-color: rgba(100, 228, 26, 0.35);
+        }
+        #boxColor3 {
+          background-color: rgba(26, 73, 228, 0.35);
+        }
+        #boxColor4 {
+          background-color: rgba(181, 26, 228, 0.35);
+        }
+        #boxColor5 {
+          background-color: rgba(236, 114, 13, 0.45);
+          border-top-right-radius: 15px;
+        }
+        #boxColor6 {
+          background-color: rgba(221, 76, 76, 0.55);
+        }
+        #boxColor7 {
+          background-color: rgba(58, 225, 231, 0.45);
+        }
+        #boxColor8 {
+          background-color: rgba(7, 36, 90, 0.45);
+        }
+        #boxColor9 {
+          background-color: rgba(147, 228, 171, 0.45);
+        }
+        #boxColor10 {
+          background-color: rgba(236, 55, 155, 0.45);
+        }
+        #boxColor11 {
+          background-color: rgba(18, 102, 15, 0.45);
+        }
+        #boxColor12 {
+          background-color: rgba(94, 208, 223, 0.35);
+        }
+        #boxColor13 {
+          background-color: rgba(26, 73, 228, 0.35);
+        }
+        #boxColor14 {
+          background-color: rgba(19, 77, 4, 0.35);
+        }
+        #boxColor15 {
+          background-color: rgba(179, 86, 11, 0.45);
+        }
+        #boxColor16 {
+          background-color: rgba(151, 26, 26, 0.55);
+          border-bottom-left-radius: 15px;
+        }
+        #boxColor17 {
+          background-color: rgba(11, 119, 122, 0.45);
+        }
+        #boxColor18 {
+          background-color: rgba(172, 236, 68, 0.45);
+        }
+        #boxColor19 {
+          background-color: rgba(10, 55, 138, 0.45);
+        }
+        #boxColor20 {
+          background-color: rgba(236, 55, 155, 0.45);
+          border-bottom-right-radius: 15px;
+        }
+
+        i#myCloseIcon {
+          position: absolute;
+          color: rgb(0, 0, 0);
+          text-shadow: 2px 2px 5px rgb(30, 212, 45);
+          left: 2%;
+          // top: 1%;
+          cursor: pointer;
+          z-index: 1;
+          &:hover {
+            color: rgba(214, 16, 16, 0.55);
+            text-shadow: 2px 2px 8px rgb(2, 2, 8);
+          }
+        }
+        h2 {
+          position: absolute;
+          width: 80%;
+          font-size: 3.5rem;
+          margin: 0 auto;
+          font-style: italic;
+          font-size: 3.5;
+          color: rgb(12, 13, 36);
+          text-shadow: 4px 6px 5px rgb(144, 165, 226);
+          text-align: center;
+          top: 10%;
+          left: 10%;
+
+          span {
+            font-weight: bold;
+            font-style: normal;
+          }
+        }
+
+        h3 {
+          position: absolute;
+          width: 100%;
+          font-size: 3rem;
+          top: 30%;
+          font-style: italic;
+          text-align: center;
+          color: rgb(12, 13, 36);
+          text-shadow: 4px 6px 5px rgb(144, 165, 226);
+
+          span {
+            font-weight: bold;
+            font-style: normal;
+          }
+        }
+        button {
+          position: absolute;
+          width: 85%;
+          letter-spacing: 1rem;
+          font-size: 2rem;
+          bottom: 5%;
+          right: 7.5%;
+          left: 7.5%;
+          padding: 3% 5%;
+        }
+        #extraInfo {
+          display: block;
+          position: absolute;
+          width: 100%;
+          top: 53%;
+
+          background-image: url('../CryptoImage/bitcoin-3029371_640.jpg');
+          background-repeat: no-repeat;
+          background-size: cover;
+          // left: 5%;
+          height: 47%;
+          border: 1px solid black;
+          border-bottom-right-radius: 15px;
+          border-bottom-left-radius: 15px;
+          z-index: 2;
+          .insideBox {
+            position: relative;
+            height: 100%;
+            // border: 5px double rgb(92, 225, 65);
+            float: left;
+            // z-index: 3;
+          }
+          #currPrice {
+            width: 66.66%;
+            #boxColor21 {
+              float: left;
+              width: 33.33%;
+              height: 100%;
+              background-color: rgba(224, 211, 17, 0.459);
+              border-bottom-left-radius: 15px;
+            }
+            #boxColor22 {
+              float: left;
+              width: 33.33%;
+              height: 100%;
+              background-color: rgba(99, 223, 17, 0.35);
+            }
+            #boxColor23 {
+              float: left;
+              width: 33.33%;
+              height: 100%;
+              background-color: rgba(11, 25, 212, 0.45);
+            }
+            h4 {
+              width: 100%;
+              height: 30%;
+              position: absolute;
+              margin-bottom: 0;
+              font-size: 1.7rem;
+              color: rgb(0, 0, 0);
+              background-color: rgba(70, 221, 214, 0.35);
+              letter-spacing: 1px;
+              text-shadow: 2px 2px 2px rgb(255, 255, 255);
+              span {
+                text-decoration: underline;
+              }
+            }
+            div#text {
+              width: 100%;
+              height: 70%;
+              position: absolute;
+              top: 30%;
+              font-size: 1.4rem;
+              text-align: center;
+              letter-spacing: 2px;
+              color: rgb(215, 216, 228);
+              background-color: rgba(0, 0, 0, 0.35);
+              text-shadow: 2px 2px 2px rgb(39, 6, 6);
+            }
+            p {
+              margin-block-start: 0;
+              margin-block-end: 0;
+            }
+          }
+          #coinImgBox {
+            width: 33.33%;
+            border-bottom-right-radius: 15px;
+            #currCoinImg {
+              background-image: url('../image/110.gif');
+              background-color: rgba(255, 255, 255, 0.45);
+              background-size: cover;
+              border: 5px solid rgb(255, 255, 255);
+              width: 50%;
+              height: 50%;
+              margin: 25%;
+            }
+          }
+        }
+      }
+    }
+
+    #chartWindow {
+      position: relative;
+      width: 100vw;
+      height: 69vh;
+      top: 1vh;
+      bottom: 1vh;
+      #canvasBox {
+        width: 60%;
+        height: 80%;
+        margin: 0 auto;
+        padding: 1% 0 1.5%;
+      }
+    }
+  }
+
+  #myFooter {
+    position: absolute;
+    
+    width: 100%;
+    height: 10%;
+    bottom: 0;
+    background-color: rgba(100, 228, 26, 0.35);
   }
 }
