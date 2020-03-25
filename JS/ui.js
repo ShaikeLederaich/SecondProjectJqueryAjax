@@ -67,7 +67,7 @@ export class UI {
 
   static drawSearchCoinResult(id, sym) {
     let mainHeader = document.getElementById('myHeader');
-    let boxOfAllCards = document.getElementById('boxOfAllCards')
+    let boxOfAllCards = document.getElementById('boxOfAllCards');
 
     Ajax.getHtmlTemplate('../HtmlTemplate/specialBox.html').then(temp => {
       $('#sctn2').html(temp);
@@ -275,6 +275,17 @@ export class UI {
     }
     return newSym;
   }
+
+  static closeCollapseWhenClickOnNaaLink() {
+    let navBar = document.getElementsByTagName('nav');
+    let navUL = navBar[0].children[0].children[1].children[0];
+
+    $(navUL).on('click', 'li', function() {
+      console.log('Click');
+      $('#collapsibleNavId').collapse('hide');
+    });
+  }
+
   //%---Change 'Header' Height From '20%' To 'Auto' When 'Click' on Collapse Button inside Navbar
   static changeHeaderHeightToAuto() {
     let myHeader = document.getElementById('myHeader');

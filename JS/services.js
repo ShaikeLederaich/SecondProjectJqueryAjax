@@ -25,7 +25,7 @@ export class Ajax {
 
         
         $.each(response, function(indexInArray, valueOfElement) {
-          console.log(indexInArray)
+          // console.log(indexInArray)
           if (indexInArray <= 100) {
             Coins.addToList(valueOfElement);
             UI.drawCryptoCoinsCards(
@@ -43,6 +43,7 @@ export class Ajax {
         LiveReports.drawChart();
         UI.changeZIndexForToggleBTN();
         UI.changeHeaderHeightToAuto();
+        UI.closeCollapseWhenClickOnNaaLink();
 
         callback();
 
