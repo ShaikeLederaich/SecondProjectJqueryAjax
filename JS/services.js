@@ -3,13 +3,14 @@ import { CryptoCoinObj, Coins } from './coins.js';
 import { Storage } from './Storage.js';
 
 export class Ajax {
+  //%---Get & Return Html Template---
   static async getHtmlTemplate(url) {
     let response = await fetch(url);
     let currHtml = await response.text();
     return currHtml;
   }
 
-  //%---This Function Send API 'GET' Request And get All Crypto Coins list
+  //%---Send API 'GET' Request And get All Crypto Coins list
 
   static getDataFromURL(url, callback) {
     $.ajax({
@@ -20,30 +21,40 @@ export class Ajax {
       .done(response => {
         //%---Done() - If The Request Succses === No Error
 
-        //%---This Function Get Array of All Crypto Coins list And Extract Specific Parametrs
-        let cardsOnPage;
+        //%---Placing The Array Response To Array of all list coins in Coins class
+        Coins.arrAllListOfCoins = response;
 
+        let numOfCards = UI.howManyCardsToDisplay(window.innerWidth);
+
+        UI.CardsToDisplay(
+          UI.sliceNewArr(UI.startIndex, numOfCards, numOfCards)
+        );
+
+        UI.appendPagination();
         
-        $.each(response, function(indexInArray, valueOfElement) {
-          // console.log(indexInArray)
-          if (indexInArray <= 100) {
-            Coins.addToList(valueOfElement);
-            UI.drawCryptoCoinsCards(
-              indexInArray,
-              valueOfElement.symbol,
-              valueOfElement.name,
-              valueOfElement.id
-            );
+        $('#loadNext').on('click', function() {
+          UI.showNextCoins(UI.startIndex, numOfCards);
+          $('#loadPrevious')
+            .parent()
+            .removeClass('disabled');
+        });
+
+        $('#loadPrevious').on('click', function() {
+          UI.showPreviousCoins(UI.startIndex, numOfCards);
+          if (UI.startIndex === 0) {
+            $('#loadPrevious')
+              .parent()
+              .addClass('disabled');
           }
         });
 
-        let boxOfAllCards = document.getElementById('boxOfAllCards')
-        boxOfAllCards.style.overflowY = 'scroll'
-        Storage.getLiveRepFromLocalStorage();
+        let boxOfAllCards = document.getElementById('boxOfAllCards');
+        boxOfAllCards.style.overflowY = 'scroll';
         LiveReports.drawChart();
         UI.changeZIndexForToggleBTN();
         UI.changeHeaderHeightToAuto();
-        UI.closeCollapseWhenClickOnNaaLink();
+        UI.closeCollapseWhenClickOnALink();
+        UI.removeFromLiveRepArrFromTheModal(LiveReports.pushFromModal);
 
         callback();
 
@@ -55,8 +66,6 @@ export class Ajax {
             .catch(err => console.log(err));
           e.preventDefault();
         });
-
-        UI.updateModalAndLiveArrFromAllCards();
       })
       //%---Fail() - If The Request Not Succses === Error
       .fail(err => {
@@ -146,8 +155,6 @@ export function drawMainPage() {
     $('canvas#myChart').hide();
     $('#sctn1').fadeIn(1000);
     clearInterval(LiveReports.liveInterval);
-
-    console.log(LiveReports.myChart);
     e.preventDefault();
   });
 }
@@ -204,7 +211,6 @@ export class LiveReports {
     $(`div#${coinObj.id} > label > .liveRepCheck`).removeAttr('data-target');
   }
 
-
   static drawChart() {
     let chartArrLenght = LiveReports.liveRep.length;
 
@@ -239,10 +245,8 @@ export class LiveReports {
       if (chartArrLenght !== 0) {
         $('#sctn1').hide();
         let chartWindow = document.getElementById('chartWindow');
-        // chartWindow.style.zIndex = 0
         Ajax.getHtmlTemplate('../HtmlTemplate/chart.html').then(chart => {
           $('#chartWindow').html(chart);
-
           LiveReports.chart();
         });
       }

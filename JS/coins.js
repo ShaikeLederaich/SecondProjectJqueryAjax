@@ -18,6 +18,7 @@ export class CryptoCoinObj {
   }
 }
 
+
 export class Coins {
   static arrAllListOfCoins = [];
   static arrCoinsWithExtraParam = [];

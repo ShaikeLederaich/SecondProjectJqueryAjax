@@ -20,8 +20,8 @@
   </head>
   <body>
     <header id="myHeader" class="fixed-top">
-      <div id="headlineBox">
-        <h1 class="text-center">
+      <div id="headlineBox" class="container-fluid">
+        <h1>
           Cryptonite
         </h1>
       </div>
@@ -34,9 +34,9 @@
         />
       </div>
       <nav
-        class="navbar nav-fill nav-pills navbar-expand-md navbar-light bg-secondary"
+        class="navbar nav-fill nav-pills navbar-expand-md navbar-light bg-white"
       >
-        <div class="container-fluid mx-lg-5 py-1">
+        <div class="container m-auto py-1">
           <!--$ Collapse button -->
           <button
             id="navCollapseBtn"
@@ -88,13 +88,17 @@
     </header>
 
     <section id="innerContent">
+      <section id="backParallaxBigImg">
+        
+      </section>
       <section id="sctn1" class="h-100">
         <div class="container-fluid h-100">
           <div class="row h-100">
             <div
               id="boxOfAllCards"
-              class="col col-lg-9 m-auto h-100 d-flex flex-wrap justify-content-between mt-3 mx-3"
+              class="col m-auto h-100 d-flex flex-wrap justify-content-around mt-3 mx-3"
             ></div>
+            <div class="w-100"></div>
           </div>
         </div>
       </section>
@@ -114,7 +118,6 @@
                     The option to get a live report, possible for 5 maximum
                     crypto coins at the same time!
                   </h4>
-
                   <h5 class="modal-title m-auto h4 p-2 bg-success">
                     Please select which currency you would like to give up by
                     moving the switch to 'Yes' and then press the 'Confirm'
@@ -140,7 +143,6 @@
         </div>
         <!-- End Modal -->
       </section>
-
       <section id="chartWindow"></section>
     </section>
 

@@ -1,15 +1,14 @@
-@import '_vars';
+
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans:500,500i,700,700i&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Bellota+Text:400,400i,700,700i|Rubik&display=swap');
 
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
-
 body {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
   overflow-x: hidden;
   margin: 0 auto;
   font-size: 10px;
@@ -17,37 +16,42 @@ body {
     z-index: 0;
     background-color: #999;
     color: rgb(0, 0, 0);
-    height: 20%;
+    height: 18%;
     #headlineBox {
       position: relative;
       height: 60%;
       background-color: #999;
       h1 {
         margin-bottom: 0;
-        padding: 0 25%;
         text-shadow: 2px 2px 2px rgb(66, 177, 2);
         letter-spacing: 3px;
         font-family: 'Bellota Text', cursive;
         font-style: italic;
-        font-size: 7em;
+        font-size: 4.6em;
       }
     }
     #borderBottomHeadline {
       border-bottom: 3px solid rgb(24, 0, 0);
       z-index: -2;
+      margin-right: 100px;
+
     }
     #borderLeftImg {
       border-left: 3px solid rgb(24, 0, 0);
       position: absolute;
       top: 0;
+      right: 100px;
+      height: 130px;
+      z-index: -1;
     }
     #imgBox {
       float: right;
       position: absolute;
       border-bottom: 3px solid rgb(24, 0, 0);
-      top: 0;
+      top: 30px;
       right: 0;
-      z-index: -1;
+      width: 100px;
+      height: 100px;
       img {
         width: 100%;
         height: 100%;
@@ -56,7 +60,9 @@ body {
     nav {
       z-index: -2;
       height: 40%;
-      div.container-fluid {
+      border-bottom: 1px solid black;
+
+      div.container {
         #navCollapseBtn {
           z-index: 3;
         }
@@ -71,63 +77,68 @@ body {
   }
   #innerContent {
     position: absolute;
-    top: 20%;
-    height: 70%;
-    padding: 0.3% 0;
-    border-top: 1px solid black;
+    top: 18.5%;
+    height: 66.5%;
+    padding: 1.5% 0 3% 0;
     border-bottom: 1px solid black;
 
     #sctn1 {
       position: relative;
-      #boxOfAllCards {
-        position: relative;
-        box-sizing: border-box;
-        z-index: 1;
-        .myCardBox {
-          border: 2px solid rgb(11, 6, 63);
-          width: 31.5%;
-          margin-bottom: 2%;
-          background-color: rgba(0, 0, 0, 0.226);
-          .card-body {
-            .collapse {
-              .card {
-                .card-body {
-                  img {
-                    width: 50%;
-                    float: right;
-                  }
-                  h5 {
-                    width: 50%;
-                    padding-top: 5%;
-                    line-height: 150%;
-                    float: left;
-                    font-size: 1.8rem;
-                    font-weight: bold;
-                    letter-spacing: 1px;
-                  }
-                  p {
-                    clear: both;
-                    background-color: rgba(0, 0, 0, 0.25);
-                    font-size: 1.2rem;
-                    letter-spacing: 1px;
-
-                    span {
-                      font-weight: bold;
-                      font-size: 1.3rem;
-                    }
-                    #spn1 {
-                      color: red;
-                    }
-                    #spn3 {
-                      color: rgb(21, 255, 0);
-                    }
-                    #spn5 {
-                      color: rgb(4, 0, 255);
+      .container-fluid {
+        .row {
+          #boxOfAllCards {
+            position: relative;
+            z-index: 1;
+            padding: 0 15% 0 15%;
+            .myCardBox {
+              border: 2px solid rgb(11, 6, 63);
+              width: 31.5%;
+              margin-bottom: 2%;
+              background-color: rgba(0, 0, 0, 0.226);
+              .card-body {
+                .collapse {
+                  .card {
+                    .card-body {
+                      img {
+                        width: 50%;
+                        float: right;
+                      }
+                      h5 {
+                        width: 50%;
+                        padding-top: 5%;
+                        line-height: 150%;
+                        float: left;
+                        font-size: 1.8rem;
+                        font-weight: bold;
+                        letter-spacing: 1px;
+                      }
+                      p {
+                        clear: both;
+                        background-color: rgba(0, 0, 0, 0.25);
+                        font-size: 1.2rem;
+                        letter-spacing: 1px;
+                        span {
+                          font-weight: bold;
+                          font-size: 1.3rem;
+                        }
+                        #spn1 {
+                          color: red;
+                        }
+                        #spn3 {
+                          color: rgb(21, 255, 0);
+                        }
+                        #spn5 {
+                          color: rgb(4, 0, 255);
+                        }
+                      }
                     }
                   }
                 }
               }
             }
+          }
+          nav {
+            margin-top: 0.5%;
           }
         }
       }
@@ -135,9 +146,12 @@ body {
 
     #sctn2 {
       position: absolute;
-      width: 100vw;
+      margin: 0 auto;
+      width: 70%;
       height: 70vh;
+      right: 15%;
       top: 0;
+      z-index: -1;
       #mySpecialSrcBox {
         display: flex;
         flex-wrap: wrap;
@@ -373,9 +387,10 @@ body {
     #chartWindow {
       position: absolute;
       width: 100vw;
-      height: 69vh;
+      height: 65vh;
       top: 1vh;
       bottom: 1vh;
+      z-index: -1;
       #canvasBox {
         width: 60%;
         height: 80%;
@@ -389,7 +404,7 @@ body {
     position: absolute;
 
     width: 100%;
-    height: 10%;
+    height: 15%;
     bottom: 0;
     background-color: rgba(100, 228, 26, 0.35);
   }

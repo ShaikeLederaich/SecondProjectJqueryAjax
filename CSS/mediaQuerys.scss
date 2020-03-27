@@ -1,8 +1,6 @@
-@import '_vars';
-
-//%---Extra Small---Portrait Smartphone
-//%---Max Width 575.98 px
-@media (max-width: $breakPoint-exSmall) {
+//%---Portrait Smartphone
+//%---Max Width 575.99 px
+@media (max-width: 575.99px) {
   body {
     #myHeader {
       #headlineBox {
@@ -25,17 +23,8 @@
         // margin-right: 25vw;
         display: none;
       }
-      #borderLeftImg {
-        height: 18vh;
-        right: 25vw;
-        // z-index: 0;
-      }
-      #imgBox {
-        width: 25vw;
-        height: 18vh;
-      }
       nav {
-        .container-fluid {
+        .container {
           .collapse {
             form {
               #srcBtn {
@@ -49,9 +38,14 @@
     }
     #innerContent {
       #sctn1 {
-        #boxOfAllCards {
-          .myCardBox {
-            width: 100%;
+        .container-fluid {
+          .row {
+            #boxOfAllCards {
+            padding: 0 10% 0 10%;
+              .myCardBox {
+                width: 100%;
+              }
+            }
           }
         }
       }
@@ -76,13 +70,13 @@
     }
   }
 }
-//%---Small---
-//%---Min-Width: 576px Max-Width 767.98
-@media (min-width: $breakPoint-SmartphoneMin) and (max-width: $breakPoint-SmartphoneMax) {
+
+//%---Tablet---
+//%---Min-Width: 576px Max-Width 767.99
+@media (min-width: 576px) and (max-width: 767.99px) {
   body {
     #myHeader {
       #headlineBox {
-        width: 80vw;
         height: 50%;
         h1 {
           font-size: 5em;
@@ -96,20 +90,8 @@
           top: 0;
         }
       }
-      #borderBottomHeadline {
-        // margin-right: 20vw;
-        display: none;
-      }
-      #borderLeftImg {
-        height: 18vh;
-        right: 20vw;
-      }
-      #imgBox {
-        width: 20vw;
-        height: 18vh;
-      }
       nav {
-        .container-fluid {
+        .container {
           .collapse {
             form {
               #searchCoin {
@@ -125,9 +107,14 @@
     }
     #innerContent {
       #sctn1 {
-        #boxOfAllCards {
-          .myCardBox {
-            width: 100%;
+        .container-fluid {
+          .row {
+            #boxOfAllCards {
+            padding: 0 10% 0 10%;
+              .myCardBox {
+                width: 48%;
+              }
+            }
           }
         }
       }
@@ -152,33 +139,20 @@
     }
   }
 }
-//%---Medium---Tablet
-//%---Min-Width: 768px Max-Width 991.98px
-@media (min-width: $breakPoint-TabletMin) and (max-width: $breakPoint-TabletMax) {
+//%---Normal/Desktops/Landscape Smartphone
+//%---Min-Width: 768px Max-Width 1199.99px
+@media (min-width: 768px) and (max-width: 1199.99px) {
   body {
     #myHeader {
       #headlineBox {
         z-index: 0;
-        width: 86vw;
         h1 {
-          font-size: 6em;
+          font-size: 3em;
           padding: 1% 25% 3% 25%;
         }
       }
-      #borderBottomHeadline {
-        margin-right: 14vw;
-      }
-      #borderLeftImg {
-        height: 18vh;
-        right: 14vw;
-        z-index: -1;
-      }
-      #imgBox {
-        width: 14vw;
-        height: 18vh;
-      }
       nav {
-        div.container-fluid {
+        div.container {
           div.collapse {
             padding-right: 13vw;
           }
@@ -200,70 +174,26 @@
     }
   }
 }
-//%---Large---Desktops
-//%---Min-Width: 992px Max-Width 1199.98px
-@media (min-width: $breakPoint-DesktopsMin) and (max-width: $breakPoint-DesktopsMax) {
+//%---Widescreen---
+//%---Min-Width: 1200px
+@media (min-width: 1200px) {
   body {
     #myHeader {
       #headlineBox {
-        width: 86vw;
         z-index: 0;
         h1 {
-          font-size: 6.5em;
-          padding: 0 25% 3% 25%;
+          font-size: 6em;
+          padding: 0.6% 0% 2% 1.5%;
         }
       }
-      #borderBottomHeadline {
-        margin-right: 14vw;
-      }
-      #borderLeftImg {
-        height: 18vh;
-        right: 14vw;
-        z-index: -1;
-      }
-      #imgBox {
-        width: 14vw;
-        height: 18vh;
-      }
-      nav {
-        div.container-fluid {
-          div.collapse {
-            padding-right: 9.5vw;
-          }
-        }
-      }
-    }
-  }
-}
-@media (min-width: $breakPoint-LargeDesktop) {
-  body {
-    #myHeader {
-      #headlineBox {
-        width: 87vw;
-        z-index: 0;
-        h1 {
-          padding: 0 25% 3% 25%;
-        }
-      }
-      #borderBottomHeadline {
-        margin-right: 13vw;
-      }
-      #borderLeftImg {
-        height: 18vh;
-        right: 13vw;
-        z-index: -1;
-      }
-      #imgBox {
-        width: 13vw;
-        height: 18vh;
-      }
-      nav {
-        div.container-fluid {
-          div.collapse {
-            padding-right: 10vw;
-          }
-        }
-      }
+
+      // nav {
+      //   div.container {
+      //     div.collapse {
+      //       // padding-right: 9.5vw;
+      //     }
+      //   }
+      // }
     }
   }
 }

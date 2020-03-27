@@ -4,7 +4,80 @@ import { Storage } from './Storage.js';
 import { Coins } from './coins.js';
 
 export class UI {
-  static drawCryptoCoinsCards(index, symbol, name, id) {
+  //%---How many cards to Display By screen Width
+  static endIndex;
+  static startIndex = 0;
+  static arrToDisplay = []
+
+  static howManyCardsToDisplay(innerWidth) {
+    
+    if (innerWidth < 576) {
+      this.endIndex = 10;
+    } else if (innerWidth > 575 && innerWidth < 769) {
+      this.endIndex = 20;
+    } else if (innerWidth > 768) {
+      this.endIndex = 36;
+    }
+    return this.endIndex;
+  }
+
+  static sliceNewArr(startIndex, numberOfCardsToDisplay, length) {
+    //%---Slice new Array To Display
+    this.arrToDisplay = Coins.arrAllListOfCoins.slice(startIndex, numberOfCardsToDisplay);
+    if (this.arrToDisplay.length < length) {
+      $('#loadNext').parent().addClass('disabled')
+    } else {
+      $('#loadNext').parent().removeClass('disabled')
+    }
+    return this.arrToDisplay
+  }
+
+  static CardsToDisplay(arrToDisplay) {
+    $('#boxOfAllCards').empty()
+    //%---Draw Cards to UI
+    $.each(arrToDisplay, function(indexInArray, valueOfElement) {
+      UI.drawCardsInsideboxOfAllCards(
+        indexInArray,
+        valueOfElement.symbol,
+        valueOfElement.name,
+        valueOfElement.id
+      );
+    });
+    Storage.getLiveRepFromLocalStorage();
+    UI.updateModalAndLiveArrFromAllCards();
+  }
+
+  static showNextCoins(index, numOfCards) {
+    this.startIndex = index + numOfCards
+    this.endIndex += numOfCards
+
+    this.CardsToDisplay(this.sliceNewArr(this.startIndex, this.endIndex, numOfCards))
+  }
+
+  static showPreviousCoins(index, numOfCards) {
+    this.startIndex = index - numOfCards
+    this.endIndex -= numOfCards
+
+    this.CardsToDisplay(this.sliceNewArr(this.startIndex, this.endIndex, numOfCards))
+  }
+
+  static appendPagination() {
+    let output = `
+    <nav aria-label="Search results" class="d-flex w-100">
+      <ul class="pagination m-auto justify-content-center">
+        <li class="page-item disabled">
+          <a id="loadPrevious" class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item">
+          <a id="loadNext" class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>`;
+
+    $('#sctn1 > .container-fluid > .row').append(output);
+  }
+
+  static drawCardsInsideboxOfAllCards(index, symbol, name, id) {
     let output = `
       <div data-index="${index}" id="${id}" class="card myCardBox">
         <label class="rocker rocker-small">
@@ -16,7 +89,6 @@ export class UI {
           <h5 class="card-title text-center font-weight-bolder">${symbol}</h5>
           <p class="card-text font-weight-bold text-center">${name}</p>
           <button id="btn-${id}" class="btn btn-primary btn-block" data-toggle="collapse" data-target="#collapse-${id}">Read More</button>
-
           <div class="collapse mb-5" id="collapse-${id}">
           <div class="accordion">
           <div class="progress mt-4">
@@ -68,7 +140,8 @@ export class UI {
   static drawSearchCoinResult(id, sym) {
     let mainHeader = document.getElementById('myHeader');
     let boxOfAllCards = document.getElementById('boxOfAllCards');
-
+    let sctn2 = document.getElementById('sctn2');
+    sctn2.style.zIndex = 1;
     Ajax.getHtmlTemplate('../HtmlTemplate/specialBox.html').then(temp => {
       $('#sctn2').html(temp);
       $('article#extraInfo').hide();
@@ -97,10 +170,12 @@ export class UI {
     });
 
     $('#mySpecialSrcBox > i').click(function(e) {
-      // console.log(e);
       $('#mySpecialSrcBox').fadeOut(1500);
       mainHeader.style.zIndex = 0;
       boxOfAllCards.style.zIndex = 1;
+      setTimeout(() => {
+        sctn2.style.zIndex = -1;
+      }, 1500);
       e.preventDefault();
     });
   }
@@ -150,7 +225,6 @@ export class UI {
       });
     });
 
-    UI.removeFromLiveRepArrFromTheModal(LiveReports.pushFromModal);
   }
 
   static removeFromLiveRepArrFromTheModal(callback) {
@@ -276,7 +350,7 @@ export class UI {
     return newSym;
   }
 
-  static closeCollapseWhenClickOnNaaLink() {
+  static closeCollapseWhenClickOnALink() {
     let navBar = document.getElementsByTagName('nav');
     let navUL = navBar[0].children[0].children[1].children[0];
 
