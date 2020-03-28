@@ -171,6 +171,94 @@
           }
         }
       }
+      #InfoSctn {
+        // visibility: hidden;
+        overflow-y: scroll;
+        position: absolute;
+        margin: 0.5% auto;
+        left: 7.5%;
+        top: 0;
+        width: 85%;
+        height: 99%;
+        border: 1px solid rgb(0, 0, 0);
+        z-index: 1;
+        background-color: rgb(210, 209, 219);
+        img {
+          position: fixed;
+          top: 17%;
+          left: 5%;
+          width: 20%;
+          border: 2px solid rgb(17, 9, 58);
+          border-radius: 50%;
+        }
+        #contactMe {
+          position: fixed;
+          top: 50%;
+          font-size: 1.8em;
+          font-weight: bold;
+          margin-left: 2%;
+          a {
+            color: blue;
+            text-decoration: underline;
+          }
+        }
+        #student {
+          position: absolute;
+          text-align: center;
+          padding-top: 0.5%;
+          width: 70%;
+          top: 0;
+          left: 23%;
+          font-size: 1.8em;
+          font-weight: bold;
+          letter-spacing: 2px;
+          span {
+            &:nth-child(1) {
+              font-style: italic;
+              color: rgb(7, 6, 73);
+            }
+            &:nth-child(3) {
+              font-size: 0.9em;
+            }
+          }
+        }
+        #quickOverview {
+          position: absolute;
+          width: 40%;
+          top: 15%;
+          right: 37%;
+          padding: 1%;
+          border: 1px solid rgb(11, 6, 63);
+          font-size: 1.7em;
+        }
+        #tech {
+          position: absolute;
+          width: 35%;
+          top: 15%;
+          right: 0;
+          padding: 1%;
+          border: 1px solid rgb(11, 6, 63);
+          font-size: 1.7em;
+          div {
+            float: left;
+            &:nth-child(1) {
+              span {
+                font-weight: bold;
+                font-size: 1.1em;
+              }
+            }
+            // &:nth-child(2) {
+            //   margin-left: 5%;
+            //   ul {
+            //     list-style-position: inside;
+            //     ul {
+            //       padding-left: 5%;
+            //     }
+            //   }
+            // }
+          }
+        }
+      }
     }
   }
 }
@@ -195,5 +283,6 @@
       //   }
       // }
     }
+    
   }
 }

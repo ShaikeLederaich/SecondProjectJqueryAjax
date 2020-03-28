@@ -7,10 +7,9 @@ export class UI {
   //%---How many cards to Display By screen Width
   static endIndex;
   static startIndex = 0;
-  static arrToDisplay = []
+  static arrToDisplay = [];
 
   static howManyCardsToDisplay(innerWidth) {
-    
     if (innerWidth < 576) {
       this.endIndex = 10;
     } else if (innerWidth > 575 && innerWidth < 769) {
@@ -23,17 +22,25 @@ export class UI {
 
   static sliceNewArr(startIndex, numberOfCardsToDisplay, length) {
     //%---Slice new Array To Display
-    this.arrToDisplay = Coins.arrAllListOfCoins.slice(startIndex, numberOfCardsToDisplay);
+    this.arrToDisplay = Coins.arrAllListOfCoins.slice(
+      startIndex,
+      numberOfCardsToDisplay
+    );
     if (this.arrToDisplay.length < length) {
-      $('#loadNext').parent().addClass('disabled')
+      $('#loadNext')
+        .parent()
+        .addClass('disabled');
     } else {
-      $('#loadNext').parent().removeClass('disabled')
+      $('#loadNext')
+        .parent()
+        .removeClass('disabled');
     }
-    return this.arrToDisplay
+    return this.arrToDisplay;
   }
 
   static CardsToDisplay(arrToDisplay) {
-    $('#boxOfAllCards').empty()
+    $('#boxOfAllCards').empty();
+    this.appendParallaxImg();
     //%---Draw Cards to UI
     $.each(arrToDisplay, function(indexInArray, valueOfElement) {
       UI.drawCardsInsideboxOfAllCards(
@@ -48,17 +55,48 @@ export class UI {
   }
 
   static showNextCoins(index, numOfCards) {
-    this.startIndex = index + numOfCards
-    this.endIndex += numOfCards
+    this.startIndex = index + numOfCards;
+    this.endIndex += numOfCards;
 
-    this.CardsToDisplay(this.sliceNewArr(this.startIndex, this.endIndex, numOfCards))
+    this.CardsToDisplay(
+      this.sliceNewArr(this.startIndex, this.endIndex, numOfCards)
+    );
   }
 
   static showPreviousCoins(index, numOfCards) {
-    this.startIndex = index - numOfCards
-    this.endIndex -= numOfCards
+    this.startIndex = index - numOfCards;
+    this.endIndex -= numOfCards;
 
-    this.CardsToDisplay(this.sliceNewArr(this.startIndex, this.endIndex, numOfCards))
+    this.CardsToDisplay(
+      this.sliceNewArr(this.startIndex, this.endIndex, numOfCards)
+    );
+  }
+
+  static showSwitchYes(numOfCards) {
+    if (!$('#checkSwitch > input')[0].checked === false) {
+      let currArr = [];
+      $.each(LiveReports.liveRep, function(indexInArray, valueOfElement) {
+        currArr.push(Coins.findCoinBySearch(valueOfElement));
+      });
+      UI.CardsToDisplay(currArr)
+    } else {
+      this.CardsToDisplay(
+        this.sliceNewArr(this.startIndex, this.endIndex, numOfCards)
+      );
+    }
+  }
+
+  static addButtons() {
+    let output =  `
+    <div id="buttonBox">
+    <div id="checkSwitch">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class=" form-check-label" for="exampleCheck1">Show Checked Only</label>
+    </div>
+    <button class="myBTN btn" id="clearSwitch" type="button" class="btn">Reset Switches</button>
+    </div>
+    `
+    $('#sctn1 > .container-fluid > .row').prepend(output)
   }
 
   static appendPagination() {
@@ -77,6 +115,13 @@ export class UI {
     $('#sctn1 > .container-fluid > .row').append(output);
   }
 
+  static appendParallaxImg() {
+    let output = `
+    <div id="parallaxImg"></div>
+    `;
+    $('#boxOfAllCards').append(output);
+  }
+
   static drawCardsInsideboxOfAllCards(index, symbol, name, id) {
     let output = `
       <div data-index="${index}" id="${id}" class="card myCardBox">
@@ -88,7 +133,7 @@ export class UI {
         <div class="card-body">
           <h5 class="card-title text-center font-weight-bolder">${symbol}</h5>
           <p class="card-text font-weight-bold text-center">${name}</p>
-          <button id="btn-${id}" class="btn btn-primary btn-block" data-toggle="collapse" data-target="#collapse-${id}">Read More</button>
+          <button id="btn-${id}" class="btn myBTN btn-block" data-toggle="collapse" data-target="#collapse-${id}">More Info</button>
           <div class="collapse mb-5" id="collapse-${id}">
           <div class="accordion">
           <div class="progress mt-4">
@@ -127,7 +172,7 @@ export class UI {
           <p class="card-text text-center">
           <span id="spn5">IL Shekel:</span><br/><span id="spn6"> &#8362;${currPriceObj.Ils}</span>
           </p>
-          <button id="readLess-${id}" class="btn btn-primary btn-block" data-toggle="collapse" data-target="#collapse-${id}">Read Less</button>
+          <button id="readLess-${id}" class="btn myBTN btn-primary btn-block" data-toggle="collapse" data-target="#collapse-${id}">Less Info</button>
         </div>
       `);
 
@@ -224,7 +269,6 @@ export class UI {
         });
       });
     });
-
   }
 
   static removeFromLiveRepArrFromTheModal(callback) {
@@ -386,6 +430,13 @@ export class UI {
       cardToggle[0].style.zIndex = 2;
       cardToggle[1].style.zIndex = 2;
     });
+  }
+  static getCurrYear() {
+    let d = new Date();
+    let a = $('#myFooter')
+      .children('#p2')
+      .children()[1];
+    $(a).text(d.getFullYear())
   }
 }
 

@@ -30,6 +30,9 @@ export class Coins {
     return this.arrAllListOfCoins;
   }
   static findCoinBySearch(userSearch) {
+    if (userSearch === userSearch.toUpperCase()) {
+      userSearch = userSearch.toLowerCase()
+    }
     let arr = Coins.getList();
     let findAMatchingCurrency = arr.find(coin => coin.symbol === userSearch);
 

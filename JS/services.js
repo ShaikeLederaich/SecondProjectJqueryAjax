@@ -26,12 +26,14 @@ export class Ajax {
 
         let numOfCards = UI.howManyCardsToDisplay(window.innerWidth);
 
+        UI.addButtons();
+
         UI.CardsToDisplay(
           UI.sliceNewArr(UI.startIndex, numOfCards, numOfCards)
         );
 
         UI.appendPagination();
-        
+
         $('#loadNext').on('click', function() {
           UI.showNextCoins(UI.startIndex, numOfCards);
           $('#loadPrevious')
@@ -48,8 +50,17 @@ export class Ajax {
           }
         });
 
+        $('#checkSwitch').on('click', function() {
+          UI.showSwitchYes(numOfCards);
+        });
+
+        $('#clearSwitch').on('click', function() {
+          LiveReports.resetLiveRep();
+        });
+
         let boxOfAllCards = document.getElementById('boxOfAllCards');
         boxOfAllCards.style.overflowY = 'scroll';
+
         LiveReports.drawChart();
         UI.changeZIndexForToggleBTN();
         UI.changeHeaderHeightToAuto();
@@ -150,10 +161,19 @@ export function getCoinInfoByID() {
   });
 }
 
+export function drawInfoPage() {
+  $('a#info').click(e => {
+    
+  });
+}
+
 export function drawMainPage() {
   $('a#main').click(function(e) {
-    $('canvas#myChart').hide();
-    $('#sctn1').fadeIn(1000);
+    let chartWindow = document.getElementById('chartWindow');
+    chartWindow.style.zIndex = -1;
+    $('canvas#myChart').fadeOut(1500);
+    $('#canvasBox').fadeOut(1500);
+    $('#sctn1').fadeIn(1500);
     clearInterval(LiveReports.liveInterval);
     e.preventDefault();
   });
@@ -166,6 +186,14 @@ export class LiveReports {
   static liveInterval;
 
   static myChart;
+
+  static resetLiveRep() {
+    LiveReports.liveRep = [];
+    Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
+    $('input.liveRepCheck').each(function(index, element) {
+      $(this).prop('checked', false);
+    });
+  }
 
   static pushAndRemovedFromLiveReportsBefore6(sym) {
     if (LiveReports.liveRep.includes(sym)) {
@@ -214,10 +242,24 @@ export class LiveReports {
   static drawChart() {
     let chartArrLenght = LiveReports.liveRep.length;
 
-    $('header#myHeader').mouseenter(function(e) {
+    $('a#live').on('click', function(e) {
       chartArrLenght = LiveReports.liveRep.length;
-      if (chartArrLenght === 0) {
-        $('a#live').addClass('disabled');
+      let chartWindow = document.getElementById('chartWindow');
+      if (chartArrLenght !== 0) {
+        $('a#live')
+          .parent()
+          .tooltip('hide');
+        Ajax.getHtmlTemplate('../HtmlTemplate/chart.html').then(chart => {
+          $('#sctn1').fadeOut(1500);
+          $('#chartWindow').html(chart);
+          $('#canvasBox').fadeIn(1500);
+          setTimeout(() => {
+            chartWindow.style.zIndex = 1;
+          }, 1500);
+          LiveReports.chart();
+        });
+      } else {
+        console.log('123');
         $('a#live')
           .parent()
           .attr({
@@ -228,27 +270,12 @@ export class LiveReports {
           });
         $('a#live')
           .parent()
-          .mouseover(e => {
-            $('a#live')
-              .parent()
-              .tooltip('show');
-            e.preventDefault();
-          });
-        console.log('0');
-      } else if (chartArrLenght !== 0) {
-        $('a#live').removeClass('disabled');
-      }
-      e.preventDefault();
-    });
-
-    $('a#live').click(function(e) {
-      if (chartArrLenght !== 0) {
-        $('#sctn1').hide();
-        let chartWindow = document.getElementById('chartWindow');
-        Ajax.getHtmlTemplate('../HtmlTemplate/chart.html').then(chart => {
-          $('#chartWindow').html(chart);
-          LiveReports.chart();
-        });
+          .tooltip('show');
+        setTimeout(() => {
+          $('a#live')
+            .parent()
+            .tooltip('hide');
+        }, 2000);
       }
       e.preventDefault();
     });

@@ -101,6 +101,80 @@
     font-size: 2.5rem;
     top: 28%;
   }
+  body #innerContent #InfoSctn {
+    overflow-y: scroll;
+    position: absolute;
+    margin: 0.5% auto;
+    left: 7.5%;
+    top: 0;
+    width: 85%;
+    height: 99%;
+    border: 1px solid black;
+    z-index: 1;
+    background-color: #d2d1db;
+  }
+  body #innerContent #InfoSctn img {
+    position: fixed;
+    top: 17%;
+    left: 5%;
+    width: 20%;
+    border: 2px solid #11093a;
+    border-radius: 50%;
+  }
+  body #innerContent #InfoSctn #contactMe {
+    position: fixed;
+    top: 50%;
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-left: 2%;
+  }
+  body #innerContent #InfoSctn #contactMe a {
+    color: blue;
+    text-decoration: underline;
+  }
+  body #innerContent #InfoSctn #student {
+    position: absolute;
+    text-align: center;
+    padding-top: 0.5%;
+    width: 70%;
+    top: 0;
+    left: 23%;
+    font-size: 1.8em;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+  body #innerContent #InfoSctn #student span:nth-child(1) {
+    font-style: italic;
+    color: #070649;
+  }
+  body #innerContent #InfoSctn #student span:nth-child(3) {
+    font-size: 0.9em;
+  }
+  body #innerContent #InfoSctn #quickOverview {
+    position: absolute;
+    width: 40%;
+    top: 15%;
+    right: 37%;
+    padding: 1%;
+    border: 1px solid #0b063f;
+    font-size: 1.7em;
+  }
+  body #innerContent #InfoSctn #tech {
+    position: absolute;
+    width: 35%;
+    top: 15%;
+    right: 0;
+    padding: 1%;
+    border: 1px solid #0b063f;
+    font-size: 1.7em;
+  }
+  body #innerContent #InfoSctn #tech div {
+    float: left;
+  }
+  body #innerContent #InfoSctn #tech div:nth-child(1) span {
+    font-weight: bold;
+    font-size: 1.1em;
+  }
 }
 
 @media (min-width: 1200px) {

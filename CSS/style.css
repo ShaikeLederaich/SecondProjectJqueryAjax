@@ -7,16 +7,31 @@
           box-sizing: border-box;
 }
 
+.myBTN {
+  font-size: 1.8em;
+  color: whitesmoke;
+  background-color: rgba(10, 5, 80, 0.35);
+  border: 1px solid white;
+}
+
+.myBTN:hover {
+  color: #11093a;
+  background-color: rgba(210, 209, 219, 0.35);
+  border: 1px solid #11093a;
+}
+
 body {
+  height: 100%;
   width: 100%;
   overflow-x: hidden;
   margin: 0 auto;
   font-size: 10px;
+  background-image: url("../image/1519160.jpg");
+  background-size: cover;
 }
 
 body #myHeader {
   z-index: 0;
-  background-color: #999;
   color: black;
   height: 18%;
 }
@@ -24,7 +39,7 @@ body #myHeader {
 body #myHeader #headlineBox {
   position: relative;
   height: 60%;
-  background-color: #999;
+  background-color: rgba(59, 21, 21, 0.65);
 }
 
 body #myHeader #headlineBox h1 {
@@ -69,7 +84,8 @@ body #myHeader #imgBox img {
 body #myHeader nav {
   z-index: -2;
   height: 40%;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
+  background-color: rgba(245, 245, 245, 0.55);
 }
 
 body #myHeader nav div.container #navCollapseBtn {
@@ -80,33 +96,88 @@ body #myHeader nav div.container div.collapse {
   z-index: 2;
 }
 
-body #myHeader nav a {
-  font-size: 1.5em;
+body #myHeader nav div.container div.collapse ul li :hover {
+  background-color: rgba(10, 5, 80, 0.35);
+  color: whitesmoke;
+}
+
+body #myHeader nav div.container div.collapse ul li a {
+  font-size: 1.8em;
+  color: #11093a;
 }
 
 body #innerContent {
   position: absolute;
+  width: 100%;
   top: 18.5%;
   height: 66.5%;
-  padding: 1.5% 0 3% 0;
+  padding: 0.5% 0 0 0;
   border-bottom: 1px solid black;
+  background-image: -webkit-gradient(linear, left top, right bottom, from(rgba(29, 250, 9, 0.55)), color-stop(rgba(32, 140, 190, 0.65)), to(rgba(223, 12, 12, 0.7)));
+  background-image: linear-gradient(to bottom right, rgba(29, 250, 9, 0.55), rgba(32, 140, 190, 0.65), rgba(223, 12, 12, 0.7));
 }
 
 body #innerContent #sctn1 {
-  position: relative;
+  position: absolute;
+}
+
+body #innerContent #sctn1 .container-fluid .row div#buttonBox {
+  position: absolute;
+  width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  right: 30%;
+}
+
+body #innerContent #sctn1 .container-fluid .row div#buttonBox #checkSwitch {
+  display: inline;
+}
+
+body #innerContent #sctn1 .container-fluid .row div#buttonBox #checkSwitch label {
+  font-size: 2.2em;
+  color: #fdfdfd;
 }
 
 body #innerContent #sctn1 .container-fluid .row #boxOfAllCards {
+  overflow-x: hidden;
   position: relative;
+  width: 100%;
+  top: 5%;
+  height: 83%;
   z-index: 1;
   padding: 0 15% 0 15%;
+}
+
+body #innerContent #sctn1 .container-fluid .row #boxOfAllCards #parallaxImg {
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  height: 50%;
+  background-image: url("../image/1519129.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 body #innerContent #sctn1 .container-fluid .row #boxOfAllCards .myCardBox {
   border: 2px solid #0b063f;
   width: 31.5%;
   margin-bottom: 2%;
-  background-color: rgba(0, 0, 0, 0.226);
+  background-color: rgba(235, 220, 157, 0.45);
+}
+
+body #innerContent #sctn1 .container-fluid .row #boxOfAllCards .myCardBox .card-body button:hover {
+  color: #11093a;
+  background-color: rgba(219, 115, 115, 0.35);
+  border: 1px solid #11093a;
+}
+
+body #innerContent #sctn1 .container-fluid .row #boxOfAllCards .myCardBox .card-body .collapse .card .card-body {
+  background-color: rgba(32, 140, 190, 0.35);
 }
 
 body #innerContent #sctn1 .container-fluid .row #boxOfAllCards .myCardBox .card-body .collapse .card .card-body img {
@@ -150,6 +221,8 @@ body #innerContent #sctn1 .container-fluid .row #boxOfAllCards .myCardBox .card-
 
 body #innerContent #sctn1 .container-fluid .row nav {
   margin-top: 0.5%;
+  position: absolute;
+  bottom: 2%;
 }
 
 body #innerContent #sctn2 {
@@ -170,7 +243,7 @@ body #innerContent #sctn2 #mySpecialSrcBox {
       flex-wrap: wrap;
   font-family: 'Fira Sans';
   position: relative;
-  background-image: url(../CryptoImage/bitcoin-4728496_1920.jpg);
+  background-image: url("../image/bitcoin-4728496_1920.jpg");
   background-size: cover;
   background-position: center;
   top: 0;
@@ -336,7 +409,7 @@ body #innerContent #sctn2 #mySpecialSrcBox #extraInfo {
   position: absolute;
   width: 100%;
   top: 53%;
-  background-image: url("../CryptoImage/bitcoin-3029371_640.jpg");
+  background-image: url("../image/bitcoin-3029371_640.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 47%;
@@ -429,6 +502,10 @@ body #innerContent #sctn2 #mySpecialSrcBox #extraInfo #coinImgBox #currCoinImg {
   margin: 25%;
 }
 
+body #innerContent #myModal {
+  z-index: 2;
+}
+
 body #innerContent #chartWindow {
   position: absolute;
   width: 100vw;
@@ -439,17 +516,134 @@ body #innerContent #chartWindow {
 }
 
 body #innerContent #chartWindow #canvasBox {
+  background-color: rgba(255, 255, 255, 0.8);
   width: 60%;
   height: 80%;
   margin: 0 auto;
   padding: 1% 0 1.5%;
 }
 
-body #myFooter {
+body #innerContent #InfoSctn {
+  overflow-y: scroll;
   position: absolute;
+  margin: 0.5% auto;
+  left: 7.5%;
+  top: 0;
+  width: 85%;
+  height: 99%;
+  border: 1px solid black;
+  z-index: 1;
+  background-color: #d2d1db;
+}
+
+body #innerContent #InfoSctn img {
+  position: fixed;
+  top: 17%;
+  left: 5%;
+  width: 20%;
+  border: 2px solid #11093a;
+  border-radius: 50%;
+}
+
+body #innerContent #InfoSctn #contactMe {
+  position: fixed;
+  top: 50%;
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-left: 2%;
+}
+
+body #innerContent #InfoSctn #contactMe a {
+  color: blue;
+  text-decoration: underline;
+}
+
+body #innerContent #InfoSctn #student {
+  position: absolute;
+  text-align: center;
+  padding-top: 0.5%;
+  width: 70%;
+  top: 0;
+  left: 23%;
+  font-size: 2.5em;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+body #innerContent #InfoSctn #student span:nth-child(1) {
+  font-style: italic;
+  color: #070649;
+}
+
+body #innerContent #InfoSctn #student span:nth-child(3) {
+  font-size: 0.8em;
+}
+
+body #innerContent #InfoSctn #quickOverview {
+  position: absolute;
+  width: 40%;
+  top: 15%;
+  right: 37%;
+  padding: 1%;
+  border: 1px solid #0b063f;
+  font-size: 1.7em;
+}
+
+body #innerContent #InfoSctn #tech {
+  position: absolute;
+  width: 35%;
+  top: 15%;
+  right: 0;
+  padding: 1%;
+  border: 1px solid #0b063f;
+  font-size: 1.7em;
+}
+
+body #innerContent #InfoSctn #tech div {
+  float: left;
+}
+
+body #innerContent #InfoSctn #tech div:nth-child(1) span {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+body #innerContent #InfoSctn #tech div:nth-child(2) {
+  margin-left: 5%;
+}
+
+body #innerContent #InfoSctn #tech div:nth-child(2) ul {
+  list-style-position: inside;
+}
+
+body #innerContent #InfoSctn #tech div:nth-child(2) ul ul {
+  padding-left: 5%;
+}
+
+body .modal-backdrop {
+  z-index: 1;
+}
+
+body #myFooter {
   width: 100%;
   height: 15%;
   bottom: 0;
   background-color: rgba(100, 228, 26, 0.35);
+}
+
+body #myFooter p {
+  letter-spacing: 0.1em;
+  font-size: 2.5em;
+  color: white;
+  font-style: italic;
+  text-shadow: 2px 2px 2px #0a125e;
+}
+
+body #myFooter p::first-letter {
+  font-size: 1.2em;
+}
+
+body #myFooter p .footerSpan {
+  color: #06c6e7;
 }
 /*# sourceMappingURL=style.css.map */
