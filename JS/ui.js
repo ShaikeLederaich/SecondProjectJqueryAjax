@@ -1,5 +1,5 @@
 import { Animations } from './animations.js';
-import { Ajax, LiveReports } from './services.js';
+import { Ajax, LiveReports, getCoinInfoByID } from './services.js';
 import { Storage } from './Storage.js';
 import { Coins } from './coins.js';
 
@@ -52,6 +52,7 @@ export class UI {
     });
     Storage.getLiveRepFromLocalStorage();
     UI.updateModalAndLiveArrFromAllCards();
+    getCoinInfoByID();
   }
 
   static showNextCoins(index, numOfCards) {
@@ -78,7 +79,7 @@ export class UI {
       $.each(LiveReports.liveRep, function(indexInArray, valueOfElement) {
         currArr.push(Coins.findCoinBySearch(valueOfElement));
       });
-      UI.CardsToDisplay(currArr)
+      UI.CardsToDisplay(currArr);
     } else {
       this.CardsToDisplay(
         this.sliceNewArr(this.startIndex, this.endIndex, numOfCards)
@@ -87,16 +88,17 @@ export class UI {
   }
 
   static addButtons() {
-    let output =  `
+    let output = `
     <div id="buttonBox">
     <div id="checkSwitch">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    
     <label class=" form-check-label" for="exampleCheck1">Show Checked Only</label>
+    <input type="checkbox" id="exampleCheck1">
     </div>
     <button class="myBTN btn" id="clearSwitch" type="button" class="btn">Reset Switches</button>
     </div>
-    `
-    $('#sctn1 > .container-fluid > .row').prepend(output)
+    `;
+    $('#sctn1 > .container-fluid > .row').prepend(output);
   }
 
   static appendPagination() {
@@ -131,7 +133,7 @@ export class UI {
           <span class="switch-right">No</span>
         </label>
         <div class="card-body">
-          <h5 class="card-title text-center font-weight-bolder">${symbol}</h5>
+          <h5 class="card-title font-weight-bolder">${symbol}</h5>
           <p class="card-text font-weight-bold text-center">${name}</p>
           <button id="btn-${id}" class="btn myBTN btn-block" data-toggle="collapse" data-target="#collapse-${id}">More Info</button>
           <div class="collapse mb-5" id="collapse-${id}">
@@ -162,7 +164,7 @@ export class UI {
     ).html(`
         <div class="card-body">
           <img class="card-img-top" src="${imgLink}" alt="Card image cap">
-          <h5 class="card-title">Current<br/>Price:</h5>
+          <h5 class="card-title">Current Price:</h5>
           <p class="card-text text-center">
           <span id="spn1">US Dollar: </span><br/><span id="spn2"> &#36;${currPriceObj.Usd}</span>
           </p>
@@ -225,8 +227,7 @@ export class UI {
     });
   }
 
-  static drwaSearchingExtraInfo(id, img, price) {
-    $('#extraInfo > #currPrice > header > h4 > span').text(id);
+  static drwaSearchingExtraInfo(img, price) {
     $('#extraInfo > #currPrice > #text > #p1 > span').text(price.Usd);
     $('#extraInfo > #currPrice > #text > #p2 > span').text(price.Eur);
     $('#extraInfo > #currPrice > #text > #p3 > span').text(price.Ils);
@@ -331,7 +332,7 @@ export class UI {
       let output = `
       <li id="${currObj.id}">
         <p>
-        Currency Id: <span id="spn1-${currObj.id}">${currObj.id}</span>, Currency Symbol: <span id="spn2-${sym}" class="spnSym">${sym}</span>
+        Id: <span id="spn1-${currObj.id}">${currObj.id}</span>, <br/> Symbol: <span id="spn2-${sym}" class="spnSym">${sym}</span>
         <label class="rocker rocker-small">
           <input type="checkbox"/>
           <span class="switch-left">Yes</span>
@@ -358,7 +359,6 @@ export class UI {
       ).css({
         'font-size': '1.3rem',
         'border-bottom': '4px dashed black',
-        'padding-top': '10px',
         'padding-bottom': '20px'
       });
 
@@ -399,7 +399,7 @@ export class UI {
     let navUL = navBar[0].children[0].children[1].children[0];
 
     $(navUL).on('click', 'li', function() {
-      console.log('Click');
+      $('.animated-icon2').removeClass('open');
       $('#collapsibleNavId').collapse('hide');
     });
   }
@@ -412,7 +412,7 @@ export class UI {
       myHeader.style.zIndex = 2;
     });
     $('#collapsibleNavId').on('hidden.bs.collapse', function() {
-      myHeader.style.height = '20%';
+      myHeader.style.height = '182px';
       myHeader.style.zIndex = 0;
     });
   }
@@ -436,7 +436,7 @@ export class UI {
     let a = $('#myFooter')
       .children('#p2')
       .children()[1];
-    $(a).text(d.getFullYear())
+    $(a).text(d.getFullYear());
   }
 }
 

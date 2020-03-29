@@ -19,17 +19,33 @@
   }
 }
 body {
-  height: 100%;
   width: 100%;
   overflow-x: hidden;
+  overflow-y: auto;
   margin: 0 auto;
   font-size: 10px;
   background-image: url('../image/1519160.jpg');
   background-size: cover;
+  &::-webkit-scrollbar {
+    width: 2em;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: rgba(66, 75, 128, 0.342);
+    box-shadow: inset 0 0 10px rgba(230, 245, 218, 0.3);
+    border: 2px solid rgba(10, 5, 80, 0.35);
+    border-radius: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(9, 15, 112, 0.295);
+    outline: 1px solid slategrey;
+    border: 3px solid rgba(204, 202, 226, 0.75);
+    border-radius: 5px;
+  }
   #myHeader {
+    position: relative;
     z-index: 0;
     color: rgb(0, 0, 0);
-    height: 18%;
+    height: 182px;
     #headlineBox {
       position: relative;
       height: 60%;
@@ -97,10 +113,9 @@ body {
     }
   }
   #innerContent {
-    position: absolute;
+    position: relative;
     width: 100%;
-    top: 18.5%;
-    height: 66.5%;
+    height: 671px;
     padding: 0.5% 0 0 0;
     border-bottom: 1px solid black;
     background-image: linear-gradient(
@@ -109,9 +124,9 @@ body {
       rgba(32, 140, 190, 0.65),
       rgba(223, 12, 12, 0.7)
     );
-
     #sctn1 {
-      position: absolute;
+      width: 100%;
+      position: relative;
       .container-fluid {
         .row {
           div#buttonBox {
@@ -123,8 +138,11 @@ body {
             #checkSwitch {
               display: inline;
               label {
-                font-size: 2.2em;
+                font-size: 2em;
                 color: rgb(253, 253, 253);
+              }
+              input#exampleCheck1 {
+                margin: 10px 0 0 5px;
               }
             }
           }
@@ -135,7 +153,37 @@ body {
             top: 5%;
             height: 83%;
             z-index: 1;
-            padding: 0 15% 0 15%;
+            padding: 0 5% 0 5%;
+            &::-webkit-scrollbar {
+              width: 2em;
+            }
+            &::-webkit-scrollbar-track {
+              background-color: rgba(66, 75, 128, 0.342);
+              box-shadow: inset 0 0 10px rgba(230, 245, 218, 0.3);
+              border: 2px solid rgba(10, 5, 80, 0.35);
+              border-radius: 5px;
+            }
+            &::-webkit-scrollbar-thumb {
+              background-color: rgba(45, 187, 17, 0.295);
+              outline: 1px solid slategrey;
+              border: 3px solid rgba(204, 202, 226, 0.75);
+              border-radius: 5px;
+            }
+
+            .loader {
+              
+              border: 16px solid #f3f3f3;
+              border-radius: 50%;
+              border-top: 16px solid #3498db;
+              width: 120px;
+              height: 120px;
+              animation: spin 2s linear infinite;
+            }
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+
             #parallaxImg {
               position: absolute;
               width: 100%;
@@ -153,6 +201,12 @@ body {
               margin-bottom: 2%;
               background-color: rgba(235, 220, 157, 0.45);
               .card-body {
+                h5 {
+                  font-size: 2.5em;
+                }
+                p {
+                  font-size: 1.5em;
+                }
                 button {
                   &:hover {
                     color: rgb(17, 9, 58);
@@ -161,40 +215,41 @@ body {
                   }
                 }
                 .collapse {
-                  // z-index: 2;
-                  .card {
-                    .card-body {
-                      background-color: rgba(32, 140, 190, 0.35);
-                      img {
-                        width: 50%;
-                        float: right;
-                      }
-                      h5 {
-                        width: 50%;
-                        padding-top: 5%;
-                        line-height: 150%;
-                        float: left;
-                        font-size: 1.8rem;
-                        font-weight: bold;
-                        letter-spacing: 1px;
-                      }
-                      p {
-                        clear: both;
-                        background-color: rgba(0, 0, 0, 0.25);
-                        font-size: 1.2rem;
-                        letter-spacing: 1px;
-                        span {
+                  z-index: 2;
+                  .accordion {
+                    .card {
+                      .card-body {
+                        background-color: rgba(32, 140, 190, 0.35);
+                        img {
+                          width: 50%;
+                          margin: 0 auto;
+                        }
+                        h5 {
+                          width: 100%;
+                          padding-top: 5%;
+                          clear: both;
+                          font-size: 1.8rem;
                           font-weight: bold;
-                          font-size: 1.3rem;
+                          letter-spacing: 1px;
                         }
-                        #spn1 {
-                          color: red;
-                        }
-                        #spn3 {
-                          color: rgb(21, 255, 0);
-                        }
-                        #spn5 {
-                          color: rgb(4, 0, 255);
+                        p {
+                          clear: both;
+                          background-color: rgba(0, 0, 0, 0.25);
+                          font-size: 1.2rem;
+                          letter-spacing: 1px;
+                          span {
+                            font-weight: bold;
+                            font-size: 1.3rem;
+                          }
+                          #spn1 {
+                            color: red;
+                          }
+                          #spn3 {
+                            color: rgb(21, 255, 0);
+                          }
+                          #spn5 {
+                            color: rgb(4, 0, 255);
+                          }
                         }
                       }
                     }
@@ -211,12 +266,11 @@ body {
         }
       }
     }
-
     #sctn2 {
       position: absolute;
       margin: 0 auto;
       width: 70%;
-      height: 70vh;
+      height: 70%;
       right: 15%;
       top: 0;
       z-index: -1;
@@ -230,7 +284,7 @@ body {
         background-position: center;
         top: 0;
         left: 25%;
-        height: 55%;
+        height: 65%;
         width: 50%;
         border: 10px double blue;
         border-radius: 25px;
@@ -309,7 +363,7 @@ body {
           color: rgb(0, 0, 0);
           text-shadow: 2px 2px 5px rgb(30, 212, 45);
           left: 2%;
-          // top: 1%;
+          top: 1%;
           cursor: pointer;
           z-index: 1;
           &:hover {
@@ -320,32 +374,27 @@ body {
         h2 {
           position: absolute;
           width: 80%;
-          font-size: 3.5rem;
+          font-size: 2rem;
           margin: 0 auto;
           font-style: italic;
-          font-size: 3.5;
           color: rgb(12, 13, 36);
-          text-shadow: 4px 6px 5px rgb(144, 165, 226);
-          text-align: center;
+          text-shadow: 2px 2px 3px rgb(114, 6, 6);;
           top: 10%;
           left: 10%;
-
           span {
             font-weight: bold;
             font-style: normal;
           }
         }
-
         h3 {
           position: absolute;
-          width: 100%;
-          font-size: 3rem;
-          top: 30%;
+          width: 85%;
+          font-size: 1.5rem;
+          top: 25%;
+          left: 10%;
           font-style: italic;
-          text-align: center;
           color: rgb(12, 13, 36);
-          text-shadow: 4px 6px 5px rgb(144, 165, 226);
-
+          text-shadow: 2px 2px 3px rgb(114, 6, 6);
           span {
             font-weight: bold;
             font-style: normal;
@@ -355,7 +404,7 @@ body {
           position: absolute;
           width: 85%;
           letter-spacing: 1rem;
-          font-size: 2rem;
+          font-size: 1.5rem;
           bottom: 5%;
           right: 7.5%;
           left: 7.5%;
@@ -366,7 +415,6 @@ body {
           position: absolute;
           width: 100%;
           top: 53%;
-
           background-image: url('../image/bitcoin-3029371_640.jpg');
           background-repeat: no-repeat;
           background-size: cover;
@@ -379,7 +427,6 @@ body {
           .insideBox {
             position: relative;
             height: 100%;
-            // border: 5px double rgb(92, 225, 65);
             float: left;
             // z-index: 3;
           }
@@ -414,16 +461,15 @@ body {
               background-color: rgba(70, 221, 214, 0.35);
               letter-spacing: 1px;
               text-shadow: 2px 2px 2px rgb(255, 255, 255);
-              span {
-                text-decoration: underline;
-              }
+              
             }
             div#text {
               width: 100%;
               height: 70%;
               position: absolute;
               top: 30%;
-              font-size: 1.4rem;
+              font-size: 1.2rem;
+              padding: 1% 0;
               text-align: center;
               letter-spacing: 2px;
               color: rgb(215, 216, 228);
@@ -443,18 +489,14 @@ body {
               background-color: rgba(255, 255, 255, 0.45);
               background-size: cover;
               border: 5px solid rgb(255, 255, 255);
-              width: 50%;
-              height: 50%;
-              margin: 25%;
+              width: 100px;
+              height: 100px;
+              margin: 10% auto;
             }
           }
         }
       }
     }
-    #myModal {
-      z-index: 2;
-    }
-
     #chartWindow {
       position: absolute;
       width: 100vw;
@@ -480,19 +522,19 @@ body {
       width: 85%;
       height: 99%;
       border: 1px solid rgb(0, 0, 0);
-      z-index: 1;
-      background-color: rgb(210, 209, 219);
+      z-index: -1;
+      background-color: rgba(210, 209, 219, 0.75);
       img {
-        position: fixed;
-        top: 17%;
-        left: 5%;
+        position: absolute;
+        top: 2%;
+        left: 2%;
         width: 20%;
         border: 2px solid rgb(17, 9, 58);
         border-radius: 50%;
       }
       #contactMe {
-        position: fixed;
-        top: 50%;
+        position: absolute;
+        top: 42%;
         font-size: 1.8em;
         font-weight: bold;
         margin-left: 2%;
@@ -534,7 +576,7 @@ body {
         position: absolute;
         width: 35%;
         top: 15%;
-        right: 0;
+        right: 1%;
         padding: 1%;
         border: 1px solid rgb(11, 6, 63);
         font-size: 1.7em;
@@ -563,8 +605,8 @@ body {
     z-index: 1;
   }
   #myFooter {
+    position: relative;
     width: 100%;
-    height: 15%;
     bottom: 0;
     background-color: rgba(100, 228, 26, 0.35);
     p {

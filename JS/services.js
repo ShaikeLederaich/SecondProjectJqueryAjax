@@ -12,7 +12,7 @@ export class Ajax {
 
   //%---Send API 'GET' Request And get All Crypto Coins list
 
-  static getDataFromURL(url, callback) {
+  static getDataFromURL(url) {
     $.ajax({
       type: 'GET',
       url: `${url}`,
@@ -59,15 +59,13 @@ export class Ajax {
         });
 
         let boxOfAllCards = document.getElementById('boxOfAllCards');
-        boxOfAllCards.style.overflowY = 'scroll';
+        // boxOfAllCards.style.overflowY = 'scroll';
 
         LiveReports.drawChart();
         UI.changeZIndexForToggleBTN();
         UI.changeHeaderHeightToAuto();
         UI.closeCollapseWhenClickOnALink();
         UI.removeFromLiveRepArrFromTheModal(LiveReports.pushFromModal);
-
-        callback();
 
         $('#srcBtn').click(function(e) {
           searchCryptoCoin()
@@ -119,7 +117,7 @@ export function moreInfo(target, id, img, price) {
     ).show();
     UI.pushCollapseToDivByID(id, img, price);
   } else {
-    UI.drwaSearchingExtraInfo(id, img, price);
+    UI.drwaSearchingExtraInfo(img, price);
   }
 }
 
@@ -162,17 +160,33 @@ export function getCoinInfoByID() {
 }
 
 export function drawInfoPage() {
+  let sctnInfo = document.getElementById('InfoSctn');
   $('a#info').click(e => {
-    
+    console.log('32424');
+    Ajax.getHtmlTemplate('../HtmlTemplate/about.html').then(info => {
+      console.log(info);
+      $('#InfoSctn').html(info);
+      let chartWindow = document.getElementById('chartWindow');
+      chartWindow.style.zIndex = -1;
+      $('#sctn1').fadeOut(1500);
+      $('canvas#myChart').fadeOut(1500);
+      $('#canvasBox').fadeOut(1500);
+      $('#InfoSctn').fadeIn(1500);
+      sctnInfo.style.zIndex = 2;
+    });
+    e.preventDefault();
   });
 }
 
 export function drawMainPage() {
   $('a#main').click(function(e) {
     let chartWindow = document.getElementById('chartWindow');
+    let sctnInfo = document.getElementById('InfoSctn');
     chartWindow.style.zIndex = -1;
+    sctnInfo.style.zIndex = -1;
     $('canvas#myChart').fadeOut(1500);
     $('#canvasBox').fadeOut(1500);
+    $('#InfoSctn').fadeOut(1500);
     $('#sctn1').fadeIn(1500);
     clearInterval(LiveReports.liveInterval);
     e.preventDefault();
@@ -203,12 +217,10 @@ export class LiveReports {
 
       console.log(LiveReports.liveRep);
       Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
-      // LiveReports.drawChart();
     } else {
       LiveReports.liveRep.push(sym);
       console.log(LiveReports.liveRep);
       Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
-      // LiveReports.drawChart();
     }
   }
 
@@ -226,7 +238,6 @@ export class LiveReports {
       $(`div#${coinObj.id} > label > .liveRepCheck`).prop('checked', true);
 
       Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
-      // LiveReports.drawChart();
     }
   }
 
@@ -245,16 +256,19 @@ export class LiveReports {
     $('a#live').on('click', function(e) {
       chartArrLenght = LiveReports.liveRep.length;
       let chartWindow = document.getElementById('chartWindow');
+      let sctnInfo = document.getElementById('InfoSctn');
       if (chartArrLenght !== 0) {
         $('a#live')
           .parent()
           .tooltip('hide');
         Ajax.getHtmlTemplate('../HtmlTemplate/chart.html').then(chart => {
           $('#sctn1').fadeOut(1500);
+          $('#InfoSctn').fadeOut(1500);
           $('#chartWindow').html(chart);
           $('#canvasBox').fadeIn(1500);
           setTimeout(() => {
             chartWindow.style.zIndex = 1;
+            sctnInfo.style.zIndex = -1;
           }, 1500);
           LiveReports.chart();
         });

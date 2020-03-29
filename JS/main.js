@@ -3,21 +3,19 @@ import {
   Ajax,
   getCoinInfoByID,
   LiveReports,
-  drawMainPage
+  drawMainPage,
+  drawInfoPage
 } from './services.js';
 import { UI } from './ui.js';
 
 $(function() {
   Animations.hamburgerAnimation();
 
-  Ajax.getDataFromURL(
-    'https://api.coingecko.com/api/v3/coins/list',
-    getCoinInfoByID
-  );
-  
-  // console.log(window)
+  Ajax.getDataFromURL('https://api.coingecko.com/api/v3/coins/list');
+
+  console.log(window);
   drawMainPage();
-  UI.getCurrYear()
+  drawInfoPage();
+  UI.getCurrYear();
+  $('#InfoSctn').hide();
 });
-
-

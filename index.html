@@ -46,7 +46,7 @@
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <div class="animated-icon2">
+            <div class="animated-icon2" id="hamburgerBTN">
               <span></span><span></span><span></span><span></span>
             </div>
           </button>
@@ -80,27 +80,90 @@
       </nav>
       <!-- End Container Of Header -->
     </header>
-
     <section id="innerContent">
       <section id="sctn1" class="h-100">
         <div class="container-fluid h-100">
           <div class="row h-100">
             <div
               id="boxOfAllCards"
-              class="col d-flex flex-wrap justify-content-around mt-3 mx-3"
+              class="col col-lg-9 col-md-11 d-flex flex-wrap w-100  justify-content-around mt-3 mx-auto"
             >
-          
+            <div class="loader"></div>
           </div>
             <div class="w-100"></div>
           </div>
         </div>
       </section>
 
-      <section id="sctn2"></section>
+      <section id="sctn2">
 
-      <div class="alert">
+        <!-- <article id="mySpecialSrcBox">
+          <div id="boxColor1" class="colorBoxes"></div>
+          <div id="boxColor2" class="colorBoxes"></div>
+          <div id="boxColor3" class="colorBoxes"></div>
+          <div id="boxColor4" class="colorBoxes"></div>
+          <div id="boxColor5" class="colorBoxes"></div>
+          <div id="boxColor6" class="colorBoxes"></div>
+          <div id="boxColor7" class="colorBoxes"></div>
+          <div id="boxColor8" class="colorBoxes"></div>
+          <div id="boxColor9" class="colorBoxes"></div>
+          <div id="boxColor10" class="colorBoxes"></div>
+          <div id="boxColor11" class="colorBoxes"></div>
+          <div id="boxColor12" class="colorBoxes"></div>
+          <div id="boxColor13" class="colorBoxes"></div>
+          <div id="boxColor14" class="colorBoxes"></div>
+          <div id="boxColor15" class="colorBoxes"></div>
+          <div id="boxColor16" class="colorBoxes"></div>
+          <div id="boxColor17" class="colorBoxes"></div>
+          <div id="boxColor18" class="colorBoxes"></div>
+          <div id="boxColor19" class="colorBoxes"></div>
+          <div id="boxColor20" class="colorBoxes"></div>
         
-      </div>
+          <i class="fas fa-times fa-3x" id="myCloseIcon"></i>
+        
+            <label class="rocker rocker-small">
+              <input type="checkbox" id="specialBoxToggle"/>
+              <span class="switch-left">Yes</span>
+              <span class="switch-right">No</span>
+            </label>
+        
+        
+          <h2>Symbol: <span></span></h2>
+          <h3>ID: <span></span></h3>
+        
+          <article id="extraInfo">
+            <div class="insideBox" id="currPrice">
+              <div id="boxColor21"></div>
+              <div id="boxColor22"></div>
+              <div id="boxColor23"></div>
+              <header>
+                <h4 class="text-center pt-2 mx-auto">
+                  Current Price Of: <span></span>
+                </h4>
+              </header>
+              <div id="text">
+                <p id="p1">Usd:<span></span></p>
+                <p id="p2">Eur:<span></span></p>
+                <p id="p3">Ils:<span></span></p>
+              </div>
+            </div>
+            <div class="insideBox" id="coinImgBox">
+              <div id="currCoinImg">
+        
+              </div>
+            </div>
+          </article>
+        
+          <button
+            type="button"
+            name="moreInfo"
+            id="moreInfo"
+            class="btn btn-primary"
+          >
+            More Info
+          </button>
+        </article> -->
+      </section>
 
       <section id="sctnModal">
         <div class="modal" id="myModal">
@@ -142,73 +205,7 @@
       </section>
       <section id="chartWindow"></section>
       <section id="InfoSctn">
-        <img src="./image/IMG_20200103_210617_905.jpg" alt="Img Of Me" />
-        <div id="contactMe">
-          Mail me: <br>
-          <a href="mailto:Kingpepg4@gmail.com">Kingpepg4@gmail.com</a>
-        </div>
-        <div id="student">
-          This project was created by <span>Shai Lederaich</span>, <br />
-          <span>
-            Student at John Bryce - Course 'Full-Stack Web Developer'
-          </span>
-        </div>
-        <div id="quickOverview">
-          <h2>QUICK OVERVIEW:</h2>
-          <p>
-            The site ahead of you provides up-to-date information on virtual
-            currencies and real-time reports based on
-            <span>CoinGecko and CryptoCompare APIs.</span>
-          </p>
-          <p>
-            On the homepage you will find cards of all crypto coins, Each card
-            contains the ID and code of the relevant currency. <br />
-            Clicking the "More Info" button will display a photo of the crypto
-            currency and updated prices for
-            <span>US Dollars, Euro & Israeli Shekels.</span>
-          </p>
-          <p>
-            In the top navigation menu you can search any crypto currency by
-            entering the currency symbol. You can also select up to 5 crypto
-            coins that you want to receive as real-time reports. The choice is
-            made by moving the switch to 'Yes'.
-            <br />
-            On the Live Report page, you'll see real-time reports of the
-            currencies you've selected before On the About page you will find
-            this information as well as information about the website developer.
-          </p>
-        </div>
-        <div id="tech">
-          <div>
-            <span>This site is a Single Page Application (SPA)</span>
-            <p>
-              single-page application (SPA) is a web application or website that
-              interacts with the web browser by dynamically rewriting the
-              current web page with new data from the web server.
-            </p>
-          </div>
-          <div>
-            <h3>Technologies:</h3>
-            <ul>
-              <li>HTML5</li>
-              <li>CSS3 & Media queries</li>
-              <li>Bootstraps & Flex</li>
-              <li>
-                JavaScript
-                <ul>
-                  <li>ES6 Modules</li>
-                  <li>Jquery</li>
-                  <li>Ajax & Fetch</li>
-                  <li>Callback, Promises & Async Await</li>
-                  <li>Events</li>
-                  <li>Chart.js</li>
-                  <li>Anime.js</li>
-                </ul>
-              </li>
-              <li>External API's</li>
-            </ul>
-          </div>
-        </div>
+        
       </section>
     </section>
 
