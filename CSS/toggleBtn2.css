@@ -20,7 +20,7 @@
   width: 7em;
   height: 4em;
   overflow: hidden;
-  border-bottom: 0.5em solid #eee;
+  border-bottom: 0.5em solid rgba(238, 238, 238, 0.55);
   z-index: 2;
 }
 
@@ -37,7 +37,7 @@
   right: 0;
   bottom: 0;
   background-color: #999;
-  border: 0.5em solid #eee;
+  border: 0.5em solid rgba(238, 238, 238, 0.55);
   border-bottom: 0;
 }
 

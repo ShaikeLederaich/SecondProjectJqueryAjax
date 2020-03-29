@@ -46,6 +46,7 @@ export class Storage {
   static getLiveRepFromLocalStorage() {
     if (localStorage.getItem('ChartList') === null) {
       LiveReports.liveRep = [];
+      
     } else {
       let list = localStorage.getItem('ChartList');
       list = JSON.parse(list);

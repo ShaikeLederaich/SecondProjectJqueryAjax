@@ -3,15 +3,16 @@ import { CryptoCoinObj, Coins } from './coins.js';
 import { Storage } from './Storage.js';
 
 export class Ajax {
+  //%---Get & Return Html Template---
   static async getHtmlTemplate(url) {
     let response = await fetch(url);
     let currHtml = await response.text();
     return currHtml;
   }
 
-  //%---This Function Send API 'GET' Request And get All Crypto Coins list
+  //%---Send API 'GET' Request And get All Crypto Coins list
 
-  static getDataFromURL(url, callback) {
+  static getDataFromURL(url) {
     $.ajax({
       type: 'GET',
       url: `${url}`,
@@ -20,31 +21,51 @@ export class Ajax {
       .done(response => {
         //%---Done() - If The Request Succses === No Error
 
-        //%---This Function Get Array of All Crypto Coins list And Extract Specific Parametrs
-        let cardsOnPage;
+        //%---Placing The Array Response To Array of all list coins in Coins class
+        Coins.arrAllListOfCoins = response;
 
-        
-        $.each(response, function(indexInArray, valueOfElement) {
-          console.log(indexInArray)
-          if (indexInArray <= 100) {
-            Coins.addToList(valueOfElement);
-            UI.drawCryptoCoinsCards(
-              indexInArray,
-              valueOfElement.symbol,
-              valueOfElement.name,
-              valueOfElement.id
-            );
+        let numOfCards = UI.howManyCardsToDisplay(window.innerWidth);
+
+        UI.addButtons();
+
+        UI.CardsToDisplay(
+          UI.sliceNewArr(UI.startIndex, numOfCards, numOfCards)
+        );
+
+        UI.appendPagination();
+
+        $('#loadNext').on('click', function() {
+          UI.showNextCoins(UI.startIndex, numOfCards);
+          $('#loadPrevious')
+            .parent()
+            .removeClass('disabled');
+        });
+
+        $('#loadPrevious').on('click', function() {
+          UI.showPreviousCoins(UI.startIndex, numOfCards);
+          if (UI.startIndex === 0) {
+            $('#loadPrevious')
+              .parent()
+              .addClass('disabled');
           }
         });
 
-        let boxOfAllCards = document.getElementById('boxOfAllCards')
-        boxOfAllCards.style.overflowY = 'scroll'
-        Storage.getLiveRepFromLocalStorage();
+        $('#checkSwitch').on('click', function() {
+          UI.showSwitchYes(numOfCards);
+        });
+
+        $('#clearSwitch').on('click', function() {
+          LiveReports.resetLiveRep();
+        });
+
+        let boxOfAllCards = document.getElementById('boxOfAllCards');
+        // boxOfAllCards.style.overflowY = 'scroll';
+
         LiveReports.drawChart();
         UI.changeZIndexForToggleBTN();
         UI.changeHeaderHeightToAuto();
-
-        callback();
+        UI.closeCollapseWhenClickOnALink();
+        UI.removeFromLiveRepArrFromTheModal(LiveReports.pushFromModal);
 
         $('#srcBtn').click(function(e) {
           searchCryptoCoin()
@@ -54,8 +75,6 @@ export class Ajax {
             .catch(err => console.log(err));
           e.preventDefault();
         });
-
-        UI.updateModalAndLiveArrFromAllCards();
       })
       //%---Fail() - If The Request Not Succses === Error
       .fail(err => {
@@ -98,7 +117,7 @@ export function moreInfo(target, id, img, price) {
     ).show();
     UI.pushCollapseToDivByID(id, img, price);
   } else {
-    UI.drwaSearchingExtraInfo(id, img, price);
+    UI.drwaSearchingExtraInfo(img, price);
   }
 }
 
@@ -140,13 +159,36 @@ export function getCoinInfoByID() {
   });
 }
 
+export function drawInfoPage() {
+  let sctnInfo = document.getElementById('InfoSctn');
+  $('a#info').click(e => {
+    console.log('32424');
+    Ajax.getHtmlTemplate('../HtmlTemplate/about.html').then(info => {
+      console.log(info);
+      $('#InfoSctn').html(info);
+      let chartWindow = document.getElementById('chartWindow');
+      chartWindow.style.zIndex = -1;
+      $('#sctn1').fadeOut(1500);
+      $('canvas#myChart').fadeOut(1500);
+      $('#canvasBox').fadeOut(1500);
+      $('#InfoSctn').fadeIn(1500);
+      sctnInfo.style.zIndex = 2;
+    });
+    e.preventDefault();
+  });
+}
+
 export function drawMainPage() {
   $('a#main').click(function(e) {
-    $('canvas#myChart').hide();
-    $('#sctn1').fadeIn(1000);
+    let chartWindow = document.getElementById('chartWindow');
+    let sctnInfo = document.getElementById('InfoSctn');
+    chartWindow.style.zIndex = -1;
+    sctnInfo.style.zIndex = -1;
+    $('canvas#myChart').fadeOut(1500);
+    $('#canvasBox').fadeOut(1500);
+    $('#InfoSctn').fadeOut(1500);
+    $('#sctn1').fadeIn(1500);
     clearInterval(LiveReports.liveInterval);
-
-    console.log(LiveReports.myChart);
     e.preventDefault();
   });
 }
@@ -159,6 +201,14 @@ export class LiveReports {
 
   static myChart;
 
+  static resetLiveRep() {
+    LiveReports.liveRep = [];
+    Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
+    $('input.liveRepCheck').each(function(index, element) {
+      $(this).prop('checked', false);
+    });
+  }
+
   static pushAndRemovedFromLiveReportsBefore6(sym) {
     if (LiveReports.liveRep.includes(sym)) {
       let num = LiveReports.liveRep.indexOf(sym);
@@ -167,12 +217,10 @@ export class LiveReports {
 
       console.log(LiveReports.liveRep);
       Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
-      // LiveReports.drawChart();
     } else {
       LiveReports.liveRep.push(sym);
       console.log(LiveReports.liveRep);
       Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
-      // LiveReports.drawChart();
     }
   }
 
@@ -190,7 +238,6 @@ export class LiveReports {
       $(`div#${coinObj.id} > label > .liveRepCheck`).prop('checked', true);
 
       Storage.setLiveRepToLocalStorage(LiveReports.liveRep);
-      // LiveReports.drawChart();
     }
   }
 
@@ -203,14 +250,30 @@ export class LiveReports {
     $(`div#${coinObj.id} > label > .liveRepCheck`).removeAttr('data-target');
   }
 
-
   static drawChart() {
     let chartArrLenght = LiveReports.liveRep.length;
 
-    $('header#myHeader').mouseenter(function(e) {
+    $('a#live').on('click', function(e) {
       chartArrLenght = LiveReports.liveRep.length;
-      if (chartArrLenght === 0) {
-        $('a#live').addClass('disabled');
+      let chartWindow = document.getElementById('chartWindow');
+      let sctnInfo = document.getElementById('InfoSctn');
+      if (chartArrLenght !== 0) {
+        $('a#live')
+          .parent()
+          .tooltip('hide');
+        Ajax.getHtmlTemplate('../HtmlTemplate/chart.html').then(chart => {
+          $('#sctn1').fadeOut(1500);
+          $('#InfoSctn').fadeOut(1500);
+          $('#chartWindow').html(chart);
+          $('#canvasBox').fadeIn(1500);
+          setTimeout(() => {
+            chartWindow.style.zIndex = 1;
+            sctnInfo.style.zIndex = -1;
+          }, 1500);
+          LiveReports.chart();
+        });
+      } else {
+        console.log('123');
         $('a#live')
           .parent()
           .attr({
@@ -221,29 +284,12 @@ export class LiveReports {
           });
         $('a#live')
           .parent()
-          .mouseover(e => {
-            $('a#live')
-              .parent()
-              .tooltip('show');
-            e.preventDefault();
-          });
-        console.log('0');
-      } else if (chartArrLenght !== 0) {
-        $('a#live').removeClass('disabled');
-      }
-      e.preventDefault();
-    });
-
-    $('a#live').click(function(e) {
-      if (chartArrLenght !== 0) {
-        $('#sctn1').hide();
-        let chartWindow = document.getElementById('chartWindow');
-        // chartWindow.style.zIndex = 0
-        Ajax.getHtmlTemplate('../HtmlTemplate/chart.html').then(chart => {
-          $('#chartWindow').html(chart);
-
-          LiveReports.chart();
-        });
+          .tooltip('show');
+        setTimeout(() => {
+          $('a#live')
+            .parent()
+            .tooltip('hide');
+        }, 2000);
       }
       e.preventDefault();
     });
