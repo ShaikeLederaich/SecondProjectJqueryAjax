@@ -6,7 +6,10 @@ export class Ajax {
   //%---Get & Return Html Template---
   static async getHtmlTemplate(url) {
     let response = await fetch(url);
+    console.log(response)
     let currHtml = await response.text();
+    console.log(currHtml)
+
     return currHtml;
   }
 
@@ -58,8 +61,6 @@ export class Ajax {
           LiveReports.resetLiveRep();
         });
 
-        let boxOfAllCards = document.getElementById('boxOfAllCards');
-        // boxOfAllCards.style.overflowY = 'scroll';
 
         LiveReports.drawChart();
         UI.changeZIndexForToggleBTN();
@@ -163,7 +164,7 @@ export function drawInfoPage() {
   let sctnInfo = document.getElementById('InfoSctn');
   $('a#info').click(e => {
     console.log('32424');
-    Ajax.getHtmlTemplate('../HtmlTemplate/about.html').then(info => {
+    Ajax.getHtmlTemplate('../HtmlTemplate/about.txt').then(info => {
       console.log(info);
       $('#InfoSctn').html(info);
       let chartWindow = document.getElementById('chartWindow');
@@ -261,7 +262,7 @@ export class LiveReports {
         $('a#live')
           .parent()
           .tooltip('hide');
-        Ajax.getHtmlTemplate('../HtmlTemplate/chart.html').then(chart => {
+        Ajax.getHtmlTemplate('../HtmlTemplate/chart.txt').then(chart => {
           $('#sctn1').fadeOut(1500);
           $('#InfoSctn').fadeOut(1500);
           $('#chartWindow').html(chart);
