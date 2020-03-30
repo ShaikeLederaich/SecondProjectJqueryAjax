@@ -189,7 +189,7 @@ export class UI {
     let boxOfAllCards = document.getElementById('boxOfAllCards');
     let sctn2 = document.getElementById('sctn2');
     sctn2.style.zIndex = 1;
-    Ajax.getHtmlTemplate('../HtmlTemplate/specialBox.html').then(temp => {
+    Ajax.getHtmlTemplate('../HtmlTemplate/specialBox.txt').then(temp => {
       $('#sctn2').html(temp);
       $('article#extraInfo').hide();
       $('h2 > span').text(`${sym}`);

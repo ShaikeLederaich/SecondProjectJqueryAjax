@@ -13,7 +13,6 @@ $(function() {
 
   Ajax.getDataFromURL('https://api.coingecko.com/api/v3/coins/list');
 
-  console.log(window);
   drawMainPage();
   drawInfoPage();
   UI.getCurrYear();
