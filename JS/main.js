@@ -1,8 +1,6 @@
 import { Animations } from './animations.js';
 import {
   Ajax,
-  getCoinInfoByID,
-  LiveReports,
   drawMainPage,
   drawInfoPage
 } from './services.js';

@@ -13,6 +13,9 @@ export class Ajax {
     return currHtml;
   }
 
+
+
+  
   //%---Send API 'GET' Request And get All Crypto Coins list
 
   static getDataFromURL(url) {
@@ -164,7 +167,7 @@ export function drawInfoPage() {
   let sctnInfo = document.getElementById('InfoSctn');
   $('a#info').click(e => {
     console.log('32424');
-    Ajax.getHtmlTemplate('../HtmlTemplate/about.txt').then(info => {
+    Ajax.getHtmlTemplate('../docs/about.html').then(info => {
       console.log(info);
       $('#InfoSctn').html(info);
       let chartWindow = document.getElementById('chartWindow');
@@ -262,7 +265,7 @@ export class LiveReports {
         $('a#live')
           .parent()
           .tooltip('hide');
-        Ajax.getHtmlTemplate('../HtmlTemplate/chart.txt').then(chart => {
+        Ajax.getHtmlTemplate('../docs/chart.html').then(chart => {
           $('#sctn1').fadeOut(1500);
           $('#InfoSctn').fadeOut(1500);
           $('#chartWindow').html(chart);
