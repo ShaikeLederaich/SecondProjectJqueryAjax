@@ -63,6 +63,7 @@ body #myHeader #headlineBox {
 }
 
 body #myHeader #headlineBox h1 {
+  color: blanchedalmond;
   margin-bottom: 0;
   text-shadow: 2px 2px 2px #42b102;
   letter-spacing: 3px;
