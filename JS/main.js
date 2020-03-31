@@ -11,8 +11,12 @@ $(function() {
 
   Ajax.getDataFromURL('https://api.coingecko.com/api/v3/coins/list');
 
+  $('a#info').click(function (e) { 
+    Ajax.getHtmlTemplate('../docs/about.html', 'InfoSctn', drawInfoPage);
+    e.preventDefault();
+  });
+  
   drawMainPage();
-  drawInfoPage();
   UI.getCurrYear();
   $('#InfoSctn').hide();
 });
