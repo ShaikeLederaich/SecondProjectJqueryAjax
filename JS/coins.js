@@ -8,7 +8,6 @@ export class CryptoCoinObj {
     };
     this.time = currTime;
   }
-
   showCoinInfo() {
     console.log(`
     Current Price in US Dollar: ${this.usd}\n
@@ -18,9 +17,11 @@ export class CryptoCoinObj {
   }
 }
 
+
 export class Coins {
   static arrAllListOfCoins = [];
   static arrCoinsWithExtraParam = [];
+  static searchCoinObj = {}
 
   static addToList(obj) {
     this.arrAllListOfCoins.push(obj);

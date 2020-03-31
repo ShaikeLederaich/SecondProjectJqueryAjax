@@ -3,19 +3,20 @@ import { CryptoCoinObj, Coins } from './coins.js';
 import { Storage } from './Storage.js';
 
 export class Ajax {
-  //%---Get & Return Html Template---
-  static async getHtmlTemplate(url) {
-    let response = await fetch(url);
-    console.log(response)
-    let currHtml = await response.text();
-    console.log(currHtml)
+  //%---Get Html Template -> Then Draw The Template Inside The Parent 'Div' -> and Then Run Callback Func---
 
-    return currHtml;
+  static getHtmlTemplate(url, id, callback) {
+    console.log(id);
+    $.ajax({
+      type: 'GET',
+      url: url,
+      dataType: 'text'
+    }).done(res => {
+      document.getElementById(id).innerHTML = res;
+      callback();
+    });
   }
 
-
-
-  
   //%---Send API 'GET' Request And get All Crypto Coins list
 
   static getDataFromURL(url) {
@@ -63,7 +64,6 @@ export class Ajax {
         $('#clearSwitch').on('click', function() {
           LiveReports.resetLiveRep();
         });
-
 
         LiveReports.drawChart();
         UI.changeZIndexForToggleBTN();
@@ -132,10 +132,15 @@ function searchCryptoCoin() {
     let findAMatchingCurrency = Coins.findCoinBySearch(userSearch);
 
     if (findAMatchingCurrency !== undefined) {
-      UI.drawSearchCoinResult(
-        findAMatchingCurrency.id,
-        findAMatchingCurrency.symbol
+      Coins.searchCoinObj.id = findAMatchingCurrency.id;
+      Coins.searchCoinObj.sym = findAMatchingCurrency.symbol;
+
+      Ajax.getHtmlTemplate(
+        '../docs/specialBox.html',
+        'sctn2',
+        UI.drawSearchCoinResult
       );
+
       resolve("Ok! It's Worked!");
     } else {
       reject('Please search for the currency exactly according to its symbol');
@@ -165,21 +170,13 @@ export function getCoinInfoByID() {
 
 export function drawInfoPage() {
   let sctnInfo = document.getElementById('InfoSctn');
-  $('a#info').click(e => {
-    console.log('32424');
-    Ajax.getHtmlTemplate('../docs/about.html').then(info => {
-      console.log(info);
-      $('#InfoSctn').html(info);
-      let chartWindow = document.getElementById('chartWindow');
-      chartWindow.style.zIndex = -1;
-      $('#sctn1').fadeOut(1500);
-      $('canvas#myChart').fadeOut(1500);
-      $('#canvasBox').fadeOut(1500);
-      $('#InfoSctn').fadeIn(1500);
-      sctnInfo.style.zIndex = 2;
-    });
-    e.preventDefault();
-  });
+  let chartWindow = document.getElementById('chartWindow');
+  chartWindow.style.zIndex = -1;
+  $('#sctn1').fadeOut(1500);
+  $('canvas#myChart').fadeOut(1500);
+  $('#canvasBox').fadeOut(1500);
+  $('#InfoSctn').fadeIn(1500);
+  sctnInfo.style.zIndex = 2;
 }
 
 export function drawMainPage() {
@@ -254,28 +251,34 @@ export class LiveReports {
     $(`div#${coinObj.id} > label > .liveRepCheck`).removeAttr('data-target');
   }
 
-  static drawChart() {
-    let chartArrLenght = LiveReports.liveRep.length;
+  static chartCallback() {
+    let chartWindow = document.getElementById('chartWindow');
+    let sctnInfo = document.getElementById('InfoSctn');
 
+    $('#sctn1').fadeOut(1500);
+    $('#InfoSctn').fadeOut(1500);
+    // $('#chartWindow').html(chart);
+    $('#canvasBox').fadeIn(1500);
+    setTimeout(() => {
+      chartWindow.style.zIndex = 1;
+      sctnInfo.style.zIndex = -1;
+    }, 1500);
+    LiveReports.chart();
+  }
+
+  static drawChart() {
     $('a#live').on('click', function(e) {
-      chartArrLenght = LiveReports.liveRep.length;
-      let chartWindow = document.getElementById('chartWindow');
-      let sctnInfo = document.getElementById('InfoSctn');
+      let chartArrLenght = LiveReports.liveRep.length;
+
       if (chartArrLenght !== 0) {
         $('a#live')
           .parent()
           .tooltip('hide');
-        Ajax.getHtmlTemplate('../docs/chart.html').then(chart => {
-          $('#sctn1').fadeOut(1500);
-          $('#InfoSctn').fadeOut(1500);
-          $('#chartWindow').html(chart);
-          $('#canvasBox').fadeIn(1500);
-          setTimeout(() => {
-            chartWindow.style.zIndex = 1;
-            sctnInfo.style.zIndex = -1;
-          }, 1500);
-          LiveReports.chart();
-        });
+        Ajax.getHtmlTemplate(
+          '../docs/chart.html',
+          'chartWindow',
+          LiveReports.chartCallback
+        );
       } else {
         console.log('123');
         $('a#live')

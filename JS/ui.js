@@ -184,22 +184,20 @@ export class UI {
     });
   }
 
-  static drawSearchCoinResult(id, sym) {
+  static drawSearchCoinResult() {
     let mainHeader = document.getElementById('myHeader');
     let boxOfAllCards = document.getElementById('boxOfAllCards');
     let sctn2 = document.getElementById('sctn2');
     sctn2.style.zIndex = 1;
-    Ajax.getHtmlTemplate('../docs/specialBox.html').then(temp => {
-      $('#sctn2').html(temp);
-      $('article#extraInfo').hide();
-      $('h2 > span').text(`${sym}`);
-      $('h3 > span').text(`${id}`);
-      Animations.testSpecialBoxAnimation();
-      mainHeader.style.zIndex = -1;
-      boxOfAllCards.style.zIndex = -1;
-      UI.drawAndHideMoreInfoForSpeacialBox(id);
-      UI.updateModalAndLiveArrFromSpecialBox(sym, id);
-    });
+  
+    $('article#extraInfo').hide();
+    $('h2 > span').text(`${Coins.searchCoinObj.sym}`);
+    $('h3 > span').text(`${Coins.searchCoinObj.id}`);
+    Animations.testSpecialBoxAnimation();
+    mainHeader.style.zIndex = -1;
+    boxOfAllCards.style.zIndex = -1;
+    UI.drawAndHideMoreInfoForSpeacialBox(Coins.searchCoinObj.id);
+    UI.updateModalAndLiveArrFromSpecialBox(Coins.searchCoinObj.sym, Coins.searchCoinObj.id);
   }
 
   static drawAndHideMoreInfoForSpeacialBox(id) {
@@ -219,8 +217,8 @@ export class UI {
     $('#mySpecialSrcBox > i').click(function(e) {
       $('#mySpecialSrcBox').fadeOut(1500);
       mainHeader.style.zIndex = 0;
-      boxOfAllCards.style.zIndex = 1;
       setTimeout(() => {
+        boxOfAllCards.style.zIndex = 1;
         sctn2.style.zIndex = -1;
       }, 1500);
       e.preventDefault();
